@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#06C11C</color>
+    <color name="colorPrimaryDark">#06C11C</color>
+    <!-- <color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">#78D058</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="lightGray">#d3d3d3</color><!--亮灰色 -->
+    <color name="colorGreen">#06C11C</color>
+    <color name="darkorange">#ff8c00</color><!--暗桔黄色 -->
+    <color name="gray">#aaa</color>
+    <color name="gray_line">#E6E6E6</color>
+    <color name="bg_color">#D5D5D5</color>
+    <color name="colorRed">#EB3430</color>
+    <color name="colorBlack">#000000</color>
+</resources>

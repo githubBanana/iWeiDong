@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">basic_mvvm</string>
+    <string name="net_error_toast">请检查您的网络</string>
+</resources>
