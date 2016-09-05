@@ -18,8 +18,6 @@ import com.zf.iweidong.ui.callback.IBaseCallback;
  * @email Xs.lin@foxmail.com
  */
 public abstract class BaseFragment<VM extends ViewModel,B extends ViewDataBinding> extends BaseMvvmFragment<VM,B> implements IBaseCallback {
-    private static final String TAG = "BaseFragment";
-
 
     @Nullable
     @Override

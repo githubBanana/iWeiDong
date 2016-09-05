@@ -12,13 +12,17 @@ public interface IBaseBiz extends ILifeCycle {
 
 
     /**
+     * 初始化数据业务逻辑方法
+     */
+      void loadInitData();
+    /**
      * 加载数据,不要直接调用次方法
      */
-    void loadData();
+//    void loadData();
 
     /**
      * 提交数据,不要直接调用次方法
      */
-    void submit();
+//    void submit();
 
 }

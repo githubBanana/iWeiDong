@@ -25,6 +25,7 @@ public class BaseViewModel<CallBack extends IBaseCallback, DType> extends ViewMo
         return null;
     }
 
+
     @Override
     public void onDataLoad(DType dType) {
 

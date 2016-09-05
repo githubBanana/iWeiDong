@@ -1,1 +1,1 @@
-include ':app', ':basic_mvvm', ':net'
+include ':app', ':basic_mvvm', ':net', ':sharesdklib', ':utils'

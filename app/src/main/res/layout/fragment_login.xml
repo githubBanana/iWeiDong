@@ -1,0 +1,134 @@
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data >
+        <variable
+            name="loginViewModel"
+            type="com.zf.iweidong.ui.viewmodel.LoginViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:paddingTop="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/shape_username"
+            android:drawableLeft="@mipmap/ic_et_username"
+            android:drawablePadding="8dp"
+            android:hint="@string/et_hint_username"
+            android:inputType="phone"
+            android:lines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@={loginViewModel.userName}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/shape_username"
+            android:drawableLeft="@mipmap/ic_et_password"
+            android:drawablePadding="8dp"
+            android:hint="@string/et_hint_password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@{loginViewModel.password}"/>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_orange_light"
+            android:text="@string/btn_commit"
+            android:textColor="@android:color/white" />
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_username"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            app:columnCount="3"
+            app:orientation="vertical">
+
+           <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/tv_third_party_account"
+                android:textColor="@android:color/black"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                app:layout_row="0" />
+
+           <TextView
+               android:id="@+id/weibo_login"
+               android:drawableTop="@mipmap/share_pic_weibo"
+               android:gravity="center"
+               android:text="@string/tv_weibo_login_tv"
+               android:background="?attr/selectableItemBackground"
+               android:clickable="true"
+               app:layout_column="0"
+               app:layout_columnWeight="1"
+               app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/weixin_login"
+                android:drawableTop="@mipmap/share_pic_weixinfriend"
+                android:gravity="center"
+                android:text="@string/tv_weixin_login_tv"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/qq_login"
+                android:drawableTop="@mipmap/share_pic_qq"
+                android:gravity="center"
+                android:text="@string/tv_qq_login_tv"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                app:layout_row="1" />
+
+        </android.support.v7.widget.GridLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <Button
+                android:id="@+id/btn_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/tv_forget_password" />
+
+            <Button
+                android:id="@+id/btn_nothave_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/tv_nothave_account" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+</layout>

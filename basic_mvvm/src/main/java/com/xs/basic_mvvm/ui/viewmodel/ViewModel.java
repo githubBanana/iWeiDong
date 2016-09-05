@@ -88,4 +88,5 @@ public class ViewModel<CallBack extends ICallBck> extends BaseObservable
         if (_baseBiz != null)
             _baseBiz.onDestroy();
     }
+
 }

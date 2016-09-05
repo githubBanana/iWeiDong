@@ -82,7 +82,6 @@ public abstract class BaseMvvmFragment<VM extends ViewModel,B extends ViewDataBi
         return inflater.inflate(layoutResId,null);
     }
 
-
     @Override
     public void onStart() {
         super.onStart();

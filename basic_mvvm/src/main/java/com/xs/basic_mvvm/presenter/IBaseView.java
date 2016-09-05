@@ -8,4 +8,5 @@ package com.xs.basic_mvvm.presenter;
  * @email Xs.lin@foxmail.com
  */
 public interface IBaseView {
+
 }

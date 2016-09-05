@@ -3,8 +3,8 @@ package com.xs.basic_mvvm.presenter;
 import android.support.annotation.StringRes;
 
 import com.xs.basic_mvvm.R;
-import com.xs.basic_mvvm.ui.callback.ICallBck;
 import com.xs.basic_mvvm.model.BaseModel;
+import com.xs.basic_mvvm.ui.callback.ICallBck;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -106,15 +106,6 @@ public class BaseBiz<View extends IBaseView> implements IBaseBiz,ICallBck{
         unSubscribe();
     }
 
-    @Override
-    public void loadData() {
-
-    }
-
-    @Override
-    public void submit() {
-
-    }
 
     @Override
     public void showToast(String str) {
@@ -144,5 +135,10 @@ public class BaseBiz<View extends IBaseView> implements IBaseBiz,ICallBck{
     public void dismissLoadingView() {
         if (_iCallback != null)
             _iCallback.dismissLoadingView();
+    }
+
+    @Override
+    public void loadInitData() {
+
     }
 }

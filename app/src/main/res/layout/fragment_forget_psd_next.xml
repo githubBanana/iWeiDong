@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_username"
+        android:drawableLeft="@mipmap/ic_et_password"
+        android:drawablePadding="8dp"
+        android:hint="@string/et_hint_password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" />
+
+    <EditText
+        android:id="@+id/et_repeat_password"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="-1dp"
+        android:background="@drawable/shape_username"
+        android:drawableLeft="@mipmap/ic_et_password"
+        android:drawablePadding="8dp"
+        android:hint="@string/et_hint_repeat_password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/btn_commit"
+        android:textColor="@android:color/white" />
+</LinearLayout>
