@@ -110,6 +110,7 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
      * 恢复验证码，可重新获取验证码
      */
     private void restore() {
+        progress = 0;
         getBinding().btnVerify.setEnabled(true);
         getBinding().btnVerify.setText(getActivity().getString(R.string.btn_get_verify_text));
     }
