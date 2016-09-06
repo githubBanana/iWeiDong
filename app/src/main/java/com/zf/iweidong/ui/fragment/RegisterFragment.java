@@ -13,6 +13,8 @@ import com.zf.iweidong.ui.callback.IRegisterCallback;
 import com.zf.iweidong.ui.fragment.base.BaseFragment;
 import com.zf.iweidong.ui.viewmodel.RegisterViewModel;
 
+import java.util.Locale;
+
 /**
  * @version V1.0 <描述当前版本功能>
  * @author: Xs
@@ -92,14 +94,13 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
         getBinding().btnVerify.post(new Runnable() {
             @Override
             public void run() {
-                progress ++;
+                String text = String.format(Locale.CHINA, "%ds", progress++);
                 if (progress == total) {
                     getBinding().btnVerify.removeCallbacks(this);
                     restore();
                     return;
                 }
-                getViewModel().setCodesCountDown(String.valueOf(progress));
-                getBinding().btnVerify.setText(String.valueOf(progress));
+                getBinding().btnVerify.setText(text);
                 getBinding().btnVerify.postDelayed(this,1000 * 1);
             }
         });
@@ -110,6 +111,6 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
      */
     private void restore() {
         getBinding().btnVerify.setEnabled(true);
-        getViewModel().setCodesCountDown(getActivity().getString(R.string.btn_get_verify_text));
+        getBinding().btnVerify.setText(getActivity().getString(R.string.btn_get_verify_text));
     }
 }
