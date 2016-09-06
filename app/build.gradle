@@ -54,5 +54,4 @@ dependencies {
     compile project(':basic_mvvm')
     compile project(':sharesdklib')
     compile project(':net')
-    compile project(':utils')
 }

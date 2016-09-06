@@ -3,10 +3,10 @@ package com.xs.basic_mvvm.ui.viewmodel;
 import android.databinding.BaseObservable;
 import android.support.annotation.StringRes;
 
-import com.xs.basic_mvvm.ui.callback.ICallBck;
-import com.xs.basic_mvvm.ui.callback.ILifeCycle;
 import com.xs.basic_mvvm.presenter.BaseBiz;
 import com.xs.basic_mvvm.presenter.IBaseView;
+import com.xs.basic_mvvm.ui.callback.ICallBck;
+import com.xs.basic_mvvm.ui.callback.ILifeCycle;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -88,5 +88,6 @@ public class ViewModel<CallBack extends ICallBck> extends BaseObservable
         if (_baseBiz != null)
             _baseBiz.onDestroy();
     }
+
 
 }

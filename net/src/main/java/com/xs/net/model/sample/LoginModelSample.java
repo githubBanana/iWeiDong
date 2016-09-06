@@ -1,12 +1,13 @@
-package com.xs.net.model;
+package com.xs.net.model.sample;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <just sample>
  * @author: Xs
  * @date: 2016-03-30 16:56
  * @email Xs.lin@foxmail.com
  */
-public class LoginModel {
+public class LoginModelSample
+{
     public String ID;
     public String IS_Sync;
     public String MOpenId;

@@ -15,11 +15,6 @@ import com.zf.iweidong.ui.callback.IBaseCallback;
 public abstract class BaseActivity<VM extends ViewModel,B extends ViewDataBinding> extends BaseMvvmActivity<VM,B> implements IBaseCallback {
 
     @Override
-    public String getUserId() {
-        return null;
-    }
-
-    @Override
     public void onDataLoadSuccess() {
 
     }

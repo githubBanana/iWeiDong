@@ -60,7 +60,6 @@ public class NetConfig {
         return ABOUT_US;
     }
 
-
     public static String getFileUploadWebService() {
         if (TextUtils.isEmpty(FILE_UPLOAD_WEB_SERVICE))
             throw new NullPointerException("FILE_UPLOAD_WEB_SERVICE is null");

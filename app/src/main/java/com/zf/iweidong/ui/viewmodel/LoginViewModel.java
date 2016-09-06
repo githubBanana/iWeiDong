@@ -1,6 +1,9 @@
 package com.zf.iweidong.ui.viewmodel;
 
 import com.xs.basic_mvvm.presenter.BaseBiz;
+import com.xs.net.retrofit.DESUtil;
+import com.zf.iweidong.manager.util.SPUtil;
+import com.zf.iweidong.manager.util.UIUtil;
 import com.zf.iweidong.model.LoginModel;
 import com.zf.iweidong.presenter.ILoginView;
 import com.zf.iweidong.presenter.biz.ILoginBiz;
@@ -15,7 +18,7 @@ import com.zf.iweidong.ui.callback.ILoginCallback;
  */
 public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> implements ILoginView {
 
-    public String userName;
+    public String loginName;
     public String password;
     public ILoginBiz biz;
     public LoginViewModel(ILoginCallback iLoginCallback) {
@@ -34,13 +37,13 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
     }
 
     @Override
-    public String getUserName() {
-        return this.userName;
+    public String getLoginName() {
+        return this.loginName;
     }
 
     @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     @Override
@@ -55,7 +58,15 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
 
     @Override
     public void onLoginCompleted(LoginModel loginModel) {
-
+        /**
+         * 保存用户登录信息
+         */
+        final String userNameEncry = DESUtil.encryptAsDoNet(getLoginName());
+        final String passWordEncry = DESUtil.encryptAsDoNet(getPassword());
+        SPUtil.saveNormalData(UIUtil.getContext(),"username",userNameEncry);
+        SPUtil.saveNormalData(UIUtil.getContext(),"password",passWordEncry);
+        getCallback().onLoginSuccess(loginModel);
     }
+
 
 }

@@ -48,11 +48,11 @@ public class BaseBiz<View extends IBaseView> implements IBaseBiz,ICallBck{
             public void onError(Throwable e) {
                 e.printStackTrace();
                 showToast(R.string.net_error_toast);
+                dismissLoadingView();
             }
 
             @Override
             public void onNext(T t) {
-
             }
         };
     }

@@ -12,13 +12,6 @@ public interface IBaseCallback extends ICallBck {
 
 
     /**
-     * 获取用户id
-     * @return
-     */
-    String getUserId();
-
-
-    /**
      * 网络数据加载完成回调
      */
     void onDataLoadSuccess();

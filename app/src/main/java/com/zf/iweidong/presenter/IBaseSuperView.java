@@ -12,13 +12,6 @@ import java.util.HashMap;
  */
 public interface IBaseSuperView<DataType> extends IBaseView {
 
-
-    /**
-     * 用户id
-     * @return
-     */
-    String getUserId();
-
     /**
      * 数据加载回调
      *

@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="registerViewModel"
+            type="com.zf.iweidong.ui.viewmodel.RegisterViewModel"/>
     </data>
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
@@ -10,7 +12,6 @@
         android:background="@android:color/white">
 
         <EditText
-            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/shape_username"
@@ -20,7 +21,8 @@
             android:inputType="phone"
             android:lines="1"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+            android:paddingRight="16dp"
+            android:text="@={registerViewModel.mobileNumber}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +30,6 @@
             android:background="@drawable/shape_username">
 
             <EditText
-                android:id="@+id/et_verify"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="-1dp"
@@ -39,7 +40,8 @@
                 android:inputType="number"
                 android:lines="1"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" /><!--android:drawableLeft="@mipmap/ic_et_password"-->
+                android:paddingRight="16dp"
+                android:text="@={registerViewModel.codes}"/><!--android:drawableLeft="@mipmap/ic_et_password"-->
 
             <Button
                 android:textAllCaps="false"
@@ -47,12 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:text="@string/btn_get_verify_text"
+                android:text="@{registerViewModel.codesCountDown}"
                 android:textColor="@android:color/holo_red_light" />
         </LinearLayout>
 
         <EditText
-            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="16dp"
@@ -63,7 +64,8 @@
             android:inputType="textPassword"
             android:lines="1"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+            android:paddingRight="16dp"
+            android:text="@={registerViewModel.password}"/>
 
         <Button
             android:id="@+id/btn_register"

@@ -21,13 +21,13 @@ public interface ILoginView extends IBaseView {
      * 获取用户名
      * @return
      */
-    String getUserName();
+    String getLoginName();
 
     /**
      * 设置用户名
      * @param userName
      */
-    void setUserName(String userName);
+    void setLoginName(String userName);
 
     /**
      * 获取密码

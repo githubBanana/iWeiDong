@@ -21,12 +21,6 @@ public class BaseViewModel<CallBack extends IBaseCallback, DType> extends ViewMo
     }
 
     @Override
-    public String getUserId() {
-        return null;
-    }
-
-
-    @Override
     public void onDataLoad(DType dType) {
 
     }

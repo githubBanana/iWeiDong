@@ -9,6 +9,18 @@ import com.xs.basic_mvvm.model.BaseModel;
  * @email Xs.lin@foxmail.com
  */
 public class LoginModel extends BaseModel<LoginModel> {
+    public String ID;
+    public String IS_Sync;
+    public String MOpenId;
+    public String QOpenId;
+    public String WOpenId;
+    public String Name;
+    public String LoginName;
+    public String Head_Img;
+    public String Level;
+    public String Sex;
+    //more...
+
 
 
 }

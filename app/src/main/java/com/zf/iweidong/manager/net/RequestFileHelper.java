@@ -1,6 +1,8 @@
-package com.xs.net.retrofit;
+package com.zf.iweidong.manager.net;
 
 import com.xs.net.model.sample.FileModelSample;
+import com.xs.net.retrofit.ApiService;
+import com.xs.net.retrofit.RetrofitFileClient;
 
 import java.io.File;
 import java.util.HashMap;
@@ -16,14 +18,14 @@ import rx.Observable;
  * @date: 2016-04-08 15:31
  * @email Xs.lin@foxmail.com
  */
-public class RequestFileHelperSample {
+public class RequestFileHelper {
 
     public static final String WEB_SERVICE = "http://wd.zfwsc.com/Admin/File/";
 
     private static ApiService mApiService;
-    private static final RequestFileHelperSample INSTANCE = new RequestFileHelperSample();
-    private RequestFileHelperSample() {}
-    public static final RequestFileHelperSample getInstance() {
+    private static final RequestFileHelper INSTANCE = new RequestFileHelper();
+    private RequestFileHelper() {}
+    public static final RequestFileHelper getInstance() {
         return INSTANCE;
     }
     /**

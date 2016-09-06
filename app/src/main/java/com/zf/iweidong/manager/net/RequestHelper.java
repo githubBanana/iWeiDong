@@ -1,6 +1,8 @@
-package com.xs.net.retrofit;
+package com.zf.iweidong.manager.net;
 
-import com.xs.net.model.LoginModel;
+import com.xs.net.retrofit.RetrofitClient;
+import com.zf.iweidong.model.LoginModel;
+import com.zf.iweidong.model.RegisterModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,23 @@ public class RequestHelper {
         map.put("UUID", UUID);
         map.put("AppType", String.valueOf(AppType));
         return new RetrofitClient.Builder().method("Login").map(map).post(LoginModel.class);
+    }
+
+    /**
+     * Register
+     * 手机号注册接口
+     * Mobile:手机号
+     * Password:密码
+     *
+     * @param Mobile
+     * @param Password
+     * @return
+     */
+    public static Observable<RegisterModel> register(String Mobile, String Password) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Mobile", Mobile);
+        map.put("Password", Password);
+        return new RetrofitClient.Builder().method("Register").map(map).post(RegisterModel.class);
     }
 
 

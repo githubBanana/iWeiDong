@@ -26,11 +26,6 @@ public abstract class BaseFragment<VM extends ViewModel,B extends ViewDataBindin
     }
 
     @Override
-    public String getUserId() {
-        return null;
-    }
-
-    @Override
     public void onDataLoadSuccess() {
 
     }

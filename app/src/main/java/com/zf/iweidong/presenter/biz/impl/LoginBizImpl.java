@@ -1,11 +1,16 @@
 package com.zf.iweidong.presenter.biz.impl;
 
+import android.text.TextUtils;
+
 import com.xs.basic_mvvm.presenter.BaseBiz;
 import com.xs.basic_mvvm.ui.callback.ICallBck;
-import com.xs.net.retrofit.RequestHelper;
+import com.xs.net.retrofit.DESUtil;
+import com.zf.iweidong.manager.net.RequestHelper;
+import com.zf.iweidong.manager.util.PhoneUtil;
+import com.zf.iweidong.manager.util.SPUtil;
+import com.zf.iweidong.manager.util.UIUtil;
 import com.zf.iweidong.presenter.ILoginView;
 import com.zf.iweidong.presenter.biz.ILoginBiz;
-import com.zf.utils.PhoneUtil;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -14,7 +19,6 @@ import com.zf.utils.PhoneUtil;
  * @email Xs.lin@foxmail.com
  */
 public class LoginBizImpl extends BaseBiz<ILoginView> implements ILoginBiz {
-    private static final String TAG = "LoginBizImpl";
 
     public LoginBizImpl(ILoginView view, ICallBck callBck) {
         super(view, callBck);
@@ -23,15 +27,26 @@ public class LoginBizImpl extends BaseBiz<ILoginView> implements ILoginBiz {
     @Override
     public void login() {
         showLoadingView();
-        RequestHelper.getInstance().login(getView().getUserName(),
-                getView().getPassword(), PhoneUtil.getUUID(getCallBack()),1);
-
+        addSubscription(
+        RequestHelper.getInstance().login(getView().getLoginName(),
+                getView().getPassword(), PhoneUtil.getUUID(UIUtil.getContext()),1).
+                doOnNext(loginModel -> {
+                    if (loginModel.isSuccess())
+                        getView().onLoginCompleted(loginModel);
+                    else
+                        showToast(loginModel.getErrMsg());
+                }).subscribe(getSubscriber())
+        );
     }
 
     @Override
     public void loadInitData() {
-        getView().setUserName("hello");
-        getView().setPassword("1234");
+        final String userNameEncry = SPUtil.readNormalData(UIUtil.getContext(),"username");
+        final String passWordEncry = SPUtil.readNormalData(UIUtil.getContext(),"password");
+        if (!TextUtils.isEmpty(userNameEncry))
+            getView().setLoginName(DESUtil.decryptDoNet(userNameEncry));
+        if (!TextUtils.isEmpty(passWordEncry))
+            getView().setPassword(DESUtil.decryptDoNet(passWordEncry));
     }
 
 

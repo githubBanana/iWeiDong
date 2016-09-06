@@ -5,12 +5,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -92,7 +89,7 @@ public class RetrofitClient {
         public <T> Observable<T>  post(Class<T> cla) {
             if (map == null || TextUtils.isEmpty(method))
                 throw new NullPointerException("there is no method or map");
-            Observable<String> observable = getApiService().post(method, encryptMap(map)).
+            Observable<String> observable = getApiService().post(method, DESUtil.encryptAsDoMap(map)).
                     subscribeOn(Schedulers.newThread()).
                     observeOn(AndroidSchedulers.mainThread());
             return observable.map(s -> new Gson().fromJson(s, cla));
@@ -114,62 +111,6 @@ public class RetrofitClient {
         }
 
     }
-
-    /**
-     * 加密Map
-     *
-     * @return
-     */
-    private static Map<String, Object> encryptMap(Map<String, Object> map) {
-
-        String json = new Gson().toJson(map);
-        String encryptContent = DESUtil.encryptAsDoNet(json);
-        map.clear();
-        Log.e("RequestHelper", "encryptMap start:" + json);
-        map.put("json", encryptContent);
-        Log.e("RequestHelper", "encryptMap end:" + encryptContent);
-        return map;
-    }
-
-    /**
-     * 解密Map
-     *
-     * @param encryptInfo
-     * @return
-     */
-    public Map<String, Object> encryptDoMap(String encryptInfo) {
-        String decryptInfo = DESUtil.decryptDoNet(encryptInfo);
-        return getMapForJson(decryptInfo);
-    }
-
-    /**
-     * Json 转成 Map<>
-     *
-     * @param jsonStr
-     * @return
-     */
-    public static Map<String, Object> getMapForJson(String jsonStr) {
-        JSONObject jsonObject;
-        try {
-            jsonObject = new JSONObject(jsonStr);
-            Iterator<String> keyIter = jsonObject.keys();
-            String key;
-            String value;
-            Map<String, Object> valueMap = new HashMap<String, Object>();
-            while (keyIter.hasNext()) {
-                key = keyIter.next();
-                value = jsonObject.getString(key);
-                valueMap.put(key, value);
-            }
-            return valueMap;
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
 
     /* ***************以下为测试 Start********************** */
     public static void okhttp() {
