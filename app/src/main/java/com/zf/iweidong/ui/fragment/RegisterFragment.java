@@ -3,11 +3,13 @@ package com.zf.iweidong.ui.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.zf.iweidong.R;
 import com.zf.iweidong.databinding.FragmentRegisterBinding;
 import com.zf.iweidong.listener.OnChangeTilte;
+import com.zf.iweidong.manager.util.UIUtil;
 import com.zf.iweidong.model.RegisterModel;
 import com.zf.iweidong.ui.callback.IRegisterCallback;
 import com.zf.iweidong.ui.fragment.base.BaseFragment;
@@ -24,7 +26,7 @@ import java.util.Locale;
 public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentRegisterBinding>
         implements IRegisterCallback {
 
-    private int progress = 0,total = 60;
+    private int total = 60;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -65,6 +67,10 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
          */
         getBinding().btnRegister.setOnClickListener(view1 -> getViewModel().register());
         getBinding().btnVerify.setOnClickListener(view1 -> {
+            if (TextUtils.isEmpty(getViewModel().getMobileNumber())) {
+                showToast(R.string.et_hint_username);
+                return;
+            }
             getViewModel().getVerifyCodes();
             exector();
         });
@@ -78,7 +84,8 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
 
     @Override
     public void onRegisterSuccess(RegisterModel registerModel) {
-
+        showToast(UIUtil.getContext().getString(R.string.register_success_text));
+        getActivity().onBackPressed();
     }
 
     @Override
@@ -86,31 +93,35 @@ public class RegisterFragment extends BaseFragment<RegisterViewModel,FragmentReg
         if (!isSuccess) restore();
     }
 
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            total = total - 1;
+            String text = String.format(Locale.CHINA, "%ds", total);
+            if (total == 0) {
+                getBinding().btnVerify.removeCallbacks(this);
+                restore();
+                return;
+            }
+            getBinding().btnVerify.setText(text);
+            getBinding().btnVerify.postDelayed(this,1000 * 1);
+        }
+    };
+
     /**
-     * 开始验证码计时
+     * 开始验证码倒计时
      */
     private void exector() {
         getBinding().btnVerify.setEnabled(false);
-        getBinding().btnVerify.post(new Runnable() {
-            @Override
-            public void run() {
-                String text = String.format(Locale.CHINA, "%ds", progress++);
-                if (progress == total) {
-                    getBinding().btnVerify.removeCallbacks(this);
-                    restore();
-                    return;
-                }
-                getBinding().btnVerify.setText(text);
-                getBinding().btnVerify.postDelayed(this,1000 * 1);
-            }
-        });
+        getBinding().btnVerify.post(runnable);
     }
 
     /**
      * 恢复验证码，可重新获取验证码
      */
     private void restore() {
-        progress = 0;
+        total = 60;
+        getBinding().btnVerify.removeCallbacks(runnable);
         getBinding().btnVerify.setEnabled(true);
         getBinding().btnVerify.setText(getActivity().getString(R.string.btn_get_verify_text));
     }

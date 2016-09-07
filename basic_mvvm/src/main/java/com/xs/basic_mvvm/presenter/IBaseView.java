@@ -9,4 +9,5 @@ package com.xs.basic_mvvm.presenter;
  */
 public interface IBaseView {
 
+    void notifyUIChange();
 }

@@ -51,7 +51,9 @@ dependencies {
     compile dependenciesCf.butterknife
     compile dependenciesCf.gridlayout
     compile dependenciesCf.design
+    compile dependenciesCf.eventbus
     compile project(':basic_mvvm')
     compile project(':sharesdklib')
     compile project(':net')
+
 }

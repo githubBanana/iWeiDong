@@ -3,6 +3,7 @@ package com.zf.iweidong.manager.net;
 import com.xs.net.retrofit.RetrofitClient;
 import com.zf.iweidong.model.LoginModel;
 import com.zf.iweidong.model.RegisterModel;
+import com.zf.iweidong.model.SMSCodeModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,14 +57,29 @@ public class RequestHelper {
      * @param Password
      * @return
      */
-    public static Observable<RegisterModel> register(String Mobile, String Password) {
+    public Observable<RegisterModel> register(String Mobile, String Password) {
         Map<String, Object> map = new HashMap<>();
         map.put("Mobile", Mobile);
         map.put("Password", Password);
         return new RetrofitClient.Builder().method("Register").map(map).post(RegisterModel.class);
     }
 
-
+    /**
+     * GetSMSCode
+     * 获取短信验证码
+     * Mobile:手机号
+     * Type:类型 (1:注册 2:找回密码 3:第三方绑定)
+     *
+     * @param Mobile
+     * @param Type
+     * @return
+     */
+    public Observable<SMSCodeModel> getSMSCode(String Mobile, int Type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Mobile", Mobile);
+        map.put("Type", String.valueOf(Type));
+        return new RetrofitClient.Builder().method("GetSMSCode").map(map).post(SMSCodeModel.class);
+    }
 
 
 

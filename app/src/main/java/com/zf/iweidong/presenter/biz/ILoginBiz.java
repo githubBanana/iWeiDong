@@ -14,4 +14,9 @@ public interface ILoginBiz extends IBaseBiz{
      * 登录
      */
     void login();
+
+    /**
+     * 第三方登录
+     */
+    void thirdPartyLogin(String platFormName);
 }

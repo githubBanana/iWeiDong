@@ -72,7 +72,7 @@
                 app:layout_row="0" />
 
            <TextView
-               android:id="@+id/weibo_login"
+               android:id="@+id/tv_weibo"
                android:drawableTop="@mipmap/share_pic_weibo"
                android:gravity="center"
                android:text="@string/tv_weibo_login_tv"
@@ -83,7 +83,7 @@
                app:layout_row="1" />
 
             <TextView
-                android:id="@+id/weixin_login"
+                android:id="@+id/tv_weixin"
                 android:drawableTop="@mipmap/share_pic_weixinfriend"
                 android:gravity="center"
                 android:text="@string/tv_weixin_login_tv"
@@ -94,7 +94,7 @@
                 app:layout_row="1" />
 
             <TextView
-                android:id="@+id/qq_login"
+                android:id="@+id/tv_qq"
                 android:drawableTop="@mipmap/share_pic_qq"
                 android:gravity="center"
                 android:text="@string/tv_qq_login_tv"

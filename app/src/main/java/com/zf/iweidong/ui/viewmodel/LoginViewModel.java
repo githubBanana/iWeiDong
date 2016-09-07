@@ -30,6 +30,9 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
     public void login() {
         biz.login();
     }
+    public void thirdPartyLogin(String platFormName) {
+        biz.thirdPartyLogin(platFormName);
+    }
 
     @Override
     protected BaseBiz createBiz() {
@@ -66,6 +69,11 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
         SPUtil.saveNormalData(UIUtil.getContext(),"username",userNameEncry);
         SPUtil.saveNormalData(UIUtil.getContext(),"password",passWordEncry);
         getCallback().onLoginSuccess(loginModel);
+    }
+
+    @Override
+    public void onThirdPartyLoginCompleted() {
+
     }
 
 

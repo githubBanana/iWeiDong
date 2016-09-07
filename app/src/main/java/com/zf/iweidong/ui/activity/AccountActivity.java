@@ -35,7 +35,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
         setCenterTitle(R.string.login_title);
     }
 
-    public void commitFragment(Type type,boolean addBackStack) {
+    public void commitFragment(Type type, boolean addBackStack) {
         Fragment fragment = null;
         switch (type) {
             case LOGIN:
@@ -51,7 +51,6 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 fragment = new ForgetPsdNextFragment();
                 break;
         }
-
 
         int enter = android.support.design.R.anim.abc_fade_in;
         int exit = android.support.design.R.anim.abc_fade_out;
@@ -94,6 +93,5 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
         FORGET_PASSWORD_STEP_ONE,
         FORGET_PASSWORD_STEP_TWO
     }
-
 
 }

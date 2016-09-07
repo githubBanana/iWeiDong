@@ -13,14 +13,18 @@ import com.zf.iweidong.ui.callback.ILoginCallback;
 import com.zf.iweidong.ui.fragment.base.BaseFragment;
 import com.zf.iweidong.ui.viewmodel.LoginViewModel;
 
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
+
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <登录界面>
  * @author: Xs
  * @date: 2016-09-05 10:45
  * @email Xs.lin@foxmail.com
  */
-public class LoginFragment extends BaseFragment<LoginViewModel,FragmentLoginBinding> implements ILoginCallback {
-    private static final String TAG = "LoginFragment";
+public class LoginFragment extends BaseFragment<LoginViewModel,FragmentLoginBinding>
+        implements ILoginCallback {
 
     OnChangeTilte mOnChangeTitle;
 
@@ -58,6 +62,9 @@ public class LoginFragment extends BaseFragment<LoginViewModel,FragmentLoginBind
         getBinding().btnForgetPassword.setOnClickListener((View.OnClickListener) getActivity());
         getBinding().btnNothaveAccount.setOnClickListener((View.OnClickListener) getActivity());
         getBinding().btnSubmit.setOnClickListener(view1 -> getViewModel().login());
+        getBinding().tvWeibo.setOnClickListener(view1 -> getViewModel().thirdPartyLogin(SinaWeibo.NAME));
+        getBinding().tvWeixin.setOnClickListener(view1 -> getViewModel().thirdPartyLogin(Wechat.NAME));
+        getBinding().tvQq.setOnClickListener(view1 -> getViewModel().thirdPartyLogin(QQ.NAME));
     }
 
     @Override
@@ -68,5 +75,12 @@ public class LoginFragment extends BaseFragment<LoginViewModel,FragmentLoginBind
 
     @Override
     public void onLoginSuccess(LoginModel loginModel) {
+        getActivity().onBackPressed();
     }
+
+    @Override
+    public void onThirdPartyLoginSuccess() {
+        getActivity().onBackPressed();
+    }
+
 }

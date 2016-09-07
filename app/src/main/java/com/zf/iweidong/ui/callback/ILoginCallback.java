@@ -15,5 +15,10 @@ public interface ILoginCallback extends IBaseCallback {
      */
     void onLoginSuccess(LoginModel loginModel);
 
+    /**
+     * 第三方登录成功回调
+     */
+    void onThirdPartyLoginSuccess();
+
 
 }

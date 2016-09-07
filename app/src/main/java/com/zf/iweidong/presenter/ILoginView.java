@@ -18,6 +18,11 @@ public interface ILoginView extends IBaseView {
     void onLoginCompleted(LoginModel loginModel);
 
     /**
+     * 第三方登录回调
+     */
+    void onThirdPartyLoginCompleted();
+
+    /**
      * 获取用户名
      * @return
      */
@@ -40,4 +45,6 @@ public interface ILoginView extends IBaseView {
      * @param pssword
      */
     void setPassword(String pssword);
+
+
 }

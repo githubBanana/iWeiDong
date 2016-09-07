@@ -42,6 +42,11 @@ public class ViewModel<CallBack extends ICallBck> extends BaseObservable
     }
 
     @Override
+    public void notifyUIChange() {
+        notifyChange();
+    }
+
+    @Override
     public void showToast(String str) {
         if (_callback != null)
             _callback.showToast(str);

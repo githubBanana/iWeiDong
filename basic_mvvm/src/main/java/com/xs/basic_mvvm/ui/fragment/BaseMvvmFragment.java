@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.xs.basic_mvvm.ui.callback.ICallBck;
 import com.xs.basic_mvvm.ui.viewmodel.ViewModel;
-import com.xs.basic_mvvm.widget.load.LoadingFragment;
+import com.zf.widget.LoadingFragment;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -129,6 +129,8 @@ public abstract class BaseMvvmFragment<VM extends ViewModel,B extends ViewDataBi
     public void dismissLoadingView() {
         Fragment _fm = getActivity().getSupportFragmentManager().findFragmentByTag(LoadingFragment.TAG);
         if (_fm != null) {
+            /*DialogFragment _df = (DialogFragment) _fm;
+            _df.dismiss();*/
             DialogFragment _df = (DialogFragment) _fm;
             _df.dismiss();
         }

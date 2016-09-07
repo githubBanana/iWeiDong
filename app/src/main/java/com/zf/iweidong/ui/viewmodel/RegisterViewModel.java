@@ -1,6 +1,9 @@
 package com.zf.iweidong.ui.viewmodel;
 
 import com.xs.basic_mvvm.presenter.BaseBiz;
+import com.xs.net.retrofit.DESUtil;
+import com.zf.iweidong.manager.util.SPUtil;
+import com.zf.iweidong.manager.util.UIUtil;
 import com.zf.iweidong.model.RegisterModel;
 import com.zf.iweidong.presenter.IRegisterView;
 import com.zf.iweidong.presenter.biz.IRegisterBiz;
@@ -89,6 +92,13 @@ public class RegisterViewModel extends BaseViewModel<IRegisterCallback,RegisterM
 
     @Override
     public void onRegisterCompleted(RegisterModel registerModel) {
+        /**
+         * 保存用户注册信息
+         */
+        final String userNameEncry = DESUtil.encryptAsDoNet(getMobileNumber());
+        final String passWordEncry = DESUtil.encryptAsDoNet(getPassword());
+        SPUtil.saveNormalData(UIUtil.getContext(),"username",userNameEncry);
+        SPUtil.saveNormalData(UIUtil.getContext(),"password",passWordEncry);
         getCallback().onRegisterSuccess(registerModel);
     }
 
