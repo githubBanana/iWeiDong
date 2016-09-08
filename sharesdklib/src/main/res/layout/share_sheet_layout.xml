@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white">
+       <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享到"
+            android:gravity="center_vertical"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/img1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="微博"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@mipmap/share_pic_weibo"/>
+        <TextView
+            android:id="@+id/img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="微信好友"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@mipmap/share_pic_weixinfriend"/>
+        <TextView
+            android:id="@+id/img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="朋友圈"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@mipmap/share_pic_moment"/>
+        <TextView
+            android:id="@+id/img4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="QQ好友"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@mipmap/share_pic_qq"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        >
+        <TextView
+            android:id="@+id/shutdownbottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="关闭"
+            android:textColor="@android:color/holo_red_dark"/>
+    </LinearLayout>
+
+</LinearLayout>
