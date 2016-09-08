@@ -22,7 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <Sport 导航界面>
  * @author: Xs
  * @date: 2016-09-08 15:26
  * @email Xs.lin@foxmail.com
@@ -58,7 +58,7 @@ public class SportFragment extends BaseFragment
         _ivs.add(mImg2);
         _ivs.add(mImg3);
         _ivs.add(mImg4);
-//        _ivs.get(0).setEnabled(false);
+        _ivs.get(0).setEnabled(false);
 
         LayoutInflater mInflater = getActivity().getLayoutInflater();
         _viewList = new ArrayList<>();

@@ -25,4 +25,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     def dependenciesCf = rootProject.ext.dependencieslib
     compile dependenciesCf.appcompatv7
+    compile dependenciesCf.autolayout
 }

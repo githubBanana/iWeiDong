@@ -11,7 +11,7 @@ import com.zf.weisport.R;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <广场 界面>
  * @author: Xs
  * @date: 2016-09-08 17:24
  * @email Xs.lin@foxmail.com

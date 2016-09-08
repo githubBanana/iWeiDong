@@ -28,7 +28,7 @@ ext {
     eventbus_Version        = '3.0.0-beta1'
     ormlite_core_Version    = '4.48'
     ormlite_android_Version = '4.48'
-
+    autolayout_Version      = '1.4.3'
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
@@ -45,7 +45,8 @@ ext {
             butterknife       :   "com.jakewharton:butterknife:${butterknife_Version}",
             eventbus          :   "de.greenrobot:eventbus:${eventbus_Version}",
             ormlite_core      :   "com.j256.ormlite:ormlite-core:${ormlite_core_Version}",
-            ormlite_android   :   "com.j256.ormlite:ormlite-android:${ormlite_android_Version}"
+            ormlite_android   :   "com.j256.ormlite:ormlite-android:${ormlite_android_Version}",
+            autolayout        :   "com.zhy:autolayout:${autolayout_Version}"
     ]
 
 }
