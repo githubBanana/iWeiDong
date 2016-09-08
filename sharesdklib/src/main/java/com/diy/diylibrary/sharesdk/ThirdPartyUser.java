@@ -1,12 +1,20 @@
 package com.diy.diylibrary.sharesdk;
 
+import android.util.Log;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformDb;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
+
 /**
  * @version V1.0 <第三方平台用户信息>
  * @author: Xs
  * @date: 2016-03-25 11:06
  */
 public class ThirdPartyUser {
-    private static final String TAG = "ThirdPartyUser";
+
     private static ThirdPartyUser instance = null;
     private ThirdPartyUser() {
     }
@@ -31,6 +39,34 @@ public class ThirdPartyUser {
     private String platformName;          // 用户所属平台
     private int platfromVersion;   // 平台版本
 
+    private int type;//登录平台(4-微信 5-QQ 6-微博)
+
+    /**
+     * 初始化第三方用户登录信息
+     * @param platform
+     */
+    public void initPlatformUserInfo(Platform platform) {
+        PlatformDb platformDb = platform.getDb();
+        setAccessToken(platformDb.getToken());
+        setOpenId(platformDb.getUserId());
+        setNickname(platformDb.getUserName());
+        setUserIconUrl(platformDb.getUserIcon());
+        setAccessTokenSecret(platformDb.getTokenSecret());
+        setPlatformName(platformDb.getPlatformNname());
+        setPlatfromVersion(platformDb.getPlatformVersion());
+        if ("m".equals(platformDb.getUserGender()))
+            setUserGender("1");
+        else
+            setUserGender("0");
+        if (QQ.NAME.equals(platform.getName()))
+            setType(5);
+        else if (Wechat.NAME.equals(platform.getName()))
+            setType(4);
+        else if (SinaWeibo.NAME.equals(platform.getName()))
+            setType(6);
+        else {}
+        Log.e("info", "initPlatformUserInfo: "+platform.getName()+"  "+this.toString() );
+    }
 
     public String getPlatformName() {
         return platformName;
@@ -96,12 +132,20 @@ public class ThirdPartyUser {
         this.userIconUrl = userIconUrl;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
 
         return "\n############### thirdPartyUser infor start ##################\n"+"["+"accessToken:"+accessToken+"\nopenId:"+openId+
                 "\nnickname:"+nickname+"\nuserIconUrl:"+userIconUrl+"\nuserGender:"+userGender+"\ntokenSecret:"+accessTokenSecret+
-                "\nplatformName:"+platformName+"\nplatformVersion:"+platfromVersion+
+                "\nplatformName:"+platformName+"\nplatformVersion:"+platfromVersion+"\ntype:"+type+
                 "]\n############### thirdPartyUser infor end ##################";
     }
 }

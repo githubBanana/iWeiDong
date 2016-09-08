@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/navi_titlebarid"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorGreen"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|start">
+            <TextView
+                android:id="@+id/titlebar_left_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/sport_title_text"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_contentdes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/iv_1"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/point_grey" />
+
+            <ImageView
+                android:id="@+id/iv_2"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/navi" />
+
+            <ImageView
+                android:id="@+id/iv_3"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/navi" />
+
+            <ImageView
+                android:id="@+id/iv_4"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/navi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end">
+
+            <Button
+                android:id="@+id/btn_right"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:background="@mipmap/pic_sport_right"
+                android:singleLine="true"
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/sport_viewPaper_layoutid"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_below="@+id/navi_titlebarid"
+        android:layout_weight="8"
+        android:background="@color/colorGreen">
+        <com.zf.widget.ControlViewPaper
+            android:id="@+id/sport_viewPaper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/sport_viewPaper_layoutid"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="2.5">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/navi_bg" />
+
+        <TextView
+            android:id="@+id/tv_entry"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@drawable/entry_shape"
+            android:gravity="center"
+            android:text="@string/entry_text"
+            android:textColor="@color/colorWhite"
+            android:elevation="3dp"
+            android:textSize="20dp" />
+    </FrameLayout>
+
+</LinearLayout>

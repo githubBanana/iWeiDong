@@ -15,6 +15,15 @@ android {
         versionName androidCf.versionName
     }
 
+    signingConfigs {
+        weisport {
+            keyAlias 'alias_zhoufu'
+            keyPassword "zhoufu"
+            storeFile file('alias_zhoufu.jks')
+            storePassword "zhoufu"
+        }
+    }
+
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
         quiet true
@@ -27,7 +36,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.weisport
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.weisport
         }
     }
 
@@ -55,5 +71,6 @@ dependencies {
     compile project(':basic_mvvm')
     compile project(':sharesdklib')
     compile project(':net')
+    compile project(':dblib')
 
 }

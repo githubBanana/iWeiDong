@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 默认为true -->
+    <item android:drawable="@mipmap/point_grey" android:state_enabled="false"/>
+    <item android:drawable="@mipmap/pic_white" android:state_enabled="true"/>
+</selector>
