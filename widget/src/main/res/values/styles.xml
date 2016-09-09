@@ -10,5 +10,10 @@
         <!--<item name="android:windowIsFloating">true</item>-->
         <item name="android:windowFrame">@null</item>
     </style>
+    <style name="hight_20px_grey">
+        <item name="android:layout_height">@dimen/content_padding_empty_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_line</item>
+    </style>
 
 </resources>

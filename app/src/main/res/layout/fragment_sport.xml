@@ -43,28 +43,28 @@
                 android:id="@+id/iv_1"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:src="@drawable/navi" />
+                android:src="@drawable/navi_pic" />
 
             <ImageView
                 android:id="@+id/iv_2"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/navi" />
+                android:src="@drawable/navi_pic" />
 
             <ImageView
                 android:id="@+id/iv_3"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/navi" />
+                android:src="@drawable/navi_pic" />
 
             <ImageView
                 android:id="@+id/iv_4"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/navi" />
+                android:src="@drawable/navi_pic" />
         </LinearLayout>
 
         <LinearLayout

@@ -29,6 +29,9 @@ ext {
     ormlite_core_Version    = '4.48'
     ormlite_android_Version = '4.48'
     autolayout_Version      = '1.4.3'
+    imageloader_Version     = '1.9.5'
+    bgarefreshlayout_Version = '1.1.4'
+    multiStateView_Version  = '1.1.1'
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
@@ -46,7 +49,10 @@ ext {
             eventbus          :   "de.greenrobot:eventbus:${eventbus_Version}",
             ormlite_core      :   "com.j256.ormlite:ormlite-core:${ormlite_core_Version}",
             ormlite_android   :   "com.j256.ormlite:ormlite-android:${ormlite_android_Version}",
-            autolayout        :   "com.zhy:autolayout:${autolayout_Version}"
+            autolayout        :   "com.zhy:autolayout:${autolayout_Version}",
+            imageloader       :   "com.nostra13.universalimageloader:universal-image-loader:${imageloader_Version}",
+            bgarefreshlayout  :   "cn.bingoogolapple:bga-refreshlayout:${bgarefreshlayout_Version}",
+            multistateview    :   "com.github.Kennyc1012:MultiStateView:${multiStateView_Version}"
     ]
 
 }

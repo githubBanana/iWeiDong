@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.xs.net.retrofit.NetConfig;
 import com.zf.weisport.manager.net.RequestHelper;
+import com.zf.weisport.manager.util.ImageLoaderUtil;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -24,6 +25,8 @@ public class WeiSportApplication extends Application {
          * 配置服务器链接
          */
         new NetConfig.Builder().webService(RequestHelper.WEB_SERVICE).build();
+
+        ImageLoaderUtil.init(this);
     }
 
     /**

@@ -26,4 +26,7 @@ dependencies {
     def dependenciesCf = rootProject.ext.dependencieslib
     compile dependenciesCf.appcompatv7
     compile dependenciesCf.autolayout
+    compile dependenciesCf.imageloader
+    compile dependenciesCf.bgarefreshlayout
+    compile dependenciesCf.multistateview
 }
