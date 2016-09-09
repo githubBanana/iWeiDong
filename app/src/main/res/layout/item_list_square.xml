@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="labelTopicViewModel"
+            type="com.zf.weisport.model.LabelTopicModel"/>
+    </data>
+
+
+    <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="285px"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/hot_title_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{labelTopicViewModel.name}"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="26px"
+            android:textColor="@color/colorGreen"/>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/hot_content_id"
+            android:layout_below="@+id/hot_title_id"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="beginning|middle|end"
+            android:orientation="horizontal"
+            android:divider="@drawable/devide_shape">
+            <ImageView
+                android:id="@+id/img_hot1"
+                android:layout_width="@dimen/Image_side_size"
+                android:layout_height="@dimen/Image_side_size"
+                android:src="@mipmap/pic_defaultsport"
+                />
+            <ImageView
+                android:id="@+id/img_hot2"
+                android:layout_width="@dimen/Image_side_size"
+                android:layout_height="@dimen/Image_side_size"
+                android:src="@mipmap/pic_defaultsport"
+                />
+            <ImageView
+                android:id="@+id/img_hot3"
+                android:layout_width="@dimen/Image_side_size"
+                android:layout_height="@dimen/Image_side_size"
+                android:src="@mipmap/pic_defaultsport"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/hot_content_id"
+            style="@style/hight_20px_grey"/>
+
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+</layout>
