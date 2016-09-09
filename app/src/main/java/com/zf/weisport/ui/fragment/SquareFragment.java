@@ -45,6 +45,8 @@ public class SquareFragment extends ToolbarBaseFragment implements BGARefreshLay
         mBGARefreshLayout.setDelegate(this);
         mBGARefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
         mBGARefreshLayout.setPullDownRefreshEnable(false);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
     }
 
     @Override

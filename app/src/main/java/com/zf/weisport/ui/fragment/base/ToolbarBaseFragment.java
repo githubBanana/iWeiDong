@@ -1,5 +1,6 @@
 package com.zf.weisport.ui.fragment.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.xs.basic_mvvm.ui.viewmodel.ViewModel;
 import com.zf.weisport.R;
 
 /**
@@ -17,7 +19,7 @@ import com.zf.weisport.R;
  * @date: 2016-09-08 17:31
  * @email Xs.lin@foxmail.com
  */
-public abstract class ToolbarBaseFragment extends BaseFragment implements Toolbar.OnMenuItemClickListener{
+public abstract class ToolbarBaseFragment<VM extends ViewModel,B extends ViewDataBinding> extends BaseFragment<VM,B> implements Toolbar.OnMenuItemClickListener{
 
     Toolbar _toolbar;
     AppCompatActivity mAppCompatAct;
