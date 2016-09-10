@@ -59,11 +59,10 @@ public class SquaViewPagerAdapter extends PagerAdapter {
                     sortPosition = p;
                 else
                     sortPosition = p % _strings.size();
-                String url = (String) _strings.get(sortPosition).get("filePath");
+                String url = (String) _strings.get(sortPosition).get("url");
 //                ActivityUtil.startWebActivity(mContext,url, WebActivity.WEB_VIDEO);
             }
         });
-
         return rootview;
     }
 

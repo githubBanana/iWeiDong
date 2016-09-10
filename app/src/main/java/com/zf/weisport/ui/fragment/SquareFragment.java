@@ -4,33 +4,30 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.kennyc.view.MultiStateView;
 import com.zf.weisport.R;
-import com.zf.weisport.adapter.BaseAdapter;
 import com.zf.weisport.adapter.SquareAdapter;
+import com.zf.weisport.databinding.FragmentSquareBinding;
 import com.zf.weisport.model.LabelTopicModel;
+import com.zf.weisport.ui.callback.ISquareCallback;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
+import com.zf.weisport.ui.viewmodel.SquareViewModel;
 import com.zf.widget.carousel.AutoScrollViewPager;
 import com.zf.widget.carousel.SquaViewPagerAdapter;
 import com.zf.widget.recycleview.DividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 
 /**
  * @version V1.0 <广场 界面>
@@ -38,13 +35,30 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * @date: 2016-09-08 17:24
  * @email Xs.lin@foxmail.com
  */
-public class SquareFragment extends ToolbarBaseFragment
-        implements BGARefreshLayout.BGARefreshLayoutDelegate,ViewPager.OnPageChangeListener {
+public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,FragmentSquareBinding>
+        implements BGARefreshLayout.BGARefreshLayoutDelegate,ViewPager.OnPageChangeListener,ISquareCallback {
 
-    MultiStateView      multiStateView;
-    BGARefreshLayout    mBGARefreshLayout;
-    private RecyclerView mRecyclerView;
-    private SquareAdapter mAdapter;
+    private SquareAdapter                   mAdapter;
+    private AutoScrollViewPager             mViewPager ;
+    private SquaViewPagerAdapter            mViewPagerAdapter;
+    private LinearLayout                    mPointer;
+    private List<HashMap<String,Object>>    mTopList;
+    private List<LabelTopicModel>           mLabelTopicList;
+
+    @Override
+    protected SquareViewModel initViewModel() {
+        return new SquareViewModel(this);
+    }
+
+    @Override
+    protected void toBinding() {
+        getBinding().setSquareViewModel(getViewModel());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected int getLayoutResId() {
@@ -54,90 +68,48 @@ public class SquareFragment extends ToolbarBaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.view = view;
+        initView();
+
+        if (mTopList == null) {
+            getViewModel().getTop();
+            getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
+        } else
+            setDataToViewPager();
+
+        if (mLabelTopicList == null)
+            getViewModel().getLabelTopic();
+        else
+            mAdapter.setData(mLabelTopicList);
     }
 
-    private View view;
-    private void initView(View view) {
+    private void initView() {
 
-        multiStateView = (MultiStateView) view.findViewById(R.id.multi_state_view);
-        multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-        mBGARefreshLayout = (BGARefreshLayout) view.findViewById(R.id.bgaRefreshLayout);
-        mBGARefreshLayout.setDelegate(this);
-        mBGARefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
-        mBGARefreshLayout.setCustomHeaderView(headView,true);
-
-/*        BGARefreshViewHolder viewHolder = new BGANormalRefreshViewHolder(getActivity(),true);
-        viewHolder.setLoadingMoreText("加载更多...");
-        mBGARefreshLayout.setRefreshViewHolder(viewHolder);*/
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
-        mAdapter = new SquareAdapter(getActivity(), (view1, labelTopicModel, position) -> {
-
-        });
-        List<LabelTopicModel> mList = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            LabelTopicModel model = new LabelTopicModel();
-            model.setID(String.valueOf(i));
-            model.setName("name "+i);
-            mList.add(model);
-        }
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setData(mList);
-
-    }
-
-    AutoScrollViewPager mViewPager ;
-    SquaViewPagerAdapter mViewPagerAdapter;
-    LinearLayout mPointer;
-    List<HashMap<String,Object>> mList;
-    View headView;
-    private void initViewPager(View view) {
-        headView = getActivity().getLayoutInflater().inflate(R.layout.carousel_layout,null,false);
-      /*  final LinearLayout addTextView = (LinearLayout) findViewById(R.id.testAdd);
-        addTextView.addView(headView);*/
-
+        final View headView = getActivity().getLayoutInflater().inflate(R.layout.carousel_layout,null,false);
         mViewPager = (AutoScrollViewPager) headView.findViewById(R.id.autoScrollViewPager);
         mPointer = (LinearLayout) headView.findViewById(R.id.point_container);
         mViewPagerAdapter = new SquaViewPagerAdapter();
 
-        mList = new ArrayList<>();
-        HashMap<String,Object> map = new HashMap();
-        map.put("filePath","http://weidongzn.com/Files/upload/201602/26/201602261409463148.jpg");
-        HashMap<String,Object> map2 = new HashMap();
-        map2.put("filePath","http://weidongzn.com/Files/upload/201602/26/money.jpg");
-        HashMap<String,Object> map3 = new HashMap();
-        map3.put("filePath","http://weidongzn.com//Files/upload/201605/24/i20160524140517832.jpg");
-        mList.add(map);
-        mList.add(map2);
-        mList.add(map3);
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        getBinding().bgaRefreshLayout.setDelegate(this);
+        getBinding().bgaRefreshLayout.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(), true));
+        getBinding().bgaRefreshLayout.setCustomHeaderView(headView,true);
+//        getBinding().bgaRefreshLayout.setPullDownRefreshEnable(false);
 
-        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(40,40);
-        params.leftMargin=20;
-        mPointer.removeAllViews();
-        for (int i = 0; i < mList.size(); i++) {
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setImageResource(R.drawable.navi_pic);
-            mPointer.addView(imageView,params);
-        }
+        getBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
 
-        mViewPagerAdapter.setStrings(mList,getActivity());
-        mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOnPageChangeListener(this);
-        mViewPager.startAutoScroll();
-        mViewPager.setAutoScrollDurationFactor(20.0);
+        mAdapter = new SquareAdapter(getActivity(), (view1, labelTopicModel, position) -> {
 
+        });
+        getBinding().recyclerView.setAdapter(mAdapter);
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
         getToolbar().setTitle(R.string.hot_square_title_text);
         getToolbar().setOnMenuItemClickListener(this);
-        initViewPager(view);
-        initView(view);
     }
 
     @Override
@@ -150,7 +122,6 @@ public class SquareFragment extends ToolbarBaseFragment
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_pic_photo_id:
-                showToast("hello");
                 break;
         }
         return true;
@@ -158,7 +129,8 @@ public class SquareFragment extends ToolbarBaseFragment
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        getViewModel().getTop();
+        getViewModel().getLabelTopic();
     }
 
     @Override
@@ -174,7 +146,7 @@ public class SquareFragment extends ToolbarBaseFragment
 
     @Override
     public void onPageSelected(int position) {
-        int mCurrentItem = position % mList.size();
+        int mCurrentItem = position % mTopList.size();
         dotChange(mCurrentItem);
     }
 
@@ -189,4 +161,45 @@ public class SquareFragment extends ToolbarBaseFragment
         }
     }
 
+    @Override
+    public void onGetLableTopicSuccess() {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        if (getBinding().bgaRefreshLayout.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
+            getBinding().bgaRefreshLayout.endRefreshing();
+        mLabelTopicList = getViewModel().getLabelTopicList();
+        mAdapter.setData(mLabelTopicList);
+    }
+
+    @Override
+    public void onGetTopSuccess() {
+        mTopList = getViewModel().getTopList();
+        setDataToViewPager();
+    }
+
+    private void setDataToViewPager() {
+        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(40,40);
+        params.leftMargin=20;
+        mPointer.removeAllViews();
+        for (int i = 0; i < mTopList.size(); i++) {
+            ImageView imageView = new ImageView(getActivity());
+            imageView.setImageResource(R.drawable.navi_pic);
+            mPointer.addView(imageView,params);
+        }
+
+        mViewPagerAdapter.setStrings(mTopList,getActivity());
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOnPageChangeListener(this);
+        mViewPager.startAutoScroll();
+        mViewPager.setAutoScrollDurationFactor(20.0);
+    }
+
+    @Override
+    public void onNetEmpty() {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+    }
+
+    @Override
+    public void onNetError() {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
+    }
 }

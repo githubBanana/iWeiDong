@@ -21,6 +21,8 @@ import com.zf.widget.LoadingFragment;
  * @author: Xs
  * @date: 2016-08-31 17:43
  * @email Xs.lin@foxmail.com
+ *
+ * 注：当子类fragment继承该类并使用getviewmodel/getBinding时，务必在onCreateView或以后的方法中使用
  */
 public abstract class BaseMvvmFragment<VM extends ViewModel,B extends ViewDataBinding> extends Fragment implements ICallBck {
 

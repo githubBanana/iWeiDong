@@ -38,6 +38,14 @@
     <string name="hot_square_title_text">热门广场</string>
     <string name="create_topic_text">创建话题</string>
 
+    <!--video-->
+    <string-array name="videotypes">
+        <item>推荐视频</item>
+        <item>健身教学</item>
+        <item>创新玩法</item>
+        <item>超神竞技</item>
+    </string-array>
+
 
 
 

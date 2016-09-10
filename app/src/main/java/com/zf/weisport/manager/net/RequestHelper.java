@@ -1,6 +1,9 @@
 package com.zf.weisport.manager.net;
 
 import com.xs.net.retrofit.RetrofitClient;
+import com.zf.weisport.model.GetTopModel;
+import com.zf.weisport.model.GetVideoModel;
+import com.zf.weisport.model.LabelTopicModel;
 import com.zf.weisport.model.LoginModel;
 import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
@@ -17,7 +20,7 @@ public class RequestHelper {
     public static final String HOST = "http://192.168.1.222:8080";
     public static final String WEB_SERVICE = "http://wd.zfwsc.com/WebService/WeiYunDong.asmx/";
     public static final String ABOUT_US = "http://weidongzn.com/Web/App/AboutUs";
-
+    public static final int PAGESIZE = 10;
 
     private static final RequestHelper INSTANCE = new RequestHelper();
     private RequestHelper() {}
@@ -128,6 +131,44 @@ public class RequestHelper {
         return new RetrofitClient.Builder().method("GetSMSCode").map(map).post(SMSCodeModel.class);
     }
 
+    /**
+     * GetTop
+     * 获取轮播图
+     *
+     * @return
+     */
+    public Observable<GetTopModel> getTop() {
+        return new RetrofitClient.Builder().method("GetTop").post2(GetTopModel.class);
+    }
+
+    /**
+     * GetLabelTopic
+     * 获取标签朋友圈消息
+     *
+     * @return
+     */
+    public Observable<LabelTopicModel> getLabelTopic() {
+        return new RetrofitClient.Builder().method("GetLabelTopic").post2(LabelTopicModel.class);
+    }
+
+    /**
+     * GetVideo
+     * 获取视频列表
+     * Type:0-推荐视频 1-健身教学 2-创新玩法 3-超神竞技
+     * PageIndex:页码
+     * PageSize:页数量
+     *
+     * @param Type
+     * @param PageIndex
+     * @return
+     */
+    public static Observable<GetVideoModel> getVideo(int Type, int PageIndex) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Type", Type);
+        map.put("PageIndex", PageIndex);
+        map.put("PageSize", PAGESIZE);
+        return new RetrofitClient.Builder().method("GetVideo").map(map).post(GetVideoModel.class);
+    }
 
 
 }

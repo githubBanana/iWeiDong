@@ -25,4 +25,5 @@ public interface IBaseBiz extends ILifeCycle {
      */
 //    void submit();
 
+
 }

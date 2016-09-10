@@ -13,7 +13,7 @@ public class LabelTopicModel extends BaseModel<LabelTopicModel> {
 
     public String ID;
     public String Name;
- /*   public List<LabelTopic> Topic;
+    public List<LabelTopic> Topic;
 
     public List<LabelTopic> getTopic() {
         return Topic;
@@ -21,10 +21,9 @@ public class LabelTopicModel extends BaseModel<LabelTopicModel> {
 
     public void setTopic(List<LabelTopic> topic) {
         Topic = topic;
-    }*/
+    }
 
     public String getID() {
-
         return ID;
     }
 

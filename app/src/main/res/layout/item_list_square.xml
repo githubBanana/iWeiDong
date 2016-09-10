@@ -31,24 +31,28 @@
             android:layout_height="wrap_content"
             android:showDividers="beginning|middle|end"
             android:orientation="horizontal"
-            android:divider="@drawable/devide_shape">
+            android:divider="@drawable/devide_shape"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:id="@+id/img_hot1"
                 android:layout_width="@dimen/Image_side_size"
                 android:layout_height="@dimen/Image_side_size"
                 android:src="@mipmap/pic_defaultsport"
+                android:scaleType="fitXY"
                 />
             <ImageView
                 android:id="@+id/img_hot2"
                 android:layout_width="@dimen/Image_side_size"
                 android:layout_height="@dimen/Image_side_size"
                 android:src="@mipmap/pic_defaultsport"
+                android:scaleType="fitXY"
                 />
             <ImageView
                 android:id="@+id/img_hot3"
                 android:layout_width="@dimen/Image_side_size"
                 android:layout_height="@dimen/Image_side_size"
                 android:src="@mipmap/pic_defaultsport"
+                android:scaleType="fitXY"
                 />
         </com.zhy.autolayout.AutoLinearLayout>
         <View

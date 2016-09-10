@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zf.weisport.R;
 import com.zf.weisport.databinding.ItemListSquareBinding;
+import com.zf.weisport.model.LabelTopic;
 import com.zf.weisport.model.LabelTopicModel;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/9.
@@ -65,6 +69,33 @@ public class SquareAdapter extends BaseAdapter<LabelTopicModel> implements View.
             this._model = model;
             this.position = position;
             mBinding.setLabelTopicViewModel(model);
+            mBinding.hotTitleId.setText("#"+_model.getName());
+            List<LabelTopic> topics = _model.getTopic();
+            switch (topics.size()) {
+                case 0:
+                    break;
+                case 1:
+                    ImageLoader.getInstance().displayImage(topics.get(0).Img,mBinding.imgHot1);
+                    mBinding.imgHot1.setVisibility(View.VISIBLE);
+                    mBinding.imgHot2.setVisibility(View.GONE);
+                    mBinding.imgHot3.setVisibility(View.GONE);
+                    break;
+                case 2:
+                    ImageLoader.getInstance().displayImage(topics.get(0).Img,mBinding.imgHot1);
+                    ImageLoader.getInstance().displayImage(topics.get(1).Img,mBinding.imgHot2);
+                    mBinding.imgHot1.setVisibility(View.VISIBLE);
+                    mBinding.imgHot2.setVisibility(View.VISIBLE);
+                    mBinding.imgHot3.setVisibility(View.GONE);
+                    break;
+                case 3:
+                    ImageLoader.getInstance().displayImage(topics.get(0).Img,mBinding.imgHot1);
+                    ImageLoader.getInstance().displayImage(topics.get(1).Img,mBinding.imgHot2);
+                    ImageLoader.getInstance().displayImage(topics.get(2).Img,mBinding.imgHot3);
+                    mBinding.imgHot1.setVisibility(View.VISIBLE);
+                    mBinding.imgHot2.setVisibility(View.VISIBLE);
+                    mBinding.imgHot3.setVisibility(View.VISIBLE);
+                    break;
+            }
         }
         @Override
         public void onClick(View view) {

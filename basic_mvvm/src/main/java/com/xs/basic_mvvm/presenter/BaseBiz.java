@@ -141,4 +141,5 @@ public class BaseBiz<View extends IBaseView> implements IBaseBiz,ICallBck{
     public void loadInitData() {
 
     }
+
 }

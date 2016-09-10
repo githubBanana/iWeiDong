@@ -22,4 +22,16 @@ public interface IBaseCallback extends ICallBck {
      */
     void onSubmitCompleted(Object object);
 
+
+    /**
+     * 网络错误回调
+     */
+    void onNetError();
+
+    /**
+     * 网络访问数据空回调
+     */
+    void onNetEmpty();
+
+
 }

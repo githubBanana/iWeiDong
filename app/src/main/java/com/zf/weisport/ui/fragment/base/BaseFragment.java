@@ -34,4 +34,14 @@ public abstract class BaseFragment<VM extends ViewModel,B extends ViewDataBindin
     public void onSubmitCompleted(Object object) {
 
     }
+
+    @Override
+    public void onNetError() {
+
+    }
+
+    @Override
+    public void onNetEmpty() {
+
+    }
 }
