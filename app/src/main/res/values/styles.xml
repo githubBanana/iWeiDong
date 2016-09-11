@@ -32,4 +32,20 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="normal_item">
+        <item name="android:layout_height">@dimen/normal_item_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">@dimen/content_padding_empty_height</item>
+        <item name="android:paddingRight">@dimen/content_padding_empty_height</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textSize">@dimen/normal_item_text_size</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/text_draw_padding</item>
+    </style>
+    <style name="me_normal_item" parent="normal_item">
+        <item name="android:drawableRight">@drawable/arrow</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

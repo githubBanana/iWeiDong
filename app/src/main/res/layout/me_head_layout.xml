@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300px"
+    android:background="@mipmap/myheadbg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/headId"
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:layout_centerInParent="true"
+        android:background="@drawable/headshape"
+        android:scaleType="fitCenter"
+        android:padding="3dp"
+        android:src="@mipmap/ic_default_head" />
+
+    <TextView
+        android:id="@+id/head_nameId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="28px"
+        android:paddingTop="10dp"
+        android:text="@string/no_login" />
+</com.zhy.autolayout.AutoLinearLayout>

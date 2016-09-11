@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="Image_side_size">190px</dimen>
+
+    <dimen name="normal_item_height">88px</dimen>
+    <dimen name="normal_item_text_size">26px</dimen>
+    <dimen name="text_draw_padding">10px</dimen>
 </resources>
