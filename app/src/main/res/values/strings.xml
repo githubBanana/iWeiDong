@@ -37,6 +37,17 @@
     <!--Square-->
     <string name="hot_square_title_text">热门广场</string>
     <string name="create_topic_text">创建话题</string>
+    <!--Me-->
+    <string name="no_login">未登录</string>
+    <string name="tv_persondata">个人资料</string>
+    <string name="tv_history">历史记录</string>
+    <string name="tv_friend">好友排名</string>
+    <string name="tv_mynews">我的消息</string>
+    <string name="tv_mytotal">我的话题</string>
+    <string name="tv_follow">关注&amp;收藏</string>
+    <string name="tv_equip">设备配件</string>
+    <string name="dis_connect_text">未连接</string>
+    <string name="equip_name_text">设备名</string>
 
     <!--video-->
     <string-array name="videotypes">
@@ -46,9 +57,14 @@
         <item>超神竞技</item>
     </string-array>
 
+    <!-- WebActivity-->
+    <string name="videoDetail_text">视频详情</string>
+    <string name="news_detail_text">消息详情</string>
+    <string name="aboutus_text">关于我们</string>
+    <string name="software_update_text">软件更新</string>
 
-
-
+    <!--设置-->
+    <string name="setting_title_text">设置</string>
 
 
 

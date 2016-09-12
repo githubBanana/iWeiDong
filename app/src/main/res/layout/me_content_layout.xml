@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="none"
+    android:overScrollMode="never">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:drawable/divider_horizontal_bright"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/tv_mine_item1"
+            style="@style/me_normal_item"
+            android:drawableLeft="@mipmap/me_persondata"
+            android:text="@string/tv_persondata"
+            />
+
+        <TextView
+            android:id="@+id/tv_mine_item2"
+            style="@style/me_normal_item"
+            android:drawableLeft="@mipmap/me_history"
+            android:text="@string/tv_history"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_mine_item3"
+            android:drawableLeft="@mipmap/me_friend"
+            android:text="@string/tv_friend"
+            style="@style/me_normal_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_mine_item4"
+            android:drawableLeft="@mipmap/me_mynews"
+            android:text="@string/tv_mynews"
+            style="@style/me_normal_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_mine_item5"
+            android:drawableLeft="@mipmap/me_mytotal"
+            android:text="@string/tv_mytotal"
+            style="@style/me_normal_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_mine_item6"
+            style="@style/me_normal_item"
+
+            android:drawableLeft="@mipmap/follow_pic"
+            android:text="@string/tv_follow"
+            />
+
+        <View
+            style="@style/hight_20px_grey"/>
+
+        <TextView
+            android:id="@+id/tv_mine_item7"
+            android:drawableLeft="@mipmap/me_mydevice"
+            android:text="@string/tv_equip"
+            style="@style/me_normal_item"
+            />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</ScrollView>
