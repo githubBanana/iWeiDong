@@ -30,16 +30,20 @@ public interface IVideoView extends IBaseView {
     void onNetEmptyNotifyUI();
 
     /**
+     * 获取视频类型
+     */
+    int getType();
+
+    /**
      * 设置视频类型
      * @param type
      */
     void setType(int type);
 
     /**
-     * 获取视频类型
-     * @return
+     * 设置页码
      */
-    int getType();
+    int getPageIndex();
 
     /**
      * 设置页码
@@ -48,8 +52,14 @@ public interface IVideoView extends IBaseView {
     void setPageIndex(int pageIndex);
 
     /**
-     * 获取页码
+     * 设置页总数
+     * @param totalCount
+     */
+    void setTotalCount(int totalCount);
+
+    /**
+     * 获取页总数
      * @return
      */
-    int getPageIndex();
+    int getTotalCount();
 }

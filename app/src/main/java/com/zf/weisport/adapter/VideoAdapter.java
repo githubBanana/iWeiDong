@@ -3,11 +3,11 @@ package com.zf.weisport.adapter;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zf.weisport.R;
 import com.zf.weisport.databinding.ItemListVideoBinding;
 import com.zf.weisport.model.GetVideoModel;
@@ -69,7 +69,9 @@ public class VideoAdapter extends BaseAdapter<GetVideoModel> implements View.OnC
             this._model = model;
             this.position = position;
             mBinding.setGetVideoViewModel(model);
-            Log.e("info", "setData: "+model.toString() );
+            mBinding.tvTitle.setText(_model.Title);
+            mBinding.tvTime.setText(_model.AddTime);
+            ImageLoader.getInstance().displayImage(_model.LogoUrl,mBinding.videoIconBg);
         }
         @Override
         public void onClick(View view) {

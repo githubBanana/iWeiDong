@@ -18,9 +18,10 @@ import java.util.List;
  */
 public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> implements IVideoView {
 
-    private int Type;
-    private int PageIndex;
     private List<GetVideoModel> mList;
+    private int                 _pageIndex;
+    private int                 _type;
+    private int                 _totalCount;
 
     private IVideoBiz biz;
     public VideoViewModel(IVideoCallback iVideoCallback) {
@@ -35,6 +36,7 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
     public void getVideo() {
         biz.getVideo();
     }
+
 
     @Override
     protected BaseBiz createBiz() {
@@ -58,23 +60,33 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
     }
 
     @Override
-    public void setType(int type) {
-        this.Type = type;
-    }
-
-    @Override
     public int getType() {
-        return this.Type;
+        return this._type;
     }
 
     @Override
-    public void setPageIndex(int pageIndex) {
-        this.PageIndex = pageIndex;
+    public void setType(int type) {
+        this._type = type;
     }
 
     @Override
     public int getPageIndex() {
-        return this.PageIndex;
+        return this._pageIndex;
+    }
+
+    @Override
+    public void setPageIndex(int pageIndex) {
+        this._pageIndex = pageIndex;
+    }
+
+    @Override
+    public void setTotalCount(int totalCount) {
+        this._totalCount = totalCount;
+    }
+
+    @Override
+    public int getTotalCount() {
+        return this._totalCount;
     }
 
     public List<GetVideoModel> getmList() {

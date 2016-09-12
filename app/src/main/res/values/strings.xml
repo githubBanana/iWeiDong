@@ -25,6 +25,8 @@
     <string name="register_success_text">注册成功，请提交登录</string>
     <!--toast-->
     <string name="toast_login_error">用户名或密码错误</string>
+    <string name="no_more_data_text">没有更多数据</string>
+    <string name="loading_more_text">加载更多...</string>
 
     <!--Sport-->
     <string name="switch_to_Backstage">再按一次返回手机主界面</string>
@@ -65,6 +67,8 @@
 
     <!--设置-->
     <string name="setting_title_text">设置</string>
+
+
 
 
 

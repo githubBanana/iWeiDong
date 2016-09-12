@@ -59,6 +59,6 @@ public class BaseModel<T> implements Serializable {
     }
 
     public boolean isEmptyData() {
-        return !"0".equals(ErrNum) || data == null || data.isEmpty();
+        return !"0".equals(ErrNum) || data == null || data.isEmpty() ;
     }
 }

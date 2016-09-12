@@ -1,6 +1,5 @@
 package com.zf.weisport.ui.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <微视频 界面>
  * @author: Xs
  * @date: 2016-09-10 15:22
  * @email Xs.lin@foxmail.com
@@ -42,7 +41,6 @@ public class VideoFragment extends ToolbarBaseFragment {
         mAdapter.setTabs(stringArray);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
 
     }
 

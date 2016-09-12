@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.zf.weisport.R;
+import com.zf.weisport.ui.fragment.MeFragment;
 import com.zf.weisport.ui.fragment.SportFragment;
 import com.zf.weisport.ui.fragment.SquareFragment;
+import com.zf.weisport.ui.fragment.VideoFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
         mTabHost.getTabWidget().setShowDividers(0);
         mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_sport)).setIndicator(getTabLayoutView(R.layout.tabs_sport_layout)), SportFragment.class,null);
         mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_square)).setIndicator(getTabLayoutView(R.layout.tabs_square_layout)), SquareFragment.class,null);
-        mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_me)).setIndicator(getTabLayoutView(R.layout.tabs_me_layout)), MeFragment.class,null);
-
         mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_video)).setIndicator(getTabLayoutView(R.layout.tabs_video_layout)), VideoFragment.class,null);
+        mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_me)).setIndicator(getTabLayoutView(R.layout.tabs_me_layout)), MeFragment.class,null);
 
 
     }

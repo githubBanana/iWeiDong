@@ -12,4 +12,6 @@ public interface IVideoCallback extends IBaseCallback{
      * 获取video信息成功
      */
     void onGetVideoSuccess();
+
+
 }

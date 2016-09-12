@@ -17,11 +17,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.AccountActivity">
    <!--         <intent-filter>
@@ -33,12 +33,13 @@
         <activity android:name=".ui.activity.WebActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.activity.EquipsActivity">
-            <intent-filter>
+        <activity android:name=".ui.activity.EquipsActivity"/>
+        <activity android:name=".ui.activity.TopicActivity">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
 

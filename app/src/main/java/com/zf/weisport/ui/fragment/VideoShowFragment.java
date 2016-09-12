@@ -20,10 +20,9 @@ import java.util.List;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <微视频 界面>
  * @author: Xs
  * @date: 2016-09-10 15:36
  * @email Xs.lin@foxmail.com
@@ -34,7 +33,7 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
     private static final String TYPE = "Type";
     private VideoAdapter        mAdapter;
     private List<GetVideoModel> mList;
-    private int                 _pageIndex;
+    private VideoViewModel      mViewModel;
 
     public static VideoShowFragment newInstance(int position) {
         VideoShowFragment fragment = new VideoShowFragment();
@@ -46,7 +45,9 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
 
     @Override
     protected VideoViewModel initViewModel() {
-        return new VideoViewModel(this);
+        if (mViewModel == null)
+            mViewModel = new VideoViewModel(this);
+        return mViewModel;
     }
 
     @Override
@@ -59,54 +60,52 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
         return R.layout.fragment_video_show;
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initView();
-        int type = getArguments().getInt(TYPE);
-        Log.e("info", "onViewCreated: "+type );
-        getViewModel().setType(type);
-        getViewModel().setPageIndex(_pageIndex);
+        initData();
+
+    }
+
+    private void initData() {
         if (mList == null) {
-            Log.e("info", "onViewCreated: mlist == null" );
-            getViewModel().setPageIndex(1);
-            getViewModel().getVideo();
             getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
+            getViewModel().setPageIndex(1);
+            getViewModel().setType(getArguments().getInt(TYPE,0));
+            getViewModel().getVideo();
         } else {
-            Log.e("info", "onViewCreated: " +getViewModel().getType()+ "  "+getViewModel().getPageIndex());
+            getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
             mAdapter.setData(mList);
         }
     }
-
     private void initView() {
-        getBinding().bgaRefreshLayout.setDelegate(this);
-        BGARefreshViewHolder viewHolder = new BGANormalRefreshViewHolder(getActivity(),true);
-        viewHolder.setLoadingMoreText("加载更多...");
-        getBinding().bgaRefreshLayout.setRefreshViewHolder(viewHolder);
-        getBinding().bgaRefreshLayout.setPullDownRefreshEnable(false);
-
         getBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
-        mAdapter = new VideoAdapter(getActivity(), (view, getVideoModel, position) -> {
-
+        mAdapter = new VideoAdapter(getActivity(), (view1, getVideoModel, position) -> {
         });
         getBinding().recyclerView.setAdapter(mAdapter);
+        getBinding().bgaRefreshLayoutVideo.setDelegate(this);
+        getBinding().bgaRefreshLayoutVideo.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(),true));
+        getBinding().bgaRefreshLayoutVideo.setIsShowLoadingMoreView(true);
     }
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        getViewModel().setPageIndex(1);
+        getViewModel().getVideo();
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        return true;
     }
 
     @Override
     public void onGetVideoSuccess() {
+        Log.e("info", "onGetVideoSuccess: "+getBinding().bgaRefreshLayoutVideo.getCurrentRefreshStatus() );
+        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         mList = getViewModel().getmList();
         mAdapter.setData(mList);
@@ -114,11 +113,20 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
 
     @Override
     public void onNetEmpty() {
+        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
     }
 
     @Override
     public void onNetError() {
+        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
     }
+
+    private void dismissRefreshingView() {
+        if (getBinding().bgaRefreshLayoutVideo.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
+            getBinding().bgaRefreshLayoutVideo.endRefreshing();
+    }
+
+
 }

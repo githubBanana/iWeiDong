@@ -72,5 +72,5 @@ dependencies {
     compile project(':sharesdklib')
     compile project(':net')
     compile project(':dblib')
-
+    compile dependenciesCf.recyclerview
 }

@@ -131,8 +131,6 @@ public abstract class BaseMvvmFragment<VM extends ViewModel,B extends ViewDataBi
     public void dismissLoadingView() {
         Fragment _fm = getActivity().getSupportFragmentManager().findFragmentByTag(LoadingFragment.TAG);
         if (_fm != null) {
-            /*DialogFragment _df = (DialogFragment) _fm;
-            _df.dismiss();*/
             DialogFragment _df = (DialogFragment) _fm;
             _df.dismiss();
         }

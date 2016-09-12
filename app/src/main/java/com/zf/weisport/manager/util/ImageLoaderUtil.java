@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.zf.weisport.R;
 
 import java.io.File;
 
@@ -39,7 +40,7 @@ public class ImageLoaderUtil {
             memoryCache = new LRULimitedMemoryCache(memoryCacheSize);
         }
         mNormalImageOptions = new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).cacheInMemory(true).cacheOnDisc(true)
-                .resetViewBeforeLoading(true).build();
+                .resetViewBeforeLoading(true).showImageOnLoading(R.mipmap.pic_defaultsport).build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).
                 defaultDisplayImageOptions(mNormalImageOptions)
                 .denyCacheImageMultipleSizesInMemory()

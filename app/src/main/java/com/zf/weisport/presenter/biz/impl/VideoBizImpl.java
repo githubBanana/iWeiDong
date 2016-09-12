@@ -37,16 +37,21 @@ public class VideoBizImpl extends BaseBiz<IVideoView> implements IVideoBiz {
 
                             @Override
                             public void onNext(GetVideoModel getVideoModel) {
-                                if (getVideoModel.isSuccess()) {
-                                    if (getVideoModel.isEmptyData())
-                                        getView().onNetEmptyNotifyUI();
-                                    else
-                                        getView().onGetVideoCompleted(getVideoModel.getData());
-                                } else {
-                                    showToast(getVideoModel.getErrMsg());
+                                if (getView().getPageIndex() == 1) {//初始化 pageIndex = 1
+                                    if (getVideoModel.isSuccess()) {
+                                        if (getVideoModel.isEmptyData())
+                                            getView().onNetEmptyNotifyUI();
+                                        else {
+                                            getView().setTotalCount(getVideoModel.getDataCount());
+                                            getView().onGetVideoCompleted(getVideoModel.getData());
+                                        }
+                                    } else {
+                                        showToast(getVideoModel.getErrMsg());
+                                    }
                                 }
                             }
                         })
         );
     }
+
 }

@@ -14,4 +14,5 @@ public interface IVideoBiz extends IBaseBiz{
      * 获取视频信息
      */
     void getVideo();
+
 }

@@ -164,8 +164,7 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
     @Override
     public void onGetLableTopicSuccess() {
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-        if (getBinding().bgaRefreshLayout.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
-            getBinding().bgaRefreshLayout.endRefreshing();
+        dismissRefreshingView();
         mLabelTopicList = getViewModel().getLabelTopicList();
         mAdapter.setData(mLabelTopicList);
     }
@@ -195,11 +194,18 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
 
     @Override
     public void onNetEmpty() {
+        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
     }
 
     @Override
     public void onNetError() {
+        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
+    }
+
+    private void dismissRefreshingView() {
+        if (getBinding().bgaRefreshLayout.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
+            getBinding().bgaRefreshLayout.endRefreshing();
     }
 }
