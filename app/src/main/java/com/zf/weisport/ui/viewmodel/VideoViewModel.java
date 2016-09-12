@@ -37,6 +37,10 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
         biz.getVideo();
     }
 
+    public void getMoreVideo() {
+        biz.getMoreVideo();
+    }
+
 
     @Override
     protected BaseBiz createBiz() {
@@ -47,6 +51,17 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
     public void onGetVideoCompleted(List<GetVideoModel> getVideoModels) {
         setmList(getVideoModels);
         getCallback().onGetVideoSuccess();
+    }
+
+    @Override
+    public void onGetMoreVideoCompleted(List<GetVideoModel> getVideoModels) {
+        if (getVideoModels == null)
+            getCallback().onGetMoreVideoStatus(false,null);
+        else {
+            getmList().addAll(mList.size(),getVideoModels);
+            getCallback().onGetMoreVideoStatus(true,getVideoModels);
+        }
+
     }
 
     @Override
@@ -89,13 +104,16 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
         return this._totalCount;
     }
 
+    @Override
     public List<GetVideoModel> getmList() {
         return this.mList;
     }
 
-    public void setmList(List<GetVideoModel> mList) {
-        this.mList = mList;
+    @Override
+    public void setmList(List<GetVideoModel> getVideoModelList) {
+        this.mList = getVideoModelList;
     }
+
 
     @Override
     public void onDestroy() {

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.zf.weisport.ui.fragment.VideoShowFragment;
+import com.zf.weisport.ui.fragment.VideoShowFragment11;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -22,7 +23,7 @@ public class VideoFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return VideoShowFragment.newInstance(position);
+        return VideoShowFragment11.newInstance(position);
     }
 
     @Override

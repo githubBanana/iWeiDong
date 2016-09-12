@@ -20,6 +20,11 @@ public interface IVideoView extends IBaseView {
     void onGetVideoCompleted(List<GetVideoModel> getVideoModels);
 
     /**
+     * 获取更多视频信息完成回调
+     * @param getVideoModels
+     */
+    void onGetMoreVideoCompleted(List<GetVideoModel> getVideoModels);
+    /**
      * 访问网络错误
      */
     void onNetErrorNotifyUI();
@@ -62,4 +67,16 @@ public interface IVideoView extends IBaseView {
      * @return
      */
     int getTotalCount();
+
+    /**
+     * 获取视频信息集合
+     * @return
+     */
+    List<GetVideoModel> getmList();
+
+    /**
+     * 设置视频信息集合
+     * @param getVideoModelList
+     */
+    void setmList(List<GetVideoModel> getVideoModelList);
 }

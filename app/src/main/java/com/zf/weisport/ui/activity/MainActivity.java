@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_video)).setIndicator(getTabLayoutView(R.layout.tabs_video_layout)), VideoFragment.class,null);
         mTabHost.addTab(mTabHost.newTabSpec(getTagString(R.string.mainTab_me)).setIndicator(getTabLayoutView(R.layout.tabs_me_layout)), MeFragment.class,null);
 
-
     }
 
     private String getTagString(int stringId) {

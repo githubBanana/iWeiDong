@@ -89,6 +89,7 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
         getBinding().bgaRefreshLayoutVideo.setDelegate(this);
         getBinding().bgaRefreshLayoutVideo.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(),true));
         getBinding().bgaRefreshLayoutVideo.setIsShowLoadingMoreView(true);
+        getBinding().bgaRefreshLayoutVideo.setPullDownRefreshEnable(true);
     }
 
     @Override
@@ -99,6 +100,8 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        Log.e("info", "onBGARefreshLayoutBeginLoadingMore: " );
+        getViewModel().getMoreVideo();
         return true;
     }
 
@@ -109,6 +112,16 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         mList = getViewModel().getmList();
         mAdapter.setData(mList);
+    }
+
+    @Override
+    public void onGetMoreVideoStatus(boolean status,List<GetVideoModel> getVideoModels) {
+        if (status){
+            mList.addAll(mList.size(),getVideoModels);
+            mAdapter.addAll(mList.size(),getVideoModels);
+        }
+        Log.e("info", "onGetMoreVideoStatus: " + status+" "+getVideoModels);
+        getBinding().bgaRefreshLayoutVideo.endLoadingMore();
     }
 
     @Override
