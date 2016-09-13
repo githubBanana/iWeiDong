@@ -50,6 +50,10 @@
     <string name="tv_equip">设备配件</string>
     <string name="dis_connect_text">未连接</string>
     <string name="equip_name_text">设备名</string>
+    <string name="persion_head_tv">头像</string>
+    <string name="persion_name_tv">姓名</string>
+    <string name="persion_gender_tv">性别</string>
+
 
     <!--video-->
     <string-array name="videotypes">

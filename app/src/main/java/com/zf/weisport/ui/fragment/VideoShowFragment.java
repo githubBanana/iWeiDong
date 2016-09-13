@@ -1,25 +1,27 @@
 package com.zf.weisport.ui.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.kennyc.view.MultiStateView;
 import com.zf.weisport.R;
-import com.zf.weisport.adapter.VideoAdapter;
+import com.zf.weisport.adapter.VideoListAdapter;
 import com.zf.weisport.databinding.FragmentVideoShowBinding;
 import com.zf.weisport.model.GetVideoModel;
+import com.zf.weisport.ui.activity.WebActivity;
 import com.zf.weisport.ui.callback.IVideoCallback;
 import com.zf.weisport.ui.fragment.base.BaseFragment;
 import com.zf.weisport.ui.viewmodel.VideoViewModel;
-import com.zf.widget.recycleview.DividerItemDecoration;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * @version V1.0 <微视频 界面>
@@ -28,10 +30,10 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * @email Xs.lin@foxmail.com
  */
 public class VideoShowFragment extends BaseFragment<VideoViewModel,FragmentVideoShowBinding>
-implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
+implements IVideoCallback,PullToRefreshBase.OnRefreshListener2,AdapterView.OnItemClickListener{
 
     private static final String TYPE = "Type";
-    private VideoAdapter        mAdapter;
+    private VideoListAdapter mAdapter;
     private List<GetVideoModel> mList;
     private VideoViewModel      mViewModel;
 
@@ -77,69 +79,79 @@ implements BGARefreshLayout.BGARefreshLayoutDelegate,IVideoCallback{
             getViewModel().getVideo();
         } else {
             getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-            mAdapter.setData(mList);
+            mAdapter.setDatas(mList);
         }
     }
+
     private void initView() {
-        getBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
-        mAdapter = new VideoAdapter(getActivity(), (view1, getVideoModel, position) -> {
-        });
-        getBinding().recyclerView.setAdapter(mAdapter);
-        getBinding().bgaRefreshLayoutVideo.setDelegate(this);
-        getBinding().bgaRefreshLayoutVideo.setRefreshViewHolder(new BGANormalRefreshViewHolder(getActivity(),true));
-        getBinding().bgaRefreshLayoutVideo.setIsShowLoadingMoreView(true);
-        getBinding().bgaRefreshLayoutVideo.setPullDownRefreshEnable(true);
-    }
-
-    @Override
-    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        getViewModel().setPageIndex(1);
-        getViewModel().getVideo();
-    }
-
-    @Override
-    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        Log.e("info", "onBGARefreshLayoutBeginLoadingMore: " );
-        getViewModel().getMoreVideo();
-        return true;
+        getBinding().refreshListview.setMode(PullToRefreshBase.Mode.BOTH);
+        getBinding().refreshListview.setShowDividers(0);
+        getBinding().refreshListview.getLoadingLayoutProxy().setTextTypeface(Typeface.MONOSPACE);
+        getBinding().refreshListview.getLoadingLayoutProxy().setLoadingDrawable(getResources().getDrawable(R.mipmap.load_image_1));
+        getBinding().refreshListview.setOnRefreshListener(this);
+        getBinding().refreshListview.setOnItemClickListener(this);
+        mAdapter = new VideoListAdapter();
+        getBinding().refreshListview.setAdapter(mAdapter);
     }
 
     @Override
     public void onGetVideoSuccess() {
-        Log.e("info", "onGetVideoSuccess: "+getBinding().bgaRefreshLayoutVideo.getCurrentRefreshStatus() );
-        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        finishRefreshView();
         mList = getViewModel().getmList();
-        mAdapter.setData(mList);
+        mAdapter.setDatas(mList);
     }
 
     @Override
     public void onGetMoreVideoStatus(boolean status,List<GetVideoModel> getVideoModels) {
         if (status){
             mList.addAll(mList.size(),getVideoModels);
-            mAdapter.addAll(mList.size(),getVideoModels);
+            mAdapter.addDatas(getVideoModels);
         }
-        Log.e("info", "onGetMoreVideoStatus: " + status+" "+getVideoModels);
-        getBinding().bgaRefreshLayoutVideo.endLoadingMore();
+        finishRefreshView();
     }
 
     @Override
     public void onNetEmpty() {
-        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+        finishRefreshView();
     }
 
     @Override
     public void onNetError() {
-        dismissRefreshingView();
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
+        finishRefreshView();
     }
 
-    private void dismissRefreshingView() {
-        if (getBinding().bgaRefreshLayoutVideo.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
-            getBinding().bgaRefreshLayoutVideo.endRefreshing();
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+        getViewModel().setPageIndex(1);
+        getViewModel().getVideo();
     }
 
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+        if (getViewModel().isCanPullUp())
+            getViewModel().getMoreVideo();
+        else
+           finishRefreshView();
+    }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        GetVideoModel item = mAdapter.getItem(i-1);
+        String url = item.url;
+        WebActivity.start(getActivity(),url,WebActivity.WEB_VIDEO);
+    }
+
+    private void finishRefreshView() {
+        //立即停止会导致 动画不能完结
+        Observable.just("").delay(300, TimeUnit.MICROSECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+            if(getBinding().refreshListview.isRefreshing()) {
+                getBinding().refreshListview.onRefreshComplete();
+            }
+            finishRefreshView();
+        });
+
+    }
 }

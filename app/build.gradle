@@ -73,4 +73,5 @@ dependencies {
     compile project(':net')
     compile project(':dblib')
     compile project(':pull_refresh')
+    compile project(':multi-image-selector')
 }

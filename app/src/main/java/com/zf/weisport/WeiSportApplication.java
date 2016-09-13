@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.xs.net.retrofit.NetConfig;
+import com.zf.weisport.manager.db.model.GlobalData;
+import com.zf.weisport.manager.net.RequestFileHelper;
 import com.zf.weisport.manager.net.RequestHelper;
 import com.zf.weisport.manager.util.ImageLoaderUtil;
 
@@ -24,9 +26,12 @@ public class WeiSportApplication extends Application {
         /**
          * 配置服务器链接
          */
-        new NetConfig.Builder().webService(RequestHelper.WEB_SERVICE).build();
+        new NetConfig.Builder().webService(RequestHelper.WEB_SERVICE).
+                fileUploadWebService(RequestFileHelper.WEB_SERVICE).build();
 
         ImageLoaderUtil.init(this);
+
+        GlobalData.init(this);
     }
 
     /**

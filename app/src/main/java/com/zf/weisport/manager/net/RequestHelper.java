@@ -8,6 +8,7 @@ import com.zf.weisport.model.LoginModel;
 import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
 import com.zf.weisport.model.SyncInfoModel;
+import com.zf.weisport.model.UpdUserInfoModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -168,6 +169,30 @@ public class RequestHelper {
         map.put("PageIndex", PageIndex);
         map.put("PageSize", PAGESIZE);
         return new RetrofitClient.Builder().method("GetVideo").map(map).post(GetVideoModel.class);
+    }
+
+
+    /**
+     * UpdUser
+     * 更新用户资料
+     * User_ID:用户ID
+     * Head_Img:上传图片的ID
+     * Name:昵称
+     * Sex:性别(0:女 1:男)
+     *
+     * @param User_ID
+     * @param Head_Img
+     * @param Name
+     * @param Sex
+     * @return
+     */
+    public Observable<UpdUserInfoModel> updUser(String User_ID, String Head_Img, String Name, String Sex) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Head_Img", Head_Img);
+        map.put("Name", Name);
+        map.put("Sex", Sex);
+        return new RetrofitClient.Builder().method("UpdUser").map(map).post(UpdUserInfoModel.class);
     }
 
 

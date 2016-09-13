@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="persionViewModel"
+            type="com.zf.weisport.ui.viewmodel.PersionViewModel"/>
+    </data>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        style="@style/Divider.AutoMatch.MiddleAndEnd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View style="@style/hight_20px_grey" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/persionHeadLinearId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:layout_marginTop="10px"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/normal_item"
+                android:layout_weight="1"
+                android:background="@null"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="@string/persion_head_tv" />
+
+            <ImageView
+                android:id="@+id/persionHeadId"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10px"
+                android:elevation="8dp"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                style="@style/normal_item"
+                android:layout_weight="1"
+                android:text="@string/persion_name_tv"
+
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minWidth="80dp"
+                android:maxLength="20"
+                android:text="@={persionViewModel.name}" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                style="@style/normal_item"
+                android:layout_weight="3"
+                android:text="@string/persion_gender_tv" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:dividerPadding="10dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:button="@drawable/male_select"
+                    android:checked="@={persionViewModel.maleCheck}"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:button="@drawable/female_select"
+                    android:checked="@={persionViewModel.femaleCheck}"/>
+            </RadioGroup>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+        </LinearLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>

@@ -1,7 +1,6 @@
 package com.zf.weisport.presenter.biz.impl;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.diy.diylibrary.sharesdk.AuthorizeLogin;
 import com.diy.diylibrary.sharesdk.ThirdPartyUser;
@@ -64,7 +63,6 @@ public class LoginBizImpl extends BaseBiz<ILoginView>
 
     @Override
     public void thirdPartyLogin(String platFormName) {
-        Log.e(TAG, "thirdPartyLogin: "+platFormName );
         AuthorizeLogin.getPresenter(UIUtil.getContext()).showUser(this, platFormName);
         // unable touch
         if (QQ.NAME.equals(platFormName))
@@ -129,7 +127,6 @@ public class LoginBizImpl extends BaseBiz<ILoginView>
         getView().setWeibo(true);
         getView().notifyUIChange();
     }
-    private static final String TAG = LoginBizImpl.class.getSimpleName();
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {

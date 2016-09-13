@@ -27,6 +27,7 @@ dependencies {
     compile dependenciesCf.appcompatv7
     compile dependenciesCf.autolayout
     compile dependenciesCf.imageloader
+    compile dependenciesCf.glide
     compile dependenciesCf.bgarefreshlayout
     compile dependenciesCf.multistateview
 }

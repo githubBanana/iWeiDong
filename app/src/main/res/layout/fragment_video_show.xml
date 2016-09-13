@@ -11,26 +11,19 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.kennyc.view.MultiStateView
-            app:msv_viewState="loading"
-            android:id="@+id/multi_state_view"
-            app:msv_loadingView="@layout/layout_state_loading_view"
-            app:msv_errorView="@layout/layout_state_error_view"
-            app:msv_emptyView="@layout/layout_state_empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <cn.bingoogolapple.refreshlayout.BGARefreshLayout
-                android:id="@+id/bgaRefreshLayout_video"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="LinearLayoutManager"/>
-            </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
-        </com.kennyc.view.MultiStateView>
-
+    <com.kennyc.view.MultiStateView
+        app:msv_viewState="loading"
+        android:id="@+id/multi_state_view"
+        app:msv_loadingView="@layout/layout_state_loading_view"
+        app:msv_errorView="@layout/layout_state_error_view"
+        app:msv_emptyView="@layout/layout_state_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/refreshListview"
+        android:layout_height="match_parent" />
+    </com.kennyc.view.MultiStateView>
     </FrameLayout>
 </layout>

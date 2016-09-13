@@ -43,8 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="?android:attr/textAppearance"
-                android:textStyle="bold" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/refresh_default_gray"/>
 
             <TextView
                 android:id="@+id/pull_to_refresh_sub_text"

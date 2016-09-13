@@ -1,5 +1,7 @@
 package com.zf.weisport.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ExpandableListView;
@@ -23,6 +25,11 @@ public class EquipsActivity extends BaseActivity{
 
     @Bind(R.id.expandableListView_equipId)
     ExpandableListView mListView;
+
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity,EquipsActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

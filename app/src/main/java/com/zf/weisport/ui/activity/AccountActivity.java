@@ -1,5 +1,7 @@
 package com.zf.weisport.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,11 @@ import com.zf.weisport.ui.fragment.RegisterFragment;
  * @email Xs.lin@foxmail.com
  */
 public class AccountActivity extends BaseActivity implements View.OnClickListener,OnChangeTilte{
+
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity,AccountActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

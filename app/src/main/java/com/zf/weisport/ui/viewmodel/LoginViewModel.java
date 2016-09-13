@@ -88,7 +88,7 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
          * 保存用户登录信息到缓存、数据库
          */
         UserUtil.setLogin();
-        UserUtil.initUser(loginModel.getData().get(0));
+        UserUtil.initUser(loginModel);
         AppDatabaseCache.getCache(UIUtil.getContext()).userAdd(User.getUser());
         /**
          * 临时保存用户登录信息
@@ -97,6 +97,7 @@ public class LoginViewModel extends BaseViewModel<ILoginCallback,LoginModel> imp
         final String passWordEncry = DESUtil.encryptAsDoNet(getPassword());
         SPUtil.saveNormalData(UIUtil.getContext(),"username",userNameEncry);
         SPUtil.saveNormalData(UIUtil.getContext(),"password",passWordEncry);
+
         getCallback().onLoginSuccess(loginModel);
     }
 

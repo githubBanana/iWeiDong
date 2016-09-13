@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:tabIndicatorColor="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorGreen"
         app:tabMode="fixed"
         app:tabSelectedTextColor="?attr/colorPrimary"
         app:tabTextAppearance="?attr/textAppearanceLargePopupMenu"/>

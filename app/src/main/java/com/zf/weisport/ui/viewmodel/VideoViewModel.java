@@ -120,4 +120,17 @@ public class VideoViewModel extends BaseViewModel<IVideoCallback,GetVideoModel> 
         super.onDestroy();
         mList = null;
     }
+
+    /**
+     * 当前集合元素个数与总个数的比较
+     * @return
+     */
+    public boolean isCanPullUp() {
+        if (getTotalCount() <= 2)
+            return false;
+        if (getmList().size() < getTotalCount())
+            return true;
+        else
+            return false;
+    }
 }

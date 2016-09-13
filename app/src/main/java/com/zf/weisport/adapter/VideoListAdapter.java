@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zf.weisport.R;
 import com.zf.weisport.model.GetVideoModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,16 +20,20 @@ public class VideoListAdapter extends BaseAdapter{
     private List<GetVideoModel> _getVideoModels;
     private LayoutInflater _layoutInflater;
 
-    public List<GetVideoModel> getGetVideoModels() {
+    public VideoListAdapter() {
+        _getVideoModels = new ArrayList<>();
+    }
+    public List<GetVideoModel> getDatas() {
         return _getVideoModels;
     }
-    public int getGetVideoModelsSize() {
-        if (_getVideoModels == null)
-            return 0;
-        return _getVideoModels.size();
-    }
-    public void setGetVideoModels(List<GetVideoModel> getVideoModels) {
+
+    public void setDatas(List<GetVideoModel> getVideoModels) {
         _getVideoModels = getVideoModels;
+        notifyDataSetChanged();
+    }
+
+    public void addDatas(List<GetVideoModel> getVideoModels) {
+        _getVideoModels.addAll(_getVideoModels.size(),getVideoModels);
         notifyDataSetChanged();
     }
 
@@ -59,14 +64,12 @@ public class VideoListAdapter extends BaseAdapter{
             holder = new VideoViewHolder();
             v = _layoutInflater.inflate(R.layout.item_list_video,null);
             holder.icon = (ImageView) v.findViewById(R.id.video_icon_bg);
-            holder.play = (ImageView) v.findViewById(R.id.play_btn);
             holder.title = (TextView) v.findViewById(R.id.tv_title);
             holder.time = (TextView) v.findViewById(R.id.tv_time);
             v.setTag(holder);
         } else {
             holder = (VideoViewHolder) v.getTag();
         }
-//        holder.icon.setBackground(ImageUtil.bitmapToDrawable(ImageLoader.getInstance().loadImageSync(mList.get(position).get("LogoUrl"))));
         GetVideoModel model = getItem(position);
         ImageLoader.getInstance().displayImage(model.LogoUrl,holder.icon);
         holder.title.setText(model.Title);
@@ -74,14 +77,8 @@ public class VideoListAdapter extends BaseAdapter{
         return v;
     }
 
-    public void setDatas(List<GetVideoModel> data) {
-        getGetVideoModels().addAll(data);
-        notifyDataSetChanged();
-    }
-
     public class VideoViewHolder {
         private ImageView icon;
-        private ImageView play;
         private TextView title;
         private TextView time;
     }

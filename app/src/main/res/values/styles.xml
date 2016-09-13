@@ -48,4 +48,18 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+
+    <style name="MatchAuto">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+    <!--带分隔线 Auto-->
+    <style name="Divider.AutoMatch.MiddleAndEnd"
+        parent="MatchAuto">
+        <item name="android:showDividers">middle|end</item>
+        <item name="android:divider">@drawable/layout_divider</item>
+    </style>
+
+
 </resources>

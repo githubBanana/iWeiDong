@@ -1,5 +1,6 @@
 package com.zf.weisport.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -24,6 +25,14 @@ public class WebActivity extends BaseActivity{
     public static final int WEB_NEWS = 2;
     public static final int WEB_ABOUTUS = 3;
     public static final int WEB_INSTALL_UPDATE = 4;
+
+    public static void start(Activity activity,String url,int type) {
+        Intent intent = new Intent();
+        intent.setClass(activity, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("type",type);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

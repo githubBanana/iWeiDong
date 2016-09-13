@@ -6,10 +6,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zf.weisport.R;
+import com.zf.weisport.manager.db.bean.User;
+import com.zf.weisport.manager.util.GlideUtil;
+import com.zf.weisport.manager.util.UserUtil;
+import com.zf.weisport.ui.activity.AccountActivity;
+import com.zf.weisport.ui.activity.EquipsActivity;
+import com.zf.weisport.ui.activity.PersionActivity;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -18,6 +27,11 @@ import butterknife.OnClick;
  * Created by Xs on 2016/9/11.
  */
 public class MeFragment extends ToolbarBaseFragment{
+
+    @Bind(R.id.headId)
+    ImageView mHead;
+    @Bind(R.id.head_nameId)
+    TextView  mTvName;
 
     @Override
     protected int getLayoutResId() {
@@ -35,6 +49,15 @@ public class MeFragment extends ToolbarBaseFragment{
         super.onResume();
         getToolbar().setTitle(R.string.mainTab_me);
         getToolbar().setOnMenuItemClickListener(this);
+        if (UserUtil.isLogin(getActivity())) {
+            //初始化头像
+            GlideUtil.showHead(User.getUser().getHeadUrl(),mHead);
+            mTvName.setText(User.getUser().getName());
+        } else {
+            GlideUtil.showHead("",mHead);
+            mTvName.setText(R.string.no_login);
+        }
+
     }
 
     @Override
@@ -59,38 +82,39 @@ public class MeFragment extends ToolbarBaseFragment{
             R.id.tv_mine_item5,
             R.id.tv_mine_item6,
             R.id.tv_mine_item7,
-            R.id.head_nameId,
             R.id.headId
     })
     public void meOnclick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_mine_item1:
+        if (!UserUtil.isLogin(getActivity()))
+            AccountActivity.start(getActivity());
+        else {
+            switch (view.getId()) {
+                case R.id.tv_mine_item1:
+                    PersionActivity.start(getActivity());
+                    break;
+                case R.id.tv_mine_item2:
 
-                break;
-            case R.id.tv_mine_item2:
+                    break;
+                case R.id.tv_mine_item3:
 
-                break;
-            case R.id.tv_mine_item3:
+                    break;
+                case R.id.tv_mine_item4:
 
-                break;
-            case R.id.tv_mine_item4:
+                    break;
+                case R.id.tv_mine_item5:
 
-                break;
-            case R.id.tv_mine_item5:
+                    break;
+                case R.id.tv_mine_item6:
 
-                break;
-            case R.id.tv_mine_item6:
-
-                break;
-            case R.id.tv_mine_item7:
-
-                break;
-            case R.id.head_nameId:
-
-                break;
-            case R.id.headId:
-
-                break;
+                    break;
+                case R.id.tv_mine_item7:
+                    EquipsActivity.start(getActivity());
+                    break;
+                case R.id.headId:
+                    if (!UserUtil.isLogin(getActivity()))
+                        AccountActivity.start(getActivity());
+                    break;
+            }
         }
     }
 

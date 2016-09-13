@@ -1,8 +1,7 @@
 package com.zf.weisport.manager.net;
 
-import com.xs.net.model.sample.FileModelSample;
-import com.xs.net.retrofit.ApiService;
 import com.xs.net.retrofit.RetrofitFileClient;
+import com.zf.weisport.model.FileModel;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,22 +21,22 @@ public class RequestFileHelper {
 
     public static final String WEB_SERVICE = "http://wd.zfwsc.com/Admin/File/";
 
-    private static ApiService mApiService;
     private static final RequestFileHelper INSTANCE = new RequestFileHelper();
     private RequestFileHelper() {}
     public static final RequestFileHelper getInstance() {
         return INSTANCE;
     }
+
     /**
      * 图片上传
      * @param imgFile
      * @return
      */
-    public Observable<FileModelSample> upload(File imgFile) {
+    public Observable<FileModel> upload(File imgFile) {
         Map<String, RequestBody> map = new HashMap<>();
         RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpg"), imgFile);
         map.put("image\"; filename=\""+imgFile.getName()+"", fileBody);
-        return new RetrofitFileClient.Builder().method("Upload").map(map).post3(FileModelSample.class);
+        return new RetrofitFileClient.Builder().method("Upload").map(map).post3(FileModel.class);
     }
 
 

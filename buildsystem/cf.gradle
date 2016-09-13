@@ -30,8 +30,10 @@ ext {
     ormlite_android_Version = '4.48'
     autolayout_Version      = '1.4.3'
     imageloader_Version     = '1.9.5'
+    glide_Version           = '3.7.0'
     bgarefreshlayout_Version = '1.1.4'
     multiStateView_Version  = '1.1.1'
+    picasso_Version         = '2.5.2'
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
@@ -51,6 +53,8 @@ ext {
             ormlite_android   :   "com.j256.ormlite:ormlite-android:${ormlite_android_Version}",
             autolayout        :   "com.zhy:autolayout:${autolayout_Version}",
             imageloader       :   "com.nostra13.universalimageloader:universal-image-loader:${imageloader_Version}",
+            glide             :   "com.github.bumptech.glide:glide:${glide_Version}",
+            picasso           :   "com.squareup.picasso:picasso:${picasso_Version}",
             bgarefreshlayout  :   "cn.bingoogolapple:bga-refreshlayout:${bgarefreshlayout_Version}",
             multistateview    :   "com.github.Kennyc1012:MultiStateView:${multiStateView_Version}"
     ]
