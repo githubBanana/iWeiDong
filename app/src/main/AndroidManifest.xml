@@ -28,15 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.AccountActivity">
-        </activity>
-        <activity android:name=".ui.activity.WebActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ui.activity.EquipsActivity"/>
-        <activity android:name=".ui.activity.TopicActivity">
-        </activity>
-        <activity android:name=".ui.activity.PersionActivity"/>
+        <activity android:name=".ui.activity.AccountActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WebActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.EquipsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.TopicActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.PersionActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.HistoryRecordActivity" android:screenOrientation="portrait"/>
         <!--外部module activity-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"

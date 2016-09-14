@@ -53,6 +53,22 @@
     <string name="persion_head_tv">头像</string>
     <string name="persion_name_tv">姓名</string>
     <string name="persion_gender_tv">性别</string>
+    <string name="text_speed_record">转速记录</string>
+    <string name="text_speed">转速</string>
+    <string name="text_week">周</string>
+    <string name="text_month">月</string>
+    <string name="text_year">年</string>
+    <string name="text_accumulate_hours">累计时长</string>
+    <string name="text_max_speed">最大转速</string>
+    <string name="select_device">选择设备</string>
+
+
+    <string-array name="equipCategory">
+        <item>引力球</item>
+        <item>跳绳</item>
+        <item>呼啦圈</item>
+        <item>拳击测力</item>
+    </string-array>
 
 
     <!--video-->

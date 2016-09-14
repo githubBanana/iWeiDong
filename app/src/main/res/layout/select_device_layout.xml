@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_device"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:background="@color/colorGreen"/>
+    <TextView
+        android:id="@+id/select_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport_navi_i_tv1"
+        android:drawableLeft="@mipmap/pic_equip1"
+        android:padding="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/select_tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport_navi_i_tv2"
+        android:drawableLeft="@mipmap/pic_equip1"
+        android:padding="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/select_tv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport_navi_i_tv3"
+        android:drawableLeft="@mipmap/pic_equip1"
+        android:padding="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/select_tv4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport_navi_i_tv4"
+        android:drawableLeft="@mipmap/pic_equip1"
+        android:padding="10dp"
+        android:gravity="center_vertical"/>
+</LinearLayout>

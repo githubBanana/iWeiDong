@@ -7,6 +7,7 @@ import com.zf.weisport.model.LabelTopicModel;
 import com.zf.weisport.model.LoginModel;
 import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
+import com.zf.weisport.model.StatisticsModel;
 import com.zf.weisport.model.SyncInfoModel;
 import com.zf.weisport.model.UpdUserInfoModel;
 
@@ -195,6 +196,25 @@ public class RequestHelper {
         return new RetrofitClient.Builder().method("UpdUser").map(map).post(UpdUserInfoModel.class);
     }
 
+    /**
+     * GetStatistics
+     * 获取用户统计信息
+     * Device_Type:设备类型(1-引力球)
+     * User_ID :用户ID
+     * Type:1-周 2-月 3-年
+     *
+     * @param Device_Type
+     * @param User_ID
+     * @param Type
+     * @return
+     */
+    public Observable<StatisticsModel> getStatistics(String Device_Type, String User_ID, String Type) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("Device_Type", Device_Type);
+        map.put("User_ID", User_ID);
+        map.put("Type", Type);
+        return new RetrofitClient.Builder().method("GetStatistics").map(map).post(StatisticsModel.class);
+    }
 
 }
 
