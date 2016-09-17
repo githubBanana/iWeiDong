@@ -49,7 +49,7 @@ implements ViewPager.OnPageChangeListener,RadioGroup.OnCheckedChangeListener,
     private TextView[]          mTextViews      = new TextView[textIDs.length];
     private RelativeLayout      mSpeedDrawRelayout,mYzhouRelayout;
     private DrawSpeedRecordPortRait _mDrawSpeed;
-    private DrawYPortRait _mDrawY;
+    private DrawYPortRait           _mDrawY;
     private MenuItem            mMenuItem;
     private PagerAdapter        mPagerApdapter;
     private int                 curViewPaperIndex;

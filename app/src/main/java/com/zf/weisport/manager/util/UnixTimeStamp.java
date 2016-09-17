@@ -123,6 +123,8 @@ public class UnixTimeStamp {
 
     /**
      * 支持FORMAT4格式的转化
+     *  进行累计秒数转化日期时，用格林标准时间则相等 累计秒数86399 = 23:59:59
+     *  若采用东八时区进行日期转换，则需把结果-8小时 才实际相等
      * @param timestamp
      * @return
      */
@@ -133,8 +135,19 @@ public class UnixTimeStamp {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        String date = getSimpleDateFormatStandard().format(new Date(timestamp * 1000));
-        return date.split(" ")[1];
+        /**
+         * 这里为了去掉东八时区默认添加的8小时 ，故用 格林威治标准时间
+         */
+
+        if (timestamp < 86400) {
+            String date = getSimpleDateFormatStandard().format(new Date(timestamp * 1000));
+            return date.split(" ")[1];
+        } else {
+            int dateNumber = (int) (timestamp / 86400);
+            long timeNumber = timestamp % 86400;
+            String date = getSimpleDateFormatStandard().format(new Date(timeNumber * 1000));
+            return String.valueOf(dateNumber) + "day " + date.split(" ")[1];
+        }
     }
 
     public static enum Type{
