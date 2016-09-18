@@ -13,4 +13,5 @@
     <color name="bg_color">#D5D5D5</color>
     <color name="colorRed">#EB3430</color>
     <color name="colorBlack">#000000</color>
+    <color name="space_color">#ffececec</color>
 </resources>

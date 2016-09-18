@@ -34,6 +34,8 @@
         <activity android:name=".ui.activity.TopicActivity" android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.PersionActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.HistoryRecordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.MyNewsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.FollowActivity" android:screenOrientation="portrait"/>
         <!--外部module activity-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="followViewModel"
+            type="com.zf.weisport.ui.viewmodel.FollowViewModel"/>
+    </data>
+
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <com.kennyc.view.MultiStateView
+        android:layout_width="match_parent"
+        android:id="@+id/multi_state_view"
+        android:layout_height="match_parent"
+        app:msv_viewState="loading"
+        app:msv_emptyView="@layout/layout_state_empty_view"
+        app:msv_errorView="@layout/layout_state_error_view"
+        app:msv_loadingView="@layout/layout_state_loading_view"
+        >
+        <com.zhy.autolayout.AutoFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <ListView
+                android:id="@+id/followList"
+                android:layout_width="match_parent"
+                android:dividerHeight="0.5px"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/dialog"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@color/actionsheet_gray"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="30dp"
+                android:visibility="invisible" />
+            <com.zf.widget.sortlistview.SideBar
+                android:id="@+id/sideBar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center" />
+
+        </com.zhy.autolayout.AutoFrameLayout>
+    </com.kennyc.view.MultiStateView>
+</com.zhy.autolayout.AutoLinearLayout>
+</layout>

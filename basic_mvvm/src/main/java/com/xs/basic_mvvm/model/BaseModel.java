@@ -61,4 +61,15 @@ public class BaseModel<T> implements Serializable {
     public boolean isEmptyData() {
         return !"0".equals(ErrNum) || data == null || data.isEmpty() ;
     }
+
+    @Override
+    public String toString() {
+        return "BaseModel{" +
+                "ErrNum='" + ErrNum + '\'' +
+                ", ErrMsg='" + ErrMsg + '\'' +
+                ", data=" + data +
+                ", PageCount=" + PageCount +
+                ", TotalCount=" + TotalCount +
+                '}';
+    }
 }

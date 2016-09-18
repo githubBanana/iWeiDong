@@ -32,6 +32,11 @@ public abstract class BaseActivity<VM extends ViewModel,B extends ViewDataBindin
     public void onNetEmpty() {
 
     }
+
+    @Override
+    public void onFinishRefreshView() {
+
+    }
 }
 
 

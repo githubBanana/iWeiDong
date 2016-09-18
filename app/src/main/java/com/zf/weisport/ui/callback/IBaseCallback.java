@@ -33,5 +33,10 @@ public interface IBaseCallback extends ICallBck {
      */
     void onNetEmpty();
 
+    /**
+     * 结束刷新view
+     */
+    void onFinishRefreshView();
+
 
 }

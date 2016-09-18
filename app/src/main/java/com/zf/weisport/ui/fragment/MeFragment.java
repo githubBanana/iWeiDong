@@ -15,7 +15,9 @@ import com.zf.weisport.manager.util.GlideUtil;
 import com.zf.weisport.manager.util.UserUtil;
 import com.zf.weisport.ui.activity.AccountActivity;
 import com.zf.weisport.ui.activity.EquipsActivity;
+import com.zf.weisport.ui.activity.FollowActivity;
 import com.zf.weisport.ui.activity.HistoryRecordActivity;
+import com.zf.weisport.ui.activity.MyNewsActivity;
 import com.zf.weisport.ui.activity.PersionActivity;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 
@@ -97,16 +99,15 @@ public class MeFragment extends ToolbarBaseFragment{
                     HistoryRecordActivity.start(getActivity());
                     break;
                 case R.id.tv_mine_item3:
-
                     break;
                 case R.id.tv_mine_item4:
-
+                    MyNewsActivity.start(getActivity());
                     break;
                 case R.id.tv_mine_item5:
 
                     break;
                 case R.id.tv_mine_item6:
-
+                    FollowActivity.start(getActivity());
                     break;
                 case R.id.tv_mine_item7:
                     EquipsActivity.start(getActivity());

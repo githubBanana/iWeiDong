@@ -44,4 +44,9 @@ public abstract class BaseFragment<VM extends ViewModel,B extends ViewDataBindin
     public void onNetEmpty() {
 
     }
+
+    @Override
+    public void onFinishRefreshView() {
+
+    }
 }

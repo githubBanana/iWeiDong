@@ -34,6 +34,7 @@ ext {
     bgarefreshlayout_Version = '1.1.4'
     multiStateView_Version  = '1.1.1'
     picasso_Version         = '2.5.2'
+    taggroup_Version        = '1.4@aar'
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
@@ -56,7 +57,8 @@ ext {
             glide             :   "com.github.bumptech.glide:glide:${glide_Version}",
             picasso           :   "com.squareup.picasso:picasso:${picasso_Version}",
             bgarefreshlayout  :   "cn.bingoogolapple:bga-refreshlayout:${bgarefreshlayout_Version}",
-            multistateview    :   "com.github.Kennyc1012:MultiStateView:${multiStateView_Version}"
+            multistateview    :   "com.github.Kennyc1012:MultiStateView:${multiStateView_Version}",
+            taggroup          :   "me.gujun.android.taggroup:library:${taggroup_Version}"
     ]
 
 }

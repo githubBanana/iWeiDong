@@ -1,14 +1,18 @@
 package com.zf.weisport.manager.net;
 
+import com.xs.basic_mvvm.model.BaseModel;
 import com.xs.net.retrofit.RetrofitClient;
 import com.zf.weisport.model.GetTopModel;
 import com.zf.weisport.model.GetVideoModel;
 import com.zf.weisport.model.LabelTopicModel;
 import com.zf.weisport.model.LoginModel;
+import com.zf.weisport.model.MyFollowListModel;
+import com.zf.weisport.model.MyMessageModel;
 import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
 import com.zf.weisport.model.StatisticsModel;
 import com.zf.weisport.model.SyncInfoModel;
+import com.zf.weisport.model.TopicModel;
 import com.zf.weisport.model.UpdUserInfoModel;
 
 import java.util.HashMap;
@@ -214,6 +218,120 @@ public class RequestHelper {
         map.put("User_ID", User_ID);
         map.put("Type", Type);
         return new RetrofitClient.Builder().method("GetStatistics").map(map).post(StatisticsModel.class);
+    }
+
+    /**
+     * MyMessage
+     * 我的消息列表
+     * User_ID:当前用户ID
+     * PageIndex:页码
+     * PageSize:页数量
+     * @param User_ID
+     * @param PageIndex
+     * @param PageSize
+     * @return
+     */
+    public Observable<MyMessageModel> getMyMessage(String User_ID, String PageIndex, String PageSize) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("PageIndex", PageIndex);
+        map.put("PageSize", PageSize);
+        return new RetrofitClient.Builder().method("MyMessage").map(map).post(MyMessageModel.class);
+    }
+
+    /**
+     * ReadMessage
+     * 读取消息
+     * User_ID:用户ID
+     * Message_ID
+     * @param User_ID
+     * @param Message_ID
+     * @return
+     */
+    public Observable<BaseModel> requestReadMessage(String User_ID,String Message_ID) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Message_ID", Message_ID);
+        return new RetrofitClient.Builder().method("ReadMessage").map(map).post(BaseModel.class);
+    }
+
+    /**
+     * MyFollowList
+     我的关注列表
+     User_ID:用户ID
+     * @param User_ID
+     * @return
+     */
+    public Observable<MyFollowListModel> getFollowFriendsList(String User_ID) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        return new RetrofitClient.Builder().method("MyFollowList").map(map).post(MyFollowListModel.class);
+    }
+
+    /**
+     * 收藏 ChangeCollect
+     * User_ID:用户ID
+     * Topic_ID:
+     * Type:1-收藏 0-取消收藏
+     *
+     * @param User_ID
+     * @param Topic_ID
+     * @param Type
+     * @return
+     */
+    public static Observable<BaseModel> requestChangeCollect(String User_ID, String Topic_ID, int Type) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Topic_ID", Topic_ID);
+        map.put("Type", String.valueOf(Type));
+        return new RetrofitClient.Builder().method("ChangeCollect").map(map).post(BaseModel.class);
+    }
+
+    /**
+     *    AddFollow
+     *    添加关注
+     *  User_ID:用户ID
+     *  Friend_ID:好友ID
+     *  Type:1-关注 0-取消关注
+     * @param User_ID
+     * @param Friend_ID
+     * @param Type
+     * @return
+     */
+    public static Observable<BaseModel> requestAddFollow(String User_ID, String Friend_ID, int Type) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Friend_ID", Friend_ID);
+        map.put("Type", String.valueOf(Type));
+        return new RetrofitClient.Builder().method("AddFollow").map(map).post(BaseModel.class);
+    }
+
+
+
+    /**
+     *    GetTopic
+     *            分页获取话题列表
+     * Type:请求类型（1-标签 2-收藏 3-用户发布）
+     * Obj_ID:对应Type需要的ID
+     * User_ID:当前用户ID
+     * PageIndex:页码
+     * PageSize:页数量
+     *
+     * @param Type
+     * @param Obj_ID
+     * @param User_ID
+     * @param PageIndex
+     * @param PageSize
+     * @return
+     */
+    public Observable<TopicModel> requestGetTopic(int Type, String Obj_ID, String User_ID, int PageIndex, int PageSize) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Type", Type + "");
+        map.put("Obj_ID", Obj_ID);
+        map.put("PageIndex", PageIndex + "");
+        map.put("PageSize", PageSize + "");
+        return new RetrofitClient.Builder().method("GetTopic").map(map).post(TopicModel.class);
     }
 
 }

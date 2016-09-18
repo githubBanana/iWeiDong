@@ -13,8 +13,8 @@ import java.util.List;
  */
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
 
-    protected List<T> mListData;
-    private Object mLock = new Object();
+    protected List<T>   mListData;
+    private Object      mLock = new Object();
     protected BaseAdapter(){
         mListData = new ArrayList<>();
     }
@@ -72,6 +72,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
         }
     }
 
+
     public T getItem(int position) {
         return getListData().get(position);
     }
@@ -90,6 +91,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
             addAll(items);
         }
     }
+
     public boolean isEmpty() {
         return getItemCount() == 0;
     }
@@ -101,4 +103,5 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
     public interface OnItemClickListener<T> {
         void onItemClick(View view, T t,int position);
     }
+
 }

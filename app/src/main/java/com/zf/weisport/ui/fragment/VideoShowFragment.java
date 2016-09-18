@@ -150,7 +150,6 @@ implements IVideoCallback,PullToRefreshBase.OnRefreshListener2,AdapterView.OnIte
             if(getBinding().refreshListview.isRefreshing()) {
                 getBinding().refreshListview.onRefreshComplete();
             }
-            finishRefreshView();
         });
 
     }

@@ -10,11 +10,13 @@ import android.view.View;
 
 import com.kennyc.view.MultiStateView;
 import com.zf.weisport.R;
-import com.zf.weisport.adapter.VideoAdapter;
-import com.zf.weisport.model.GetVideoModel;
+import com.zf.weisport.adapter.TopicAdapter;
+import com.zf.weisport.databinding.FragmentTopicBinding;
+import com.zf.weisport.model.TopicModel;
+import com.zf.weisport.ui.callback.ITopicCallback;
 import com.zf.weisport.ui.fragment.base.BaseFragment;
+import com.zf.weisport.ui.viewmodel.TopicViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
@@ -22,18 +24,17 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <话题>
  * @author: Xs
  * @date: 2016-09-12 16:34
  * @email Xs.lin@foxmail.com
  */
-public class TopicFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
-    private static final String TAG = "TopicFragment";
+public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBinding> implements BGARefreshLayout.BGARefreshLayoutDelegate,ITopicCallback{
 
     private MultiStateView mMultiStateView;
     private BGARefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
-    private VideoAdapter mAdapter;
+    private TopicAdapter mAdapter;
     private static final String EXTRA_TYPE = "type";//请求类型（1-标签 2-收藏 3-用户发布）
     private static final String EXTRA_ID = "id";//对应Type需要的ID
     public TopicFragment() {
@@ -47,6 +48,39 @@ public class TopicFragment extends BaseFragment implements BGARefreshLayout.BGAR
         return (TopicFragment) Fragment.instantiate(context, TopicFragment.class.getName(), bundle);
     }
 
+    @Override
+    protected TopicViewModel initViewModel() {
+        return new TopicViewModel(this);
+    }
+
+    @Override
+    protected void toBinding() {
+        getBinding().setTopicViewModel(getViewModel());
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_topic;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() == null || !getArguments().containsKey(EXTRA_ID)) {
+            throw new NullPointerException();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        int Type = getArguments().getInt(EXTRA_TYPE, 1);
+        String Obj_ID = getArguments().getString(EXTRA_ID);
+        getViewModel().setType(Type);
+        getViewModel().setObjType(Obj_ID);
+        getViewModel().getTopicList();
+    }
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
@@ -58,20 +92,8 @@ public class TopicFragment extends BaseFragment implements BGARefreshLayout.BGAR
         return true;
     }
 
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_topic;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initView(view);
-
-    }
-
     private void initView(View view) {
-        mAdapter = new VideoAdapter(getActivity(), (view1, getVideoModel, position) -> {
+        mAdapter = new TopicAdapter(getActivity(), (view1, getVideoModel, position) -> {
 
         });
 
@@ -87,13 +109,21 @@ public class TopicFragment extends BaseFragment implements BGARefreshLayout.BGAR
 
         mMultiStateView = (MultiStateView) view.findViewById(R.id.multi_state_view);
         mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-        List<GetVideoModel> models = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            GetVideoModel getVideoModel = new GetVideoModel();
-            getVideoModel.Title = "6666666666666"+i;
-            models.add(getVideoModel);
-        }
+    }
 
-        mAdapter.setData(models);
+    @Override
+    public void onGetTopicSuccess(List<TopicModel> topicModels) {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        mAdapter.setData(topicModels);
+    }
+
+    @Override
+    public void onNetEmpty() {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+    }
+
+    @Override
+    public void onNetError() {
+        getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
     }
 }

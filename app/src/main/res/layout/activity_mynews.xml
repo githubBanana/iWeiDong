@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="myNewsViewModel"
+            type="com.zf.weisport.ui.viewmodel.MyNewsViewModel"/>
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.kennyc.view.MultiStateView
+        app:msv_viewState="loading"
+        android:id="@+id/multi_state_view"
+        app:msv_loadingView="@layout/layout_state_loading_view"
+        app:msv_errorView="@layout/layout_state_error_view"
+        app:msv_emptyView="@layout/layout_state_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/bgaRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="LinearLayoutManager"/>
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+    </com.kennyc.view.MultiStateView>
+</LinearLayout>
+</layout>

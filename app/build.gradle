@@ -68,10 +68,12 @@ dependencies {
     compile dependenciesCf.gridlayout
     compile dependenciesCf.design
     compile dependenciesCf.eventbus
+    compile dependenciesCf.taggroup
     compile project(':basic_mvvm')
     compile project(':sharesdklib')
     compile project(':net')
     compile project(':dblib')
     compile project(':pull_refresh')
     compile project(':multi-image-selector')
+    compile(name: 'cyphotosview', ext: 'aar')
 }

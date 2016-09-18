@@ -1,6 +1,7 @@
 package com.zf.weisport.manager.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.zf.weisport.WeiSportApplication;
 
@@ -19,6 +20,25 @@ public class UIUtil {
     public static Context getContext() {
         return WeiSportApplication.getContext();
     }
+
+    /**
+     * 获取资源
+     */
+    public static Resources getResources()
+    {
+        return getContext().getResources();
+    }
+
+    public static String getString(int resId)
+    {
+        return getResources().getString(resId);
+    }
+
+    public static String getString(int resId, Object... formatArgs)
+    {
+        return getResources().getString(resId, formatArgs);
+    }
+
 }
 
 

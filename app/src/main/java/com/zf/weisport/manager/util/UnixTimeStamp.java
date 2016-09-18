@@ -41,10 +41,19 @@ public class UnixTimeStamp {
      * 东八时区 SimpleDateFormat
      * @return
      */
-    private static SimpleDateFormat getSimpleDateFormat() {
+    public static SimpleDateFormat getSimpleDateFormat() {
         SimpleDateFormat format = (SimpleDateFormat) _threadLocal.get();
         if (format == null) {
             format = new SimpleDateFormat(FORMAT2, Locale.CHINA);
+            format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));//=TimeZone.getDefault()
+            _threadLocal.set(format);
+        }
+        return format;
+    }
+    public static SimpleDateFormat getSimpleDateFormat(String formatStr) {
+        SimpleDateFormat format = (SimpleDateFormat) _threadLocal.get();
+        if (format == null) {
+            format = new SimpleDateFormat(formatStr, Locale.CHINA);
             format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));//=TimeZone.getDefault()
             _threadLocal.set(format);
         }
