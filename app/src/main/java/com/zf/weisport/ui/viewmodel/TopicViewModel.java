@@ -4,7 +4,7 @@ import com.xs.basic_mvvm.presenter.BaseBiz;
 import com.zf.weisport.model.TopicModel;
 import com.zf.weisport.presenter.ITopicView;
 import com.zf.weisport.presenter.biz.ITopicBiz;
-import com.zf.weisport.presenter.biz.impl.TopicImpl;
+import com.zf.weisport.presenter.biz.impl.TopicBizImpl;
 import com.zf.weisport.ui.callback.ITopicCallback;
 
 import java.util.List;
@@ -17,8 +17,9 @@ import java.util.List;
  */
 public class TopicViewModel extends BaseViewModel<ITopicCallback,TopicModel> implements ITopicView {
 
-    public int type;//请求类型
-    public String objType;//请求类型对应的ID
+    public int      type;//请求类型
+    public String   objType;//请求类型对应的ID
+    public int   pageIndex;//页码
 
     private ITopicBiz biz;
     public TopicViewModel(ITopicCallback iTopicCallback) {
@@ -28,7 +29,7 @@ public class TopicViewModel extends BaseViewModel<ITopicCallback,TopicModel> imp
 
     @Override
     protected BaseBiz createBiz() {
-        return new TopicImpl(this,this);
+        return new TopicBizImpl(this,this);
     }
 
     /**
@@ -36,6 +37,13 @@ public class TopicViewModel extends BaseViewModel<ITopicCallback,TopicModel> imp
      */
     public void getTopicList() {
         biz.getTopic();
+    }
+
+    /**
+     * 获取更多话题列表
+     */
+    public void getMoreTopicList() {
+        biz.getMoreTopic();
     }
 
     @Override
@@ -59,8 +67,23 @@ public class TopicViewModel extends BaseViewModel<ITopicCallback,TopicModel> imp
     }
 
     @Override
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    @Override
+    public int getPageIndex() {
+        return this.pageIndex;
+    }
+
+    @Override
     public void onGetTopicCompleted(List<TopicModel> topicModels) {
         getCallback().onGetTopicSuccess(topicModels);
+    }
+
+    @Override
+    public void onGetMoreTopicCompleted(List<TopicModel> topicModels) {
+        getCallback().onGetMoreTopicSuccess(topicModels);
     }
 
     @Override

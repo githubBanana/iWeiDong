@@ -14,4 +14,9 @@ public interface ITopicBiz extends IBaseBiz {
      * 获取话题
      */
     void getTopic();
+
+    /**
+     * 获取更多话题
+     */
+    void getMoreTopic();
 }

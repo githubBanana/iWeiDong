@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="topicCommentModel"
+            type="com.zf.weisport.model.TopicCommentModel"/>
+    </data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:src="@mipmap/ic_default_head" />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@{topicCommentModel.addTime}"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tv_time"
+        android:layout_toRightOf="@id/iv_icon"
+        android:lines="1"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="@{topicCommentModel.name}" />
+
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_toStartOf="@id/tv_time"
+        android:layout_toEndOf="@id/iv_icon"
+        android:text="@{topicCommentModel.comment}" />
+</RelativeLayout>
+</layout>

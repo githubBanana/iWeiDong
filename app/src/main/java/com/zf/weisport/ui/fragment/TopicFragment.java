@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.kennyc.view.MultiStateView;
@@ -18,10 +17,15 @@ import com.zf.weisport.ui.fragment.base.BaseFragment;
 import com.zf.weisport.ui.viewmodel.TopicViewModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * @version V1.0 <话题>
@@ -31,9 +35,6 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  */
 public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBinding> implements BGARefreshLayout.BGARefreshLayoutDelegate,ITopicCallback{
 
-    private MultiStateView mMultiStateView;
-    private BGARefreshLayout mRefreshLayout;
-    private RecyclerView mRecyclerView;
     private TopicAdapter mAdapter;
     private static final String EXTRA_TYPE = "type";//请求类型（1-标签 2-收藏 3-用户发布）
     private static final String EXTRA_ID = "id";//对应Type需要的ID
@@ -41,7 +42,6 @@ public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBind
     }
 
     public static TopicFragment newInstance(Context context, String id, int type) {
-
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_ID, id);
         bundle.putInt(EXTRA_TYPE, type);
@@ -74,7 +74,8 @@ public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBind
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
+        EventBus.getDefault().register(this);
+        initView();
         int Type = getArguments().getInt(EXTRA_TYPE, 1);
         String Obj_ID = getArguments().getString(EXTRA_ID);
         getViewModel().setType(Type);
@@ -84,46 +85,76 @@ public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBind
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        getViewModel().getTopicList();
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        getViewModel().getMoreTopicList();
         return true;
     }
 
-    private void initView(View view) {
+    private void initView() {
         mAdapter = new TopicAdapter(getActivity(), (view1, getVideoModel, position) -> {
 
         });
+        getBinding().recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        getBinding().recyclerview.setAdapter(mAdapter);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mRecyclerView.setAdapter(mAdapter);
-
-        mRefreshLayout = (BGARefreshLayout) view.findViewById(R.id.bgaRefreshLayout);
-        mRefreshLayout.setDelegate(this);
+        getBinding().bgaRefreshLayout.setDelegate(this);
         BGARefreshViewHolder viewHolder = new BGANormalRefreshViewHolder(getActivity(), true);
-        viewHolder.setLoadingMoreText("加载更多....");
-        mRefreshLayout.setRefreshViewHolder(viewHolder);
+        viewHolder.setLoadingMoreText(getString(R.string.loading_more_text));
+        getBinding().bgaRefreshLayout.setRefreshViewHolder(viewHolder);
 
-        mMultiStateView = (MultiStateView) view.findViewById(R.id.multi_state_view);
-        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
     }
 
     @Override
     public void onGetTopicSuccess(List<TopicModel> topicModels) {
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        onFinishRefreshView();
         mAdapter.setData(topicModels);
+    }
+
+    @Override
+    public void onGetMoreTopicSuccess(List<TopicModel> topicModels) {
+        onFinishRefreshView();
+        if (topicModels != null)
+            mAdapter.addAll(topicModels);
     }
 
     @Override
     public void onNetEmpty() {
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+        onFinishRefreshView();
     }
 
     @Override
     public void onNetError() {
         getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_ERROR);
+        onFinishRefreshView();
     }
+
+    @Override
+    public void onFinishRefreshView() {
+        Observable.just("").delay(300, TimeUnit.MICROSECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+            if (getBinding().bgaRefreshLayout.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
+                getBinding().bgaRefreshLayout.endRefreshing();
+            if (getBinding().bgaRefreshLayout.isLoadingMore())
+                getBinding().bgaRefreshLayout.endLoadingMore();
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(TopicCommentFragment.TopicCommentCountEvent event) {
+        TopicModel model = mAdapter.getItem(event.position);
+        model.setComment(String.valueOf(event.commentCount));
+        mAdapter.changeItem(event.position,model);
+    }
+
 }

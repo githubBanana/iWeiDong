@@ -35,6 +35,7 @@ ext {
     multiStateView_Version  = '1.1.1'
     picasso_Version         = '2.5.2'
     taggroup_Version        = '1.4@aar'
+    photoview_Version       = '1.2.3'
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
@@ -58,7 +59,8 @@ ext {
             picasso           :   "com.squareup.picasso:picasso:${picasso_Version}",
             bgarefreshlayout  :   "cn.bingoogolapple:bga-refreshlayout:${bgarefreshlayout_Version}",
             multistateview    :   "com.github.Kennyc1012:MultiStateView:${multiStateView_Version}",
-            taggroup          :   "me.gujun.android.taggroup:library:${taggroup_Version}"
+            taggroup          :   "me.gujun.android.taggroup:library:${taggroup_Version}",
+            photoview         :   "com.mcxiaoke.photoview:library:${photoview_Version}"//点击放大图片集合
     ]
 
 }

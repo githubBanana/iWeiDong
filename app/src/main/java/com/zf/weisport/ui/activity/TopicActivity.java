@@ -32,7 +32,7 @@ public class TopicActivity extends BaseActivity {
      * @param id
      * @param title
      */
-    public static void startActivity(Context context, String id, String title) {
+    public static void start(Context context, String id, String title) {
         Intent intent = new Intent(context, TopicActivity.class);
         intent.setAction(ACTION_ALL_TOPIC);
         intent.putExtra(EXTRA_ID, id);
@@ -45,7 +45,7 @@ public class TopicActivity extends BaseActivity {
      *
      * @param context
      */
-    public static void startActivityForMyTopic(Context context) {
+    public static void startForMyTopic(Context context) {
         Intent intent = new Intent(context, TopicActivity.class);
         intent.setAction(ACTION_MY_TOPIC);
         context.startActivity(intent);

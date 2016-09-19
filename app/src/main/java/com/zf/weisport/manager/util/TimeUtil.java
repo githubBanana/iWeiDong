@@ -16,9 +16,9 @@ public class TimeUtil {
      * 获取当前时间
      * @return
      */
-    public static String getCurrFormatTime() {
+    public static String getCurrFormatTime(String formatStr) {
         Date date = new Date(System.currentTimeMillis());
-        String currTime = UnixTimeStamp.getSimpleDateFormat(UnixTimeStamp.FORMAT1).format(date);
+        String currTime = UnixTimeStamp.getSimpleDateFormat(formatStr).format(date);
         return currTime;
     }
     /**
@@ -29,26 +29,26 @@ public class TimeUtil {
     public static String sortAddTime(String dateString) {// 2016/5/24 15:18:45
         if (TextUtils.isEmpty(dateString))
             return "";
-        String now = getCurrFormatTime();
+        String now = getCurrFormatTime("yyyy/MM/dd HH:mm:ss");
         String[] arrayNow = now.split(" ");
         String[] dateNow = arrayNow[0].split("/");
         String[] timeNow = arrayNow[1].split(":");
-        int yearNow = Integer.valueOf(dateNow[0]).intValue();
-        int monthNow = Integer.valueOf(dateNow[1]).intValue();
-        int dayNow = Integer.valueOf(dateNow[2]).intValue();
-        int hourNow = Integer.valueOf(timeNow[0]).intValue();
-        int minuteNow = Integer.valueOf(timeNow[1]).intValue();
-        int secodeNow = Integer.valueOf(timeNow[2]).intValue();
+        int yearNow = Integer.valueOf(dateNow[0]);
+        int monthNow = Integer.valueOf(dateNow[1]);
+        int dayNow = Integer.valueOf(dateNow[2]);
+        int hourNow = Integer.valueOf(timeNow[0]);
+        int minuteNow = Integer.valueOf(timeNow[1]);
+        int secodeNow = Integer.valueOf(timeNow[2]);
 
         String[] array = dateString.split(" ");
         String[] date = array[0].split("/");
         String[] time = array[1].split(":");
-        int year = Integer.valueOf(date[0]).intValue();
-        int month = Integer.valueOf(date[1]).intValue();
-        int day = Integer.valueOf(date[2]).intValue();
-        int hour = Integer.valueOf(time[0]).intValue();
-        int minute = Integer.valueOf(time[1]).intValue();
-        int secode = Integer.valueOf(time[2]).intValue();
+        int year = Integer.valueOf(date[0]);
+        int month = Integer.valueOf(date[1]);
+        int day = Integer.valueOf(date[2]);
+        int hour = Integer.valueOf(time[0]);
+        int minute = Integer.valueOf(time[1]);
+        int secode = Integer.valueOf(time[2]);
         String returnValue = "";
         if (year == yearNow) {
             if (month == monthNow) {

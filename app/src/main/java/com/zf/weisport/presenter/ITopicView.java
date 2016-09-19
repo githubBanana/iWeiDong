@@ -20,6 +20,12 @@ public interface ITopicView extends IBaseView {
     void onGetTopicCompleted(List<TopicModel> topicModels);
 
     /**
+     * 获取更多话题列表完成
+     * @param topicModels
+     */
+    void onGetMoreTopicCompleted(List<TopicModel> topicModels);
+
+    /**
      * 访问网络错误
      */
     void onNetErrorNotifyUI();
@@ -52,4 +58,16 @@ public interface ITopicView extends IBaseView {
      * @return
      */
     String getObjType();
+
+    /**
+     * 设置页码
+     * @param pageIndex
+     */
+    void setPageIndex(int pageIndex);
+
+    /**
+     * 获取页码
+     * @return
+     */
+    int getPageIndex();
 }

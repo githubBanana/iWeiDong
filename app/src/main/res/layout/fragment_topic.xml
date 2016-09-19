@@ -1,16 +1,20 @@
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="topicViewModel"
             type="com.zf.weisport.ui.viewmodel.TopicViewModel"/>
     </data>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <com.kennyc.view.MultiStateView
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:id="@+id/multi_state_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,6 +24,7 @@
         app:msv_loadingView="@layout/layout_state_loading_view">
 
         <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+
             android:id="@+id/bgaRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -29,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:layoutManager="LinearLayoutManager"></android.support.v7.widget.RecyclerView>
+                app:layoutManager="LinearLayoutManager"/>
         </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
     </com.kennyc.view.MultiStateView>
 
-</FrameLayout>
+</RelativeLayout>
 </layout>

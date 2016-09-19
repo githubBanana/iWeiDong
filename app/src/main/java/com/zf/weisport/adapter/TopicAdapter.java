@@ -9,7 +9,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import com.zf.weisport.manager.db.bean.User;
 import com.zf.weisport.manager.net.RequestHelper;
 import com.zf.weisport.manager.util.TimeUtil;
 import com.zf.weisport.model.TopicModel;
+import com.zf.weisport.ui.activity.TopicCommentActivity;
 import com.zf.widget.LoadDialog;
 
 import rx.Observable;
@@ -95,17 +95,8 @@ public class TopicAdapter extends BaseAdapter<TopicModel> implements View.OnClic
         public void setData(TopicModel model, int position) {
             this.model = model;
             this.position = position;
-//            try {
-//                java.util.Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(model.getAddTime());
-//                PrettyTime prettyTime = new PrettyTime();
-//                String str = prettyTime.format(date);
-//                Log.e("PrettyTime", "PrettyTime:" + str);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-            Log.e("Holder", "TopicModel:" + model);
+
             mBinding.setTitle(model.getName());
-//            mBinding.setTime(model.getAddTime());
             mBinding.setTime(TimeUtil.sortAddTime(model.getAddTime()));
             mBinding.setContent(model.getContent());
             mBinding.setCommentCount(model.getComment());
@@ -220,6 +211,8 @@ public class TopicAdapter extends BaseAdapter<TopicModel> implements View.OnClic
                         ctv.setChecked(!ctv.isChecked());
                         topicModel.setIS_Follow(ctv.isChecked() ? "1" : "0");
                         setFollowText(topicModel,ctv);
+                    } else {
+
                     }
                 }
             });
@@ -279,7 +272,7 @@ public class TopicAdapter extends BaseAdapter<TopicModel> implements View.OnClic
             switch (v.getId()) {
                 case R.id.fl_comment: {
                     TopicModel topicModel = (TopicModel) v.getTag();
-// 暂时屏蔽   TopicCommentActivity.startActivity(v.getContext(), topicModel);
+                    TopicCommentActivity.start(mAct,topicModel,position);
                 }
                 break;
                 case R.id.ctv_collect: {

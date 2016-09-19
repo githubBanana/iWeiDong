@@ -17,4 +17,10 @@ public interface ITopicCallback extends IBaseCallback {
      * @param topicModels
      */
     void onGetTopicSuccess(List<TopicModel> topicModels);
+
+    /**
+     *  获取更多话题列表成功
+     * @param topicModels
+     */
+    void onGetMoreTopicSuccess(List<TopicModel> topicModels);
 }

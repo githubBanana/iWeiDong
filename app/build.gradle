@@ -69,6 +69,7 @@ dependencies {
     compile dependenciesCf.design
     compile dependenciesCf.eventbus
     compile dependenciesCf.taggroup
+    compile dependenciesCf.photoview
     compile project(':basic_mvvm')
     compile project(':sharesdklib')
     compile project(':net')

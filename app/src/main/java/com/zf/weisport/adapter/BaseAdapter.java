@@ -72,6 +72,11 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter {
         }
     }
 
+    public void changeItem(int position,T item) {
+        synchronized (mLock) {
+            notifyItemChanged(position,item);
+        }
+    }
 
     public T getItem(int position) {
         return getListData().get(position);

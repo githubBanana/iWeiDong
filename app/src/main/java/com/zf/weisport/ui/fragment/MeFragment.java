@@ -19,6 +19,7 @@ import com.zf.weisport.ui.activity.FollowActivity;
 import com.zf.weisport.ui.activity.HistoryRecordActivity;
 import com.zf.weisport.ui.activity.MyNewsActivity;
 import com.zf.weisport.ui.activity.PersionActivity;
+import com.zf.weisport.ui.activity.TopicActivity;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 
 import butterknife.Bind;
@@ -104,7 +105,7 @@ public class MeFragment extends ToolbarBaseFragment{
                     MyNewsActivity.start(getActivity());
                     break;
                 case R.id.tv_mine_item5:
-
+                    TopicActivity.startForMyTopic(getActivity());
                     break;
                 case R.id.tv_mine_item6:
                     FollowActivity.start(getActivity());

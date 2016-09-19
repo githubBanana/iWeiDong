@@ -12,6 +12,7 @@ import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
 import com.zf.weisport.model.StatisticsModel;
 import com.zf.weisport.model.SyncInfoModel;
+import com.zf.weisport.model.TopicCommentModel;
 import com.zf.weisport.model.TopicModel;
 import com.zf.weisport.model.UpdUserInfoModel;
 
@@ -333,6 +334,47 @@ public class RequestHelper {
         map.put("PageSize", PageSize + "");
         return new RetrofitClient.Builder().method("GetTopic").map(map).post(TopicModel.class);
     }
+
+    /**
+     * GetCommentList
+     * 获取评论列表
+     * Topic_ID:话题ID
+     * PageIndex:页码
+     * PageSize:页数量
+     *
+     * @param Topic_ID
+     * @param PageIndex
+     * @param PageSize
+     * @return
+     */
+    public Observable<TopicCommentModel> requestGetCommentList(String Topic_ID, int PageIndex, int PageSize) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("Topic_ID", Topic_ID);
+        map.put("PageIndex", String.valueOf(PageIndex));
+        map.put("PageSize", String.valueOf(PageSize));
+        return new RetrofitClient.Builder().method("GetCommentList").map(map).post(TopicCommentModel.class);
+    }
+
+    /**
+     * AddComment
+     * 添加评论
+     * User_ID:用户ID
+     * Topic_ID:话题ID
+     * Content:评论内容
+     *
+     * @param User_ID
+     * @param Topic_ID
+     * @param Content
+     * @return
+     */
+    public Observable<BaseModel> requestAddComment(String User_ID, String Topic_ID, String Content) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Topic_ID", Topic_ID);
+        map.put("Content", Content);
+        return new RetrofitClient.Builder().method("AddComment").map(map).post(BaseModel.class);
+    }
+
 
 }
 

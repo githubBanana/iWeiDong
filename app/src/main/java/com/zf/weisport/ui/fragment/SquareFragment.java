@@ -16,6 +16,7 @@ import com.zf.weisport.R;
 import com.zf.weisport.adapter.SquareAdapter;
 import com.zf.weisport.databinding.FragmentSquareBinding;
 import com.zf.weisport.model.LabelTopicModel;
+import com.zf.weisport.ui.activity.TopicActivity;
 import com.zf.weisport.ui.callback.ISquareCallback;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 import com.zf.weisport.ui.viewmodel.SquareViewModel;
@@ -99,7 +100,9 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
         getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
 
         mAdapter = new SquareAdapter(getActivity(), (view1, labelTopicModel, position) -> {
-
+            String id = mLabelTopicList.get(position).getID();
+            String title = mLabelTopicList.get(position).getName();
+            TopicActivity.start(getActivity(),id,title);
         });
         getBinding().recyclerView.setAdapter(mAdapter);
 
