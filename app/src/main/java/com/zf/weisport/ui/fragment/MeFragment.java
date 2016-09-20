@@ -19,6 +19,7 @@ import com.zf.weisport.ui.activity.FollowActivity;
 import com.zf.weisport.ui.activity.HistoryRecordActivity;
 import com.zf.weisport.ui.activity.MyNewsActivity;
 import com.zf.weisport.ui.activity.PersionActivity;
+import com.zf.weisport.ui.activity.SettingActivity;
 import com.zf.weisport.ui.activity.TopicActivity;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 
@@ -72,8 +73,11 @@ public class MeFragment extends ToolbarBaseFragment{
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-
+        if (item.getItemId() == R.id.settingId) {
+            if (UserUtil.isLogin(getActivity()))
+                SettingActivity.start(getActivity());
+            else
+                AccountActivity.start(getActivity());
         }
         return super.onMenuItemClick(item);
     }

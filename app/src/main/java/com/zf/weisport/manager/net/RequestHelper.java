@@ -2,6 +2,9 @@ package com.zf.weisport.manager.net;
 
 import com.xs.basic_mvvm.model.BaseModel;
 import com.xs.net.retrofit.RetrofitClient;
+import com.zf.weisport.model.AddLabelModel;
+import com.zf.weisport.model.AddTopicModel;
+import com.zf.weisport.model.GetLabelModel;
 import com.zf.weisport.model.GetTopModel;
 import com.zf.weisport.model.GetVideoModel;
 import com.zf.weisport.model.LabelTopicModel;
@@ -375,6 +378,60 @@ public class RequestHelper {
         return new RetrofitClient.Builder().method("AddComment").map(map).post(BaseModel.class);
     }
 
+    /**
+     * GetLabel
+     * 获取话题标签
+     * User_ID:用户ID
+     *
+     * @param User_ID
+     * @return
+     */
+    public Observable<GetLabelModel> getlabel(String User_ID) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        return new RetrofitClient.Builder().method("GetLabel").map(map).post(GetLabelModel.class);
+    }
+
+
+    /**
+     * AddLabel
+     * 添加话题标签
+     * User_ID:用户ID
+     * Name:名称
+     *
+     * @param User_ID
+     * @param Name
+     * @return
+     */
+    public Observable<AddLabelModel> newLabel(String User_ID, String Name) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Name", Name);
+        return new RetrofitClient.Builder().method("AddLabel").map(map).post(AddLabelModel.class);
+    }
+
+    /**
+     * AddTopic
+     * 添加话题
+     * User_ID:用户ID
+     * Content:内容
+     * Imgs:图片ID集合,分割
+     * Labels:话题ID集合,分割
+     *
+     * @param User_ID
+     * @param Content
+     * @param Imgs
+     * @param Labels
+     * @return
+     */
+    public static Observable<AddTopicModel> addTopic(String User_ID, String Content, String Imgs, String Labels) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Content", Content);
+        map.put("Imgs", Imgs);
+        map.put("Labels", Labels);
+        return new RetrofitClient.Builder().method("AddTopic").map(map).post(AddTopicModel.class);
+    }
 
 }
 

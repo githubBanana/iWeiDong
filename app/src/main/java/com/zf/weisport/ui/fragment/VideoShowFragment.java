@@ -2,6 +2,7 @@ package com.zf.weisport.ui.fragment;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,15 +69,16 @@ implements IVideoCallback,PullToRefreshBase.OnRefreshListener2,AdapterView.OnIte
 
         initView();
         initData();
-
     }
 
     private void initData() {
         if (mList == null) {
             getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
-            getViewModel().setPageIndex(1);
-            getViewModel().setType(getArguments().getInt(TYPE,0));
-            getViewModel().getVideo();
+            new Handler().post(() -> {
+                getViewModel().setPageIndex(1);
+                getViewModel().setType(getArguments().getInt(TYPE,0));
+                getViewModel().getVideo();
+            });
         } else {
             getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
             mAdapter.setDatas(mList);

@@ -150,6 +150,10 @@ public class TopicFragment extends BaseFragment<TopicViewModel,FragmentTopicBind
         EventBus.getDefault().unregister(this);
     }
 
+    /**
+     * onEvent 用于接收评论区评论数目的变更
+     * @param event
+     */
     @Subscribe
     public void onEvent(TopicCommentFragment.TopicCommentCountEvent event) {
         TopicModel model = mAdapter.getItem(event.position);

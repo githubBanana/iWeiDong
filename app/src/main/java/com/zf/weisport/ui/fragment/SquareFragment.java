@@ -1,9 +1,11 @@
 package com.zf.weisport.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +17,10 @@ import com.kennyc.view.MultiStateView;
 import com.zf.weisport.R;
 import com.zf.weisport.adapter.SquareAdapter;
 import com.zf.weisport.databinding.FragmentSquareBinding;
+import com.zf.weisport.manager.util.UserUtil;
 import com.zf.weisport.model.LabelTopicModel;
+import com.zf.weisport.ui.activity.AccountActivity;
+import com.zf.weisport.ui.activity.CreateTopicActivity;
 import com.zf.weisport.ui.activity.TopicActivity;
 import com.zf.weisport.ui.callback.ISquareCallback;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
@@ -70,19 +75,22 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        initData();
+    }
 
+    private void initData() {
         if (mTopList == null) {
-            getViewModel().getTop();
             getBinding().multiStateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
+            new Handler().post(() -> getViewModel().getTop());
         } else
             setDataToViewPager();
 
         if (mLabelTopicList == null)
-            getViewModel().getLabelTopic();
+            new Handler().post(() -> getViewModel().getLabelTopic());
         else
             mAdapter.setData(mLabelTopicList);
-    }
 
+    }
     private void initView() {
 
         final View headView = getActivity().getLayoutInflater().inflate(R.layout.carousel_layout,null,false);
@@ -123,11 +131,13 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_pic_photo_id:
-                break;
-        }
-        return true;
+        Log.e("info", "onMenuItemClick: " );
+        if (item.getItemId() == R.id.item_pic_photo_id)
+            if (UserUtil.isLogin(getActivity()))
+                CreateTopicActivity.start(getActivity());
+            else
+                AccountActivity.start(getActivity());
+        return super.onMenuItemClick(item);
     }
 
     @Override

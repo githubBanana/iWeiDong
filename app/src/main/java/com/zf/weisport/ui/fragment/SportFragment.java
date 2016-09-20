@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
  */
 public class SportFragment extends BaseFragment
         implements ViewPager.OnPageChangeListener,View.OnTouchListener {
-    private static final String TAG = "SportFragment";
 
     @Bind(R.id.iv_1)                ImageView           mImg1;
     @Bind(R.id.iv_2)                ImageView           mImg2;

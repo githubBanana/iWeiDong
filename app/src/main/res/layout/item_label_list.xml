@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="getLabelModel"
+            type="com.zf.weisport.model.GetLabelModel"/>
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"><!--"@drawable/common_bg_select"-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{getLabelModel.Name}"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+        />
+</LinearLayout>
+</layout>

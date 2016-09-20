@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="createTopicViewModel"
+            type="com.zf.weisport.ui.viewmodel.CreateTopicViewModel"/>
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_content_Id"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="@string/topic_edit_hint"
+                android:maxLength="100"
+                android:textColor="#000000"
+                android:background="@color/colorWhite"
+                android:textColorHint = "@color/gray"
+                android:gravity="top"
+                android:padding="10dp"
+                android:layout_weight="3"
+                android:text="@{createTopicViewModel.topicContent}"/>
+
+            <FrameLayout
+                android:id="@+id/fl_select_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.diy.labelview.TagListView
+                android:id="@+id/tagview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/common_margin"
+                android:paddingLeft="@dimen/common_margin"
+                android:paddingRight="@dimen/common_margin"
+                android:paddingTop="16.0dip"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+</layout>

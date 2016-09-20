@@ -41,6 +41,16 @@
     <!--Square-->
     <string name="hot_square_title_text">热门广场</string>
     <string name="create_topic_text">创建话题</string>
+    <string name="text_release">发布</string>
+    <string name="topic_edit_hint">输入您想说的...</string>
+    <string name="topicLable">话题标签</string>
+    <string name="topic_lable_add">添加话题标签</string>
+    <string name="topic_lable_add2">新建标签</string>
+    <string name="topic_lable_add3">请输入话题标签...</string>
+    <string name="topic_lable_hot">热门标签</string>
+    <string name="please_add_topic_label">请添加话题标签</string>
+    <string name="please_input_content">请输入内容</string>
+
     <!--Me-->
     <string name="no_login">未登录</string>
     <string name="tv_persondata">个人资料</string>
@@ -95,7 +105,16 @@
 
     <!--设置-->
     <string name="setting_title_text">设置</string>
-
+    <string name="aboutus">关于我们</string>
+    <string name="logout">退出登录</string>
+    <string name="software_update">软件更新</string>
+    <string name="bind_account">绑定手机号</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="modify_password">修改密码</string>
+    <string name="cache_clear_text">要删除缓存吗?</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+    <string name="clear_cache_string">清理完成</string>
 
 
 

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_line"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_padding_empty_height" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            style="@style/Divider.2Match.MiddleAndEnd"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/aboutus_tv"
+                style="@style/me_normal_item"
+                android:drawableLeft="@mipmap/aboutus"
+                android:text="@string/aboutus"
+
+                />
+
+            <TextView
+                android:id="@+id/software_update_tv"
+                style="@style/me_normal_item"
+                android:drawableLeft="@mipmap/pic_software"
+                android:text="@string/software_update" />
+
+            <TextView
+                android:id="@+id/clear_cahce_tv"
+                style="@style/me_normal_item"
+                android:drawableLeft="@mipmap/pic_clearcache"
+                android:text="@string/clear_cache"
+
+                />
+
+            <TextView
+                android:id="@+id/bind_account_tv"
+                style="@style/me_normal_item"
+                android:drawableLeft="@mipmap/pic_clearcache"
+                android:text="@string/bind_account" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20px" />
+
+            <TextView
+                android:id="@+id/modify_password_tv"
+                style="@style/me_normal_item"
+                android:drawableLeft="@mipmap/pic_modifypwd"
+                android:text="@string/modify_password" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="60px" />
+
+            <TextView
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/logout"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </ScrollView>
+</com.zhy.autolayout.AutoLinearLayout>
