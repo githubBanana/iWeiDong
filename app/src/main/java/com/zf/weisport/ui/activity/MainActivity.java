@@ -1,5 +1,6 @@
 package com.zf.weisport.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -17,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentTabHost mTabHost;
     private long exitTime = 0;
+
+    public static void  start(Activity activity) {
+        Intent intent = new Intent(activity,MainActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

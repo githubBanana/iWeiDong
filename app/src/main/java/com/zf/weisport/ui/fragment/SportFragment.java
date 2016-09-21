@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.zf.weisport.R;
 import com.zf.weisport.adapter.ViewPaperAdapter;
 import com.zf.weisport.manager.util.AnimatorUtil;
+import com.zf.weisport.ui.activity.BattleResultActivity;
 import com.zf.weisport.ui.fragment.base.BaseFragment;
 import com.zf.widget.ControlViewPaper;
 
@@ -107,6 +108,9 @@ public class SportFragment extends BaseFragment
                     break;
                 case MotionEvent.ACTION_UP:
                     AnimatorUtil.play(view,false);
+//                    RankingActivity.start(getActivity());
+//                    LastSpeedActivity.start(getActivity());
+                    BattleResultActivity.start(getActivity());
                     break;
             }
         }

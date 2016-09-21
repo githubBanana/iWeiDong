@@ -21,14 +21,9 @@ public class ForgetPsdNextFragment extends Fragment {
 
     }
 
-/*    @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_forget_psd_next;
-    }*/
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_forget_psd_next,container,false);
+        return inflater.inflate(R.layout.activity_forget_psd_next,container,false);
     }
 }

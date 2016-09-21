@@ -12,16 +12,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.diy.diylibrary.sharesdk.AuthorizeLogin;
 import com.zf.weisport.R;
 import com.zf.weisport.manager.db.bean.User;
+import com.zf.weisport.manager.db.model.AppDatabaseCache;
 import com.zf.weisport.manager.net.RequestHelper;
 import com.zf.weisport.manager.util.CacheManager;
 import com.zf.weisport.manager.util.FileUtils;
+import com.zf.weisport.manager.util.UserUtil;
 import com.zf.weisport.ui.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -92,13 +98,13 @@ public class SettingActivity extends BaseActivity {
                 showCacheSizeView(view);
                 break;
             case R.id.bind_account_tv:
-
+                BindPhoneActivity.start(this);
                 break;
             case R.id.modify_password_tv:
-
+                ModifyPwdActivity.start(this);
                 break;
             case R.id.logout:
-
+                showLogoutTipView();
                 break;
         }
     }
@@ -129,5 +135,29 @@ public class SettingActivity extends BaseActivity {
                     dialog.dismiss();
                 })
                 .show();
+    }
+
+    /**
+     * 退出账户
+     */
+    private void showLogoutTipView() {
+        new AlertDialog.Builder(this).setTitle(R.string.text_tips).setMessage(R.string.logout_message)
+                .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                    logoutSystem();
+                    AccountActivity.start(this);
+                    finish();
+                })
+                .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                })
+                .show();
+    }
+
+    private void logoutSystem() {
+        AuthorizeLogin.getPresenter(this).cancleAuthorize(QQ.NAME);
+        AuthorizeLogin.getPresenter(this).cancleAuthorize(SinaWeibo.NAME);
+        AuthorizeLogin.getPresenter(this).cancleAuthorize(Wechat.NAME);
+        UserUtil.setLoginOut();
+        AppDatabaseCache.getCache(this).deleteUser();
     }
 }

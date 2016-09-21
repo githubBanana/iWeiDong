@@ -111,7 +111,8 @@ public class CreateTopicBizImpl extends BaseBiz<ICreateTopicView> implements ICr
                                         releaseTopic();
                                     }
                                 } else {
-
+                                    showToast(fileModel.getErrMsg());
+                                    dismissLoadingView();
                                 }
                             }
                         })

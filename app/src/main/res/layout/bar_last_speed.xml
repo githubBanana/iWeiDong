@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGreen"
+    >
+    <LinearLayout
+        android:id="@+id/leave_speedrecord_id"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="10dp"
+        >
+        <TextView
+            android:id="@+id/speed_leave_titleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leave_text"
+            android:drawableLeft="@mipmap/back"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/splitline"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_weight="5">
+        <TextView
+            android:id="@+id/battle_model_title_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/speed_record_tv"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+</LinearLayout>

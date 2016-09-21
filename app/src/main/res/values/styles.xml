@@ -86,5 +86,20 @@
         <item name="android:textSize">@dimen/NormalTextSize</item>
     </style>
 
+    <style name="Theme.Start" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@mipmap/pic_startup</item>
+    </style> <!--<item name="android:windowIsTranslucent">true</item>-->
+
+    <style name="navigation_bottom_item_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/navigation_bottom_select</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+
 
 </resources>

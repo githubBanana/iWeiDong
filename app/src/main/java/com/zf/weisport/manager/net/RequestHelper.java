@@ -5,12 +5,14 @@ import com.xs.net.retrofit.RetrofitClient;
 import com.zf.weisport.model.AddLabelModel;
 import com.zf.weisport.model.AddTopicModel;
 import com.zf.weisport.model.GetLabelModel;
+import com.zf.weisport.model.GetRankModel;
 import com.zf.weisport.model.GetTopModel;
 import com.zf.weisport.model.GetVideoModel;
 import com.zf.weisport.model.LabelTopicModel;
 import com.zf.weisport.model.LoginModel;
 import com.zf.weisport.model.MyFollowListModel;
 import com.zf.weisport.model.MyMessageModel;
+import com.zf.weisport.model.MyRankModel;
 import com.zf.weisport.model.RegisterModel;
 import com.zf.weisport.model.SMSCodeModel;
 import com.zf.weisport.model.StatisticsModel;
@@ -431,6 +433,74 @@ public class RequestHelper {
         map.put("Imgs", Imgs);
         map.put("Labels", Labels);
         return new RetrofitClient.Builder().method("AddTopic").map(map).post(AddTopicModel.class);
+    }
+
+    /**
+     * UpdPassword
+     * 修改密码
+     * Mobile:手机号
+     * Password:密码
+     * OldPassword：旧密码
+     * @param Mobile
+     * @param Password
+     * @return
+     */
+    public Observable<BaseModel> updPassword(String Mobile, String Password,String OldPassword) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Mobile", Mobile);
+        map.put("Password", Password);
+        map.put("OldPassword", OldPassword);
+        return new RetrofitClient.Builder().method("UpdPassword").map(map).post(BaseModel.class);
+    }
+
+    /**
+     * BindAccount
+     * 绑定手机号
+     * User_ID:用户ID
+     * Mobile:绑定手机
+     * Password:用户密码
+     * @param User_ID
+     * @param Mobile
+     * @param Password
+     * @return
+     */
+    public Observable<BaseModel> requestBindAccount(String User_ID,String Mobile,String Password) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        map.put("Mobile", Mobile);
+        map.put("Password", Password);
+        return new RetrofitClient.Builder().method("BindAccount").map(map).post(BaseModel.class);
+    }
+
+
+    /**
+     * GetMyRank
+     * 获取用户排名
+     * User_ID:用户ID
+     *
+     * @param User_ID
+     * @return
+     */
+    public Observable<MyRankModel> requestGetMyRank(String User_ID) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("User_ID", User_ID);
+        return new RetrofitClient.Builder().method("GetMyRank").map(map).post(MyRankModel.class);
+    }
+
+    /**
+     * GetRank
+     * 分页获取排名榜单
+     * PageIndex:页码
+     * PageSize:页数量
+     *
+     * @param PageIndex
+     * @return
+     */
+    public Observable<GetRankModel> requestGetRank(String PageIndex) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("PageIndex", PageIndex);
+        map.put("PageSize", "100");
+        return new RetrofitClient.Builder().method("GetRank").map(map).post(GetRankModel.class);
     }
 
 }

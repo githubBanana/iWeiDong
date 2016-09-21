@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/battle_reslut_bg">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_gravity="center"
+        android:background="@mipmap/battle_reslut_bg2">
+        <TextView
+            android:layout_above="@+id/tv_percent_Id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="打败全国"/>
+        <TextView
+            android:id="@+id/tv_percent_Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            android:text=""/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <View
+            android:id="@+id/view_nouse"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+        <Button
+            android:id="@+id/btn_battle_done_Id"
+            android:layout_toLeftOf="@+id/view_nouse"
+            android:layout_marginEnd="15dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/btnmatch"
+            android:textColor="@color/colorGreen"
+            android:text="完成挑战"/>
+        <Button
+            android:id="@+id/battle_result_share_btn_Id"
+            android:layout_toEndOf="@+id/view_nouse"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/btnmatch"
+            android:textColor="@color/colorGreen"
+            android:text="分享"/>
+
+    </RelativeLayout>
+</LinearLayout>

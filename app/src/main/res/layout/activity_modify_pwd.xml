@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="modifyPwdViewModel"
+            type="com.zf.weisport.ui.viewmodel.ModifyPwdViewModel"/>
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:lines="1"
+        android:drawablePadding="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@drawable/shape_username"
+        android:hint="@string/et_hint_password_old"
+        android:drawableLeft="@mipmap/ic_et_password"
+        android:text="@={modifyPwdViewModel.oldPwd}"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:lines="1"
+        android:drawablePadding="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@drawable/shape_username"
+        android:hint="@string/et_hint_password_new"
+        android:drawableLeft="@mipmap/ic_et_password"
+        android:text="@={modifyPwdViewModel.newPwd}"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:lines="1"
+        android:drawablePadding="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@drawable/shape_username"
+        android:hint="@string/repeat_et_hint_password_new"
+        android:drawableLeft="@mipmap/ic_et_password"
+        android:text="@={modifyPwdViewModel.repeatPwd}"/>
+    <Button
+        android:id="@+id/btn_modify_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:layout_margin="16dp"
+        android:text="@string/commit"
+        android:textSize="15dp"
+        android:textColor="@android:color/white"/>
+</LinearLayout>
+</layout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">iWeiDong</string>
+    <string name="app_name">i微动</string>
     <string name="mainTab_sport">竞技</string>
     <string name="mainTab_square">广场</string>
     <string name="mainTab_video">微视频</string>
@@ -29,15 +29,23 @@
     <string name="loading_more_text">加载更多...</string>
     <string name="wordlimit_100">抱歉,字数不能超过100个</string>
     <string name="text_release_success">发表成功</string>
+    <string name="repeat_password_error">重复密码有误</string>
 
     <!--Sport-->
     <string name="switch_to_Backstage">再按一次返回手机主界面</string>
     <string name="sport_title_text">i微运动</string>
     <string name="entry_text">进入</string>
+    <string name="leave_text">离开</string>
     <string name="sport_navi_i_tv1">i微动·引力球</string>
     <string name="sport_navi_i_tv2">i微动·跳绳</string>
     <string name="sport_navi_i_tv3">i微动·呼啦圈</string>
     <string name="sport_navi_i_tv4">i微动·拳击测力</string>
+    <string name="ranking_record_tv">排名榜单</string>
+    <string name="ranking_record_tv1">全国排名</string>
+    <string name="ranking_record_tv2">地方排名</string>
+    <string name="ranking_record_tv3">当前排名</string>
+    <string name="speed_record_tv">转速记录</string>
+
     <!--Square-->
     <string name="hot_square_title_text">热门广场</string>
     <string name="create_topic_text">创建话题</string>
@@ -115,6 +123,12 @@
     <string name="yes">确定</string>
     <string name="no">取消</string>
     <string name="clear_cache_string">清理完成</string>
+    <string name="et_hint_password_old">请输入旧密码</string>
+    <string name="et_hint_password_new">请输入新密码</string>
+    <string name="repeat_et_hint_password_new">请重复新密码</string>
+    <string name="commit">提交</string>
+    <string name="logout_message">你确定要退出账号吗?</string>
+    <string name="text_tips">提示</string>
 
 
 

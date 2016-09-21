@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name">i微动</string>
+    <string name="mainTab_sport">竞技</string>
+    <string name="mainTab_square">广场</string>
+    <string name="mainTab_video">微视频</string>
+    <string name="mainTab_me">我的</string>
+
+    <!--登录注册-->
+    <string name="login_title">登录</string>
+    <string name="register_title">注册</string>
+    <string name="forget_psd_title">找回密码</string>
+    <string name="et_hint_username">请输入手机号码</string>
+    <string name="et_hint_password">请输入密码</string>
+    <string name="btn_commit">提交</string>
+    <string name="tv_forget_password">&lt; 忘记密码？</string>
+    <string name="tv_nothave_account">没有账号？&gt;</string>
+    <string name="tv_third_party_account">或第三方登录，无需注册</string>
+    <string name="tv_weibo_login_tv">微博登录</string>
+    <string name="tv_weixin_login_tv">微信登录</string>
+    <string name="tv_qq_login_tv">QQ登录</string>
+    <string name="et_hint_verify">请输入验证码</string>
+    <string name="btn_get_verify_text">获取验证码</string>
+    <string name="btn_next_step_text">下一步</string>
+    <string name="et_hint_repeat_password">请重复输入密码</string>
+    <string name="register_success_text">注册成功，请提交登录</string>
+    <!--toast-->
+    <string name="toast_login_error">用户名或密码错误</string>
+    <string name="no_more_data_text">没有更多数据</string>
+    <string name="loading_more_text">加载更多...</string>
+    <string name="wordlimit_100">抱歉,字数不能超过100个</string>
+    <string name="text_release_success">发表成功</string>
+    <string name="repeat_password_error">重复密码有误</string>
+
+    <!--Sport-->
+    <string name="switch_to_Backstage">再按一次返回手机主界面</string>
+    <string name="sport_title_text">i微运动</string>
+    <string name="entry_text">进入</string>
+    <string name="sport_navi_i_tv1">i微动·引力球</string>
+    <string name="sport_navi_i_tv2">i微动·跳绳</string>
+    <string name="sport_navi_i_tv3">i微动·呼啦圈</string>
+    <string name="sport_navi_i_tv4">i微动·拳击测力</string>
+    <!--Square-->
+    <string name="hot_square_title_text">热门广场</string>
+    <string name="create_topic_text">创建话题</string>
+    <string name="text_release">发布</string>
+    <string name="topic_edit_hint">输入您想说的...</string>
+    <string name="topicLable">话题标签</string>
+    <string name="topic_lable_add">添加话题标签</string>
+    <string name="topic_lable_add2">新建标签</string>
+    <string name="topic_lable_add3">请输入话题标签...</string>
+    <string name="topic_lable_hot">热门标签</string>
+    <string name="please_add_topic_label">请添加话题标签</string>
+    <string name="please_input_content">请输入内容</string>
+
+    <!--Me-->
+    <string name="no_login">未登录</string>
+    <string name="tv_persondata">个人资料</string>
+    <string name="tv_history">历史记录</string>
+    <string name="tv_friend">好友排名</string>
+    <string name="tv_mynews">我的消息</string>
+    <string name="tv_mytotal">我的话题</string>
+    <string name="tv_follow">关注&amp;收藏</string>
+    <string name="tv_equip">设备配件</string>
+    <string name="dis_connect_text">未连接</string>
+    <string name="equip_name_text">设备名</string>
+    <string name="persion_head_tv">头像</string>
+    <string name="persion_name_tv">姓名</string>
+    <string name="persion_gender_tv">性别</string>
+    <string name="text_speed_record">转速记录</string>
+    <string name="text_speed">转速</string>
+    <string name="text_week">周</string>
+    <string name="text_month">月</string>
+    <string name="text_year">年</string>
+    <string name="text_accumulate_hours">累计时长</string>
+    <string name="text_max_speed">最大转速</string>
+    <string name="select_device">选择设备</string>
+    <string name="text_follow_friends">已关注好友</string>
+    <string name="text_dynamic_collection">已收藏动态</string>
+    <string name="show_acts">发表 %s 条动态</string>
+    <string name="text_detail">详情</string>
+    <string name="text_send">发送</string>
+    <string name="text_input_comment">请输入评论</string>
+
+
+    <string-array name="equipCategory">
+        <item>引力球</item>
+        <item>跳绳</item>
+        <item>呼啦圈</item>
+        <item>拳击测力</item>
+    </string-array>
+
+
+    <!--video-->
+    <string-array name="videotypes">
+        <item>推荐视频</item>
+        <item>健身教学</item>
+        <item>创新玩法</item>
+        <item>超神竞技</item>
+    </string-array>
+
+    <!-- WebActivity-->
+    <string name="videoDetail_text">视频详情</string>
+    <string name="news_detail_text">消息详情</string>
+    <string name="aboutus_text">关于我们</string>
+    <string name="software_update_text">软件更新</string>
+
+    <!--设置-->
+    <string name="setting_title_text">设置</string>
+    <string name="aboutus">关于我们</string>
+    <string name="logout">退出登录</string>
+    <string name="software_update">软件更新</string>
+    <string name="bind_account">绑定手机号</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="modify_password">修改密码</string>
+    <string name="cache_clear_text">要删除缓存吗?</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+    <string name="clear_cache_string">清理完成</string>
+    <string name="et_hint_password_old">请输入旧密码</string>
+    <string name="et_hint_password_new">请输入新密码</string>
+    <string name="repeat_et_hint_password_new">请重复新密码</string>
+    <string name="commit">提交</string>
+    <string name="logout_message">你确定要退出账号吗?</string>
+    <string name="text_tips">提示</string>
+
+
+
+
+
+</resources>

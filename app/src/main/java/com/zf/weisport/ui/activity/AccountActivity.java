@@ -12,7 +12,6 @@ import com.zf.weisport.R;
 import com.zf.weisport.listener.OnChangeTilte;
 import com.zf.weisport.ui.activity.base.BaseActivity;
 import com.zf.weisport.ui.fragment.ForgetPsdFragment;
-import com.zf.weisport.ui.fragment.ForgetPsdNextFragment;
 import com.zf.weisport.ui.fragment.LoginFragment;
 import com.zf.weisport.ui.fragment.RegisterFragment;
 
@@ -55,7 +54,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 fragment = new ForgetPsdFragment();
                 break;
             case FORGET_PASSWORD_STEP_TWO:
-                fragment = new ForgetPsdNextFragment();
+//                fragment = new ForgetPsdNextFragment();
                 break;
         }
 
@@ -73,7 +72,8 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_next:
-                commitFragment(Type.FORGET_PASSWORD_STEP_TWO,true);
+//                commitFragment(Type.FORGET_PASSWORD_STEP_TWO,true);
+                ForgetPsdNextActivity.start(this);
             case R.id.btn_forget_password:
                 commitFragment(Type.FORGET_PASSWORD_STEP_ONE,true);
                 break;
