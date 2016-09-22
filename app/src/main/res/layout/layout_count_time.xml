@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="30dp"
+    android:layout_marginTop="@dimen/time_margin"
+    android:background="@mipmap/counttimebg">
+
+    <ImageView
+        android:id="@+id/timepicid"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="3dp"
+        android:src="@mipmap/timepic"/>
+    <TextView
+        android:id="@+id/tv_timeCountId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/timepicid"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="3dp"
+        android:textSize="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="00:00"/>
+</RelativeLayout>

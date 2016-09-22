@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,9 +39,7 @@ public class RetrofitClient {
 
     static {
 
-        File externalStorageDirectory = android.os.Environment.getExternalStorageDirectory();
-//        String externalStorageDirectory = FileUtils.getCacheDir();
-        okhttp3.Cache cache = new okhttp3.Cache(new File(externalStorageDirectory, "okhttp/cache"), 1024 * 1024);
+        okhttp3.Cache cache = new okhttp3.Cache(new File(NetConfig.getCacheDir()), 1024 * 1024);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(chain -> {
             Response response = chain.proceed(chain.request());
             ResponseBody responseBody = response.body();
@@ -50,7 +49,7 @@ public class RetrofitClient {
             Log.e("Client", "intercept#result:" + result);
             ResponseBody newResponseBody = ResponseBody.create(responseBody.contentType(), result);
             return response.newBuilder().body(newResponseBody).build();
-        }).cache(cache).build();
+        }).connectTimeout(5, TimeUnit.SECONDS).cache(cache).build();
 
 //        初始化Retrofit
         Retrofit retrofit = new Retrofit.Builder().baseUrl(NetConfig.getWebService())

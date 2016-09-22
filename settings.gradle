@@ -1,1 +1,1 @@
-include ':app', ':basic_mvvm', ':net', ':sharesdklib', ':widget', ':dblib', ':pull_refresh', ':multi-image-selector', ':xglib'
+include ':app', ':basic_mvvm', ':net', ':sharesdklib', ':widget', ':dblib', ':pull_refresh', ':multi-image-selector', ':xglib', ':ble'

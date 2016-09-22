@@ -10,4 +10,9 @@
     <dimen name="text_draw_padding">10px</dimen>
 
     <dimen name="NormalTextSize">16.0dip</dimen>
+
+    <dimen name="dimen_dp_40">40dp</dimen>
+    <dimen name="dimen_dp_10">10dp</dimen>
+    <dimen name="time_margin">15dp</dimen>
+
 </resources>

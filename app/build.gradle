@@ -77,6 +77,7 @@ dependencies {
     compile project(':pull_refresh')
     compile project(':multi-image-selector')
     compile project(':xglib')
+    compile project(':ble')
     compile(name: 'cyphotosview', ext: 'aar')
     compile(name: 'labelview', ext: 'aar')
 }

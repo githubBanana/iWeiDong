@@ -13,6 +13,7 @@ ext {
 
     //Libraries variable
     appcompatv7_Version     = '24.2.0'
+    supportv4_Verion        = '24.2.0'
     design_Version          = '24.2.0'
     gridlayout_Version      = '24.2.0'
     recyclerview_Version    = '24.2.0'
@@ -39,6 +40,7 @@ ext {
     //dependencies
     dependencieslib = [
             appcompatv7       :   "com.android.support:appcompat-v7:${appcompatv7_Version}",
+            supportv4         :   "com.android.support:support-v4:${supportv4_Verion}",
             design            :   "com.android.support:design:${design_Version}",
             gridlayout        :   "com.android.support:gridlayout-v7:${gridlayout_Version}",
             recyclerview      :   "com.android.support:recyclerview-v7:${recyclerview_Version}",

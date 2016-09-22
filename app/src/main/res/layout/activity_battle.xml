@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/bar_battle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:background="@mipmap/dangrad">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:orientation="horizontal">
+
+                <com.zf.weisport.manager.widget.pointer.DrawDangradView
+                    android:id="@+id/dangradview"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    />
+
+                <include
+                    layout="@layout/layout_dangrad"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="天梯段位"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:paddingBottom="10dp"
+            android:paddingEnd="10dp"
+            android:paddingLeft="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/easy_trainpicbg">
+
+                <include layout="@layout/layout_count_time"/>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@mipmap/clothes"
+                    android:scaleType="centerCrop"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/train_centerbgid"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@mipmap/train_centerbg">
+
+                    <com.zf.weisport.manager.widget.pointer.SpeedPointer
+                        android:id="@+id/pointer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/easy_speedtextId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0转"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="73dp"
+                        android:textSize="16dp"
+                        android:textColor="@android:color/white"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/easy_maxvalueId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/maxspeedid"
+                android:layout_alignParentEnd="true"
+                android:paddingEnd="10dp"
+                android:text="0转"
+                android:textColor="@color/colorGreen"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/maxspeedid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:paddingBottom="5dp"
+                android:paddingEnd="10dp"
+                android:text="本次最高转速"
+                android:textColor="@color/colorGreen" />
+
+            <TextView
+                android:id="@+id/tv_battery_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="@color/colorGreen"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:text="@string/battery_init_text"
+                android:padding="10dp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

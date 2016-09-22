@@ -51,4 +51,21 @@ public class GlideUtil {
             }
         });
     }
+
+    /**
+     * 显示方形头像
+     * @param url
+     * @param imageView
+     */
+    public static void showRectHead(String url, ImageView imageView) {
+        Context context = imageView.getContext();
+        Uri uri = !TextUtils.isEmpty(url) ? Uri.parse(url) : null;
+        Glide.with(context).load(uri).asBitmap().thumbnail(0.6f).centerCrop().placeholder(R.mipmap.me_false).into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                super.setResource(resource);
+            }
+        });
+
+    }
 }

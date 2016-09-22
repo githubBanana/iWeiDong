@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorGreen">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/leave_easybattle_id"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:text="@string/leave_text"
+                android:textColor="#FFFFFF"
+                android:drawableLeft="@mipmap/back"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/splitline" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:id="@+id/btn_left_2"
+                    android:layout_width="@dimen/dimen_dp_40"
+                    android:layout_height="@dimen/dimen_dp_40">
+                    <ImageView
+                        android:id="@+id/battle_headId"
+                        android:layout_width="35dp"
+                        android:layout_height="33dp"
+                        android:layout_gravity="center"
+                        android:layout_above="@+id/battle_headId2"
+                        android:src="@mipmap/me_false"
+                        android:scaleType="centerCrop"
+                        />
+                    <ImageView
+                        android:id="@+id/battle_headId2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/head"
+                        android:visibility="invisible"
+                        />
+
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/battle_user_name_Id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:text="@string/anonymous_user_text"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/tv_my_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:text="@string/no_rating_text"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/splitline" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center_vertical|center_horizontal|end">
+
+            <TextView
+                android:id="@+id/rank_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="@string/ranking_text"
+                android:gravity="center"
+                android:drawableLeft="@mipmap/pic_paiming"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/splitline" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="2.5">
+
+            <TextView
+                android:id="@+id/speed_record_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:text="@string/text_speed"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:drawableLeft="@mipmap/maxspeed"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/splitline" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="2.5">
+            <TextView
+                android:id="@+id/ble_conn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="@string/dis_connect_text"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:drawableLeft="@mipmap/ble"
+                android:onClick="onConnectClicked"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

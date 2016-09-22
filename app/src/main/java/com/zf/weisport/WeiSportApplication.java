@@ -9,6 +9,7 @@ import com.zf.weisport.manager.db.model.GlobalData;
 import com.zf.weisport.manager.net.RequestFileHelper;
 import com.zf.weisport.manager.net.RequestHelper;
 import com.zf.weisport.manager.util.CrashHandler;
+import com.zf.weisport.manager.util.FileUtils;
 import com.zf.weisport.manager.util.ImageLoaderUtil;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
@@ -29,7 +30,7 @@ public class WeiSportApplication extends Application {
         /**
          * 配置服务器链接
          */
-        new NetConfig.Builder().webService(RequestHelper.WEB_SERVICE).
+        new NetConfig.Builder().webService(RequestHelper.WEB_SERVICE).cacheDir(FileUtils.getCacheDir(this)+"okhttp/cache").
                 fileUploadWebService(RequestFileHelper.WEB_SERVICE).build();
 
         AutoLayoutConifg.getInstance().useDeviceSize();

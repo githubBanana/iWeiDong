@@ -14,6 +14,7 @@ public class NetConfig {
     private static String WEB_SERVICE ; // "http://wd.zfwsc.com/WebService/WeiYunDong.asmx/"
     private static String ABOUT_US;     // "http://weidongzn.com/Web/App/AboutUs"
     private static String FILE_UPLOAD_WEB_SERVICE; // "http://wd.zfwsc.com/Admin/File/"
+    private static String CACHE_DIR;   //okhttp cache dir
 
     public static final class Builder {
 
@@ -34,6 +35,11 @@ public class NetConfig {
 
         public Builder fileUploadWebService(String fileUploadWebService) {
             FILE_UPLOAD_WEB_SERVICE = fileUploadWebService;
+            return this;
+        }
+
+        public Builder cacheDir(String path) {
+            CACHE_DIR = path;
             return this;
         }
 
@@ -64,6 +70,12 @@ public class NetConfig {
         if (TextUtils.isEmpty(FILE_UPLOAD_WEB_SERVICE))
             throw new NullPointerException("FILE_UPLOAD_WEB_SERVICE is null");
         return FILE_UPLOAD_WEB_SERVICE;
+    }
+
+    public static String getCacheDir() {
+        if (TextUtils.isEmpty(CACHE_DIR))
+            throw new NullPointerException("CACHE_DIR is null");
+        return CACHE_DIR;
     }
 
 }

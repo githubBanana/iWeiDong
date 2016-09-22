@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -39,7 +40,7 @@ public class RetrofitFileClient {
             ResponseBody newResponseBody = ResponseBody.create(responseBody.contentType(), result);
             Response newResponse = response.newBuilder().body(newResponseBody).build();
             return newResponse;
-        }).build();
+        }).connectTimeout(5, TimeUnit.SECONDS).build();
 
 //        初始化Retrofit
         Retrofit retrofit = new Retrofit.Builder().baseUrl(NetConfig.getFileUploadWebService())

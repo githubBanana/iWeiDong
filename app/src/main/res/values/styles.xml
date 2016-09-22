@@ -101,5 +101,9 @@
         <item name="android:paddingTop">10dp</item>
     </style>
 
-
+    <style name="AppTheme.BattleActivity">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>
