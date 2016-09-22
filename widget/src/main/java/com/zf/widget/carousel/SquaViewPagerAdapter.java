@@ -1,6 +1,5 @@
 package com.zf.widget.carousel;
 
-import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +18,14 @@ import java.util.List;
  */
 public class SquaViewPagerAdapter extends PagerAdapter {
 
-    public void setStrings(List<HashMap<String,Object>> strings, Activity context) {
-        this.mContext = context;
+    private OnListenViewPagerClick mOnListenViewPagerClick;
+
+    public void setStrings(List<HashMap<String,Object>> strings, OnListenViewPagerClick listenViewPagerClick) {
+        this.mOnListenViewPagerClick = listenViewPagerClick;
         _strings = strings;
         notifyDataSetChanged();
     }
 
-    private Activity mContext;
     private  List<HashMap<String,Object>> _strings;
 
     public List<HashMap<String,Object>> getStrings() {
@@ -60,7 +60,8 @@ public class SquaViewPagerAdapter extends PagerAdapter {
                 else
                     sortPosition = p % _strings.size();
                 String url = (String) _strings.get(sortPosition).get("url");
-//                ActivityUtil.startWebActivity(mContext,url, WebActivity.WEB_VIDEO);
+                mOnListenViewPagerClick.onListenViewPagerItemClick(_strings.get(sortPosition));
+
             }
         });
         return rootview;
@@ -76,4 +77,7 @@ public class SquaViewPagerAdapter extends PagerAdapter {
         return arg0==arg1;//官方提示这样写
     }
 
+    public interface OnListenViewPagerClick {
+        void onListenViewPagerItemClick(HashMap<String,Object> map);
+    }
 }

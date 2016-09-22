@@ -22,6 +22,7 @@ import com.zf.weisport.model.LabelTopicModel;
 import com.zf.weisport.ui.activity.AccountActivity;
 import com.zf.weisport.ui.activity.CreateTopicActivity;
 import com.zf.weisport.ui.activity.TopicActivity;
+import com.zf.weisport.ui.activity.WebActivity;
 import com.zf.weisport.ui.callback.ISquareCallback;
 import com.zf.weisport.ui.fragment.base.ToolbarBaseFragment;
 import com.zf.weisport.ui.viewmodel.SquareViewModel;
@@ -42,7 +43,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * @email Xs.lin@foxmail.com
  */
 public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,FragmentSquareBinding>
-        implements BGARefreshLayout.BGARefreshLayoutDelegate,ViewPager.OnPageChangeListener,ISquareCallback {
+        implements BGARefreshLayout.BGARefreshLayoutDelegate,ViewPager.OnPageChangeListener,ISquareCallback,SquaViewPagerAdapter.OnListenViewPagerClick {
 
     private SquareAdapter                   mAdapter;
     private AutoScrollViewPager             mViewPager ;
@@ -198,7 +199,7 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
             mPointer.addView(imageView,params);
         }
 
-        mViewPagerAdapter.setStrings(mTopList,getActivity());
+        mViewPagerAdapter.setStrings(mTopList,this);
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(this);
         mViewPager.startAutoScroll();
@@ -220,5 +221,12 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
     private void dismissRefreshingView() {
         if (getBinding().bgaRefreshLayout.getCurrentRefreshStatus() == BGARefreshLayout.RefreshStatus.REFRESHING)
             getBinding().bgaRefreshLayout.endRefreshing();
+    }
+
+    @Override
+    public void onListenViewPagerItemClick(HashMap<String, Object> map) {
+        String url = (String) map.get("url");
+        WebActivity.start(getActivity(),url,WebActivity.WEB_VIDEO);
+
     }
 }
