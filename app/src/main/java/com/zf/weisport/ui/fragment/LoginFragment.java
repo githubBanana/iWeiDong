@@ -3,13 +3,11 @@ package com.zf.weisport.ui.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.zf.weisport.R;
 import com.zf.weisport.databinding.FragmentLoginBinding;
 import com.zf.weisport.listener.OnChangeTilte;
-import com.zf.weisport.manager.db.bean.User;
 import com.zf.weisport.model.LoginModel;
 import com.zf.weisport.ui.callback.ILoginCallback;
 import com.zf.weisport.ui.fragment.base.BaseFragment;
@@ -80,13 +78,11 @@ public class LoginFragment extends BaseFragment<LoginViewModel,FragmentLoginBind
     @Override
     public void onLoginSuccess(LoginModel loginModel) {
         getActivity().onBackPressed();
-        Log.e("info", "onLoginSuccess: "+ User.getUser().toString());
     }
 
     @Override
     public void onOpenLoginSuccess() {
         getActivity().onBackPressed();
-        Log.e("info", "onOpenLoginSuccess: "+User.getUser().toString() );
     }
 
 

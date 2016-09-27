@@ -47,6 +47,9 @@
     <string name="speed_record_tv">转速记录</string>
     <string name="ranking_text">排名</string>
     <string name="connected_text">已连接</string>
+    <string name="connect_ble_text">连接蓝牙...</string>
+    <string name="connected_device_text">成功连接设备</string>
+    <string name="disconnect_device_text">设备断开连接</string>
     <string name="no_rating_text">没有等级</string>
     <string name="anonymous_user_text">匿名用户</string>
     <string name="battery_init_text">电量 0%</string>

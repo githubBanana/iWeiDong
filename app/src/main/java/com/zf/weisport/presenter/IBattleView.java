@@ -16,4 +16,5 @@ public interface IBattleView extends IBaseView{
      * @param myRankModel
      */
     void onGetMyRankCompleted(MyRankModel myRankModel);
+
 }

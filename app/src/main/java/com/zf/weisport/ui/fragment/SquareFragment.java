@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -109,6 +108,8 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
         getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
 
         mAdapter = new SquareAdapter(getActivity(), (view1, labelTopicModel, position) -> {
+            if (!UserUtil.isLogin(getActivity()))
+                return;
             String id = mLabelTopicList.get(position).getID();
             String title = mLabelTopicList.get(position).getName();
             TopicActivity.start(getActivity(),id,title);
@@ -132,7 +133,6 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Log.e("info", "onMenuItemClick: " );
         if (item.getItemId() == R.id.item_pic_photo_id)
             if (UserUtil.isLogin(getActivity()))
                 CreateTopicActivity.start(getActivity());

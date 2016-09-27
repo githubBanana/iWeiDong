@@ -14,20 +14,20 @@ import java.io.Serializable;
 @DatabaseTable(tableName = BleDevice.TABLE_NAME)
 public class BleDevice implements Serializable {
 
-    public static String cacheAddress = null;
-    public static String cacheDeviceId = "0";
-    public static String cacheDeviceName = null;
-    public static String cacheDeviceType = "0";
+//    public static String cacheAddress = null;
+    public static String cacheDeviceId = "0";//无用户登录
+//    public static String cacheDeviceName = null;
+    public static String cacheDeviceType = "0";//无用户登录
 
 
-    public static void setCurrDeviceCache_Id_Type(String deviceId,String type) {
+ /*   public static void setCurrDeviceCache_Id_Type(String deviceId,String type) {
         cacheDeviceId = deviceId;
         cacheDeviceType = type;
     }
     public static void setCurrDeviceCache_Name_Address(String address,String deviceName) {
         cacheAddress = address;
         cacheDeviceName = deviceName;
-    }
+    }*/
 
     public static final String TABLE_NAME = "tb_bledevice";
 

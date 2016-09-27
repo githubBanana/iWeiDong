@@ -1,9 +1,11 @@
 package com.zf.weisport.ui.viewmodel;
 
 import com.xs.basic_mvvm.presenter.BaseBiz;
+import com.zf.weisport.manager.db.bean.BleDevice;
 import com.zf.weisport.manager.db.bean.User;
 import com.zf.weisport.manager.db.model.AppDatabaseCache;
 import com.zf.weisport.manager.util.UIUtil;
+import com.zf.weisport.manager.util.UserUtil;
 import com.zf.weisport.model.MyRankModel;
 import com.zf.weisport.presenter.IBattleView;
 import com.zf.weisport.presenter.biz.IBattleBiz;
@@ -11,7 +13,7 @@ import com.zf.weisport.presenter.biz.impl.BattleBizImpl;
 import com.zf.weisport.ui.callback.IBattleCallback;
 
 /**
- * @version V1.0 <描述当前版本功能>
+ * @version V1.0 <对战数据处理层>
  * @author: Xs
  * @date: 2016-09-22 16:47
  * @email Xs.lin@foxmail.com
@@ -34,7 +36,29 @@ public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> 
      * 获取我的排名
      */
     public void getMyRank() {
-        biz.getMyRank();
+        if (UserUtil.isLogin(UIUtil.getContext()))
+            biz.getMyRank();
+    }
+
+    /**
+     * 绑定设备
+     */
+    public void bindDevice(String address,String deviceName) {
+        //将型如11:22:33:44:55:66 转为112233445566
+        String a[] = address.split(":");
+        StringBuffer sb = new StringBuffer();
+        for (String s:a) {sb.append(s);}
+
+        //未登陆 无需绑定
+        if (!UserUtil.isLogin(UIUtil.getContext())) {
+            //本地保存macAddress 无用户登陆
+            AppDatabaseCache.getCache(UIUtil.getContext()).saveBleDevice(BleDevice.cacheDeviceType,
+                    BleDevice.cacheDeviceId,address,deviceName);
+            return;
+        }
+
+        biz.bindDevice(sb.toString(),deviceName);
+
     }
 
     @Override

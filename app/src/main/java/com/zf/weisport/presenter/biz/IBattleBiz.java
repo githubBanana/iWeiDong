@@ -12,4 +12,11 @@ public interface IBattleBiz {
      * 获取我的排名
      */
     void getMyRank();
+
+    /**
+     * 绑定设备
+     * @param address
+     * @param deviceName
+     */
+    void bindDevice(String address,String deviceName);
 }

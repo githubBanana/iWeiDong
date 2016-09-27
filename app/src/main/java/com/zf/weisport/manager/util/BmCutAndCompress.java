@@ -71,7 +71,7 @@ public class BmCutAndCompress {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(inputFilePath, options);
-            Log.e(TAG, "decodeSampledBitmap: 尺寸裁剪前 --> height:" + options.outHeight + " width:" + options.outWidth);
+//            Log.e(TAG, "decodeSampledBitmap: 尺寸裁剪前 --> height:" + options.outHeight + " width:" + options.outWidth);
             if (options.outHeight >= _cutLimit || options.outWidth >= _cutLimit) {
                 options.inSampleSize = _cutInSampleSize;
                 cut = true;
@@ -89,7 +89,7 @@ public class BmCutAndCompress {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             src.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
             if (baos.toByteArray().length / (float) 1024 > _compressLimitKb) {//_compressLimitMb * 1024
-                Log.e(TAG, "压缩前大小 " + baos.toByteArray().length / (float) (1024) + "kb");
+//                Log.e(TAG, "压缩前大小 " + baos.toByteArray().length / (float) (1024) + "kb");
                 int option = 100;
                 while (baos.toByteArray().length / (float)1024 > _compressLimitKb) {
                     baos.reset();
@@ -98,9 +98,9 @@ public class BmCutAndCompress {
                         break;
                     option -= 10;// 每次都减少10
                     option = option <= 0 ? 0 : option;
-                    Log.e(TAG, "压缩中 " + baos.toByteArray().length / (float) (1024) +" kb");
+//                    Log.e(TAG, "压缩中 " + baos.toByteArray().length / (float) (1024) +" kb");
                 }
-                Log.e(TAG, "压缩后大小 " + baos.toByteArray().length / (float) (1024) +" kb");
+//                Log.e(TAG, "压缩后大小 " + baos.toByteArray().length / (float) (1024) +" kb");
                 _outFile = new File(_outFilePath);
                 FileOutputStream fileOutputStream = null;
                 try {
@@ -118,7 +118,7 @@ public class BmCutAndCompress {
                     e.printStackTrace();
                     return e;
                 }
-                Log.e(TAG, "裁剪+压缩后大小: " + (_outFile.length() / (float) (1024)+"kb"));
+//                Log.e(TAG, "裁剪+压缩后大小: " + (_outFile.length() / (float) (1024)+"kb"));
                 return null;
 
             } else {
@@ -141,7 +141,7 @@ public class BmCutAndCompress {
                         e.printStackTrace();
                         return e;
                     }
-                    Log.e(TAG, "裁剪+无压缩后大小: " + (_outFile.length() / (float) (1024 * 1024)));
+//                    Log.e(TAG, "裁剪+无压缩后大小: " + (_outFile.length() / (float) (1024 * 1024)));
                     return null;
                 } else {//无裁剪+无压缩
                     _outFile = new File(inputFilePath);
@@ -153,7 +153,7 @@ public class BmCutAndCompress {
                             e.printStackTrace();
                             return e;
                         }
-                    Log.e(TAG, "无裁剪+无压缩后大小: " + (_outFile.length() / (float) (1024 * 1024)));
+//                    Log.e(TAG, "无裁剪+无压缩后大小: " + (_outFile.length() / (float) (1024 * 1024)));
                     return null;
                 }
             }

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -115,7 +114,6 @@ public class SettingActivity extends BaseActivity {
     private void getCacheSize() {
         //getCacheDir().getAbsolutePath()
         caches = new String[]{FileUtils.getLogDir(this), FileUtils.getCacheDir(this), Glide.getPhotoCacheDir(this).getAbsolutePath()};
-        Log.e("info", "getCacheSize: "+Glide.getPhotoCacheDir(this).getAbsolutePath() );
         new CacheManager().justCheckSize(caches, size -> mCacheSize = size);
     }
 

@@ -38,5 +38,11 @@ public interface ICallBck {
      */
     void dismissLoadingView();
 
+    /**
+     * 显示提示框
+     * @param message
+     */
+    void showTipDialog(String message);
+
 
 }

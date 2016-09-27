@@ -1,7 +1,6 @@
 package com.zf.weisport.manager.db.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.zf.weisport.manager.db.bean.User;
 import com.zf.weisport.manager.util.UserUtil;
@@ -18,7 +17,6 @@ public class GlobalData {
         if (UserUtil.isLogin(context)) {
             if (AppDatabaseCache.getCache(context).queryUser() != null) {
                 User.getUser().setUser(AppDatabaseCache.getCache(context).queryUser());
-                Log.i("test", "用户已经登录：" + User.getUser().toString());
             }
         } else {
         }

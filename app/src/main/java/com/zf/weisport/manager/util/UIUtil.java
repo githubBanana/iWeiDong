@@ -2,7 +2,11 @@ package com.zf.weisport.manager.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.zf.weisport.R;
 import com.zf.weisport.WeiSportApplication;
 
 /**

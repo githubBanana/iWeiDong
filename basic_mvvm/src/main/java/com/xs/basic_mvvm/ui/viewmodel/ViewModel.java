@@ -77,6 +77,12 @@ public class ViewModel<CallBack extends ICallBck> extends BaseObservable
     }
 
     @Override
+    public void showTipDialog(String message) {
+        if (_callback != null)
+            _callback.showTipDialog(message);
+    }
+
+    @Override
     public void onStart() {
         if (_baseBiz != null)
             _baseBiz.onStart();

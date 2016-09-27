@@ -53,14 +53,6 @@ public class AppDatabaseCache {
         mBleDeviceGenericDao = new GenericDaoImpl<>(mContext,mDataHelper,BleDevice.class);
     }
 
-    /*public void test() {
-        List<User> userList = mUserGenericDao.queryForAll();
-        Log.i(TAG,"user data test size :"+userList.size());
-        for (int i = 0;i < userList.size();i++) {
-            Log.i(TAG,"user data test::"+userList.get(i).toString());
-        }
-    }*/
-
     public User queryUser() {
         List<User> list = mUserGenericDao.queryForAll();
         if (list != null && list.size() != 0) {

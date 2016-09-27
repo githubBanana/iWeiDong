@@ -1,7 +1,5 @@
 package com.diy.diylibrary.sharesdk;
 
-import android.util.Log;
-
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.sina.weibo.SinaWeibo;
@@ -65,7 +63,6 @@ public class ThirdPartyUser {
         else if (SinaWeibo.NAME.equals(platform.getName()))
             setType(6);
         else {}
-        Log.e("info", "initPlatformUserInfo: "+platform.getName()+"  "+this.toString() );
     }
 
     public String getPlatformName() {

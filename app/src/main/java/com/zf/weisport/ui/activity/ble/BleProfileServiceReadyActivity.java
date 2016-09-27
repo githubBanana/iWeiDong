@@ -21,6 +21,7 @@
  */
 package com.zf.weisport.ui.activity.ble;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -36,18 +37,21 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.diy.blelib.R;
 import com.diy.blelib.profile.BleManagerCallbacks;
 import com.diy.blelib.profile.BleProfileService;
 import com.diy.blelib.profile.bleutils.BleConstant;
 import com.diy.blelib.scanner.ScannerFragment;
+import com.zf.weisport.R;
 
 import java.util.UUID;
 
@@ -185,14 +189,29 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		super.onCreate(savedInstanceState);
 
 		ensureBLESupported();
-		if (!isBLEEnabled()) {
+		/*if (!isBLEEnabled()) {
 			showBLEDialog();
-		}
+		}*/
 
 
 		onCreateView(savedInstanceState);
 
 		LocalBroadcastManager.getInstance(this).registerReceiver(mCommonBroadcastReceiver, makeIntentFilter());
+
+		if (!isBLEEnabled())
+			showBLEDialog();
+		else {
+			/**
+			 * 判断是否自动扫描
+			 */
+			if (isAutoScanSetting()) {
+				if (!TextUtils.isEmpty(theLastConnDeviceAddress())) {
+					showLoadingView(R.string.connect_ble_text);
+					startScan();
+				} else
+					showDeviceScanningDialog();
+			}
+		}
 	}
 
 	@Override
@@ -203,14 +222,21 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		 * If the service has not been started before, the following lines will not start it. However, if it's running, the Activity will be binded to it and
 		 * notified via mServiceConnection.
 		 */
-		final Intent service = new Intent(this, getServiceClass());
+		//由于本项目已经有另外一套ble重练业务流程,故屏蔽以下代码，在activty重启时，不在onStart中进行重连
+		/*final Intent service = new Intent(this, getServiceClass());
 		if (bindService(service, mServiceConnection, 0)) // we pass 0 as a flag so the service will not be created if not exists
-			Log.e(TAG, "Binding to the service..."); // (* - see the comment below)
+			Log.e(TAG, "Binding to the service..."); // (* - see the comment below)*/
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
+		//为了避免锁屏或activity不可见时销毁服务导致出错等奔溃，故不能在onStop中进行销毁
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 
 		try {
 			// We don't want to perform some operations (e.g. disable Battery Level notifications) in the service if we are just rotating the screen.
@@ -218,6 +244,8 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 
 			Log.e(TAG, "Unbinding from the service...");
 			unbindService(mServiceConnection);
+			//由于本项目已经有另外一套ble重练业务流程，故增加以下一行代码，在activity退出时，把蓝牙服务彻底销毁
+			stopService(new Intent(this,getServiceClass()));
 			mService = null;
 
 			Log.e(TAG, "Activity unbinded from the service");
@@ -226,13 +254,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		} catch (final IllegalArgumentException e) {
 			// do nothing, we were not connected to the sensor
 		}
-		Log.e(TAG, "onStop: " );
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
 		LocalBroadcastManager.getInstance(this).unregisterReceiver(mCommonBroadcastReceiver);
 		Log.e(TAG, "onDestroy: " );
 	}
@@ -298,9 +319,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		Log.e(TAG, "onRestoreInstanceState: " );
 	}
 
-
-
-
 	/**
 	 * Called when user press CONNECT or DISCONNECT button. See layout files -> onClick attribute.
 	 */
@@ -309,8 +327,8 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			if (mService == null) {
 				showDeviceScanningDialog();
 			} else {
-				Log.e(TAG, "Disconnecting...");
-				mService.disconnect();
+//				Log.e(TAG, "Disconnecting...");
+//				mService.disconnect();
 			}
 		} else {
 			showBLEDialog();
@@ -465,6 +483,14 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 
 	/**
+	 * Returns the address of the device
+	 * @return
+     */
+	protected String getDeviceAddress() {
+		return mService.getDeviceAddress();
+	}
+
+	/**
 	 * Restores the default UI before reconnecting
 	 */
 	protected abstract void setUIConnectStatus(int status);
@@ -512,4 +538,103 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_ENABLE_BT && resultCode != Activity.RESULT_OK) finish();
 	}
+
+	/****************************************************************************************************
+	 * 自动扫描 auto scan
+	 *
+	 */
+	private boolean isScanning = false;
+	private final static long SCAN_DURATION = 5000;
+	private BluetoothAdapter mAdapter;
+
+	/**
+	 * 子类设置是否自动扫描 默认不自动
+	 * @return
+     */
+	protected boolean isAutoScanSetting() {
+		return false;
+	}
+
+	/**
+	 * 子类设置需要对比扫描的ble地址 默认为空
+	 * @return
+     */
+	protected String theLastConnDeviceAddress() {
+		return "";
+	}
+
+	private void startScan() {
+		final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+		mAdapter = bluetoothManager.getAdapter();
+
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+				!= PackageManager.PERMISSION_GRANTED) {
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)) {
+				//notify user
+				return;
+			}
+			ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},ScannerFragment.REQUEST_PERMISSION_REQ_CODE);
+			return;
+		}
+
+		// Samsung Note II with Android 4.3 build JSS15J.N7100XXUEMK9 is not filtering by UUID at all. We must parse UUIDs manually
+		mAdapter.startLeScan(mLEScanCallback);
+		isScanning = true;
+		final Handler mHandler = new Handler();
+		mHandler.postDelayed(() -> {
+            if (isScanning) {
+                stopScan();
+				onAutoScanResult(false,null,null);
+            }
+        }, SCAN_DURATION);
+	}
+	/**
+	 * Stop scan if user tap Cancel button.
+	 */
+	private void stopScan() {
+		if (isScanning) {
+			mAdapter.stopLeScan(mLEScanCallback);
+			isScanning = false;
+		}
+	}
+
+	/**
+	 * results of the ble auto scan
+	 */
+	private void onAutoScanResult(boolean resultFlag,BluetoothDevice device,String deviceName) {
+		if (resultFlag) {
+			onDeviceSelected(device,deviceName);
+		} else {
+			dismissLoadingView();
+			showDeviceScanningDialog();
+		}
+	}
+
+
+	private BluetoothAdapter.LeScanCallback mLEScanCallback = (device, rssi, scanRecord) -> {
+        if (device != null) {
+            if (device.getName() != null) {
+                if (theLastConnDeviceAddress().equals(device.getAddress())) {
+					onAutoScanResult(true, device,device.getName());
+                    stopScan();
+                } else {
+                }
+            }
+        }
+    };
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		switch (requestCode) {
+			case ScannerFragment.REQUEST_PERMISSION_REQ_CODE:
+				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					startScan();
+				}else {
+					showToastCustomView(R.string.no_required_permission);
+				}
+				break;
+		}
+	}
+
 }

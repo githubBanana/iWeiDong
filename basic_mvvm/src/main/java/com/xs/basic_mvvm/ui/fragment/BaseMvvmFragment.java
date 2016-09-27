@@ -1,5 +1,6 @@
 package com.xs.basic_mvvm.ui.fragment;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -7,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.xs.basic_mvvm.R;
 import com.xs.basic_mvvm.ui.callback.ICallBck;
 import com.xs.basic_mvvm.ui.viewmodel.ViewModel;
 import com.zf.widget.LoadingFragment;
@@ -134,5 +137,17 @@ public abstract class BaseMvvmFragment<VM extends ViewModel,B extends ViewDataBi
             DialogFragment _df = (DialogFragment) _fm;
             _df.dismiss();
         }
+    }
+
+    @Override
+    public void showTipDialog(String message) {
+        new AlertDialog.Builder(getActivity()).setTitle(R.string.tip_text)
+                .setMessage(message)
+                .setNegativeButton(R.string.know_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
     }
 }

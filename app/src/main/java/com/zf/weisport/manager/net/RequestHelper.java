@@ -4,6 +4,7 @@ import com.xs.basic_mvvm.model.BaseModel;
 import com.xs.net.retrofit.RetrofitClient;
 import com.zf.weisport.model.AddLabelModel;
 import com.zf.weisport.model.AddTopicModel;
+import com.zf.weisport.model.DeviceConnectModel;
 import com.zf.weisport.model.GetLabelModel;
 import com.zf.weisport.model.GetRankModel;
 import com.zf.weisport.model.GetTopModel;
@@ -503,5 +504,20 @@ public class RequestHelper {
         return new RetrofitClient.Builder().method("GetRank").map(map).post(GetRankModel.class);
     }
 
+    /**
+     * DeviceConnect
+     * 设备连接记录接口
+     * User_ID:用户ID(手机号)
+     * MAC:设备MAC
+     * @param User_ID
+     * @param MAC
+     * @return
+     */
+    public static Observable<DeviceConnectModel> deviceConnect(String User_ID,String MAC) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("User_ID",User_ID);
+        map.put("MAC",MAC);
+        return new RetrofitClient.Builder().method("DeviceConnect").map(map).post(DeviceConnectModel.class);
+    }
 }
 

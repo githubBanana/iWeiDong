@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.diy.blelib.profile.bleutils.BleConstant;
 import com.diy.blelib.profile.bleutils.BleUUID;
 import com.zf.weisport.R;
 import com.zf.weisport.manager.db.bean.User;
+import com.zf.weisport.manager.db.model.AppDatabaseCache;
 import com.zf.weisport.manager.util.GlideUtil;
 import com.zf.weisport.manager.widget.pointer.DrawDangradView;
 import com.zf.weisport.manager.widget.pointer.SpeedPointer;
@@ -64,12 +66,34 @@ public class BattleActivity extends BleProfileServiceReadyActivity<HtsService.RS
     }
 
     @Override
+    protected UUID[] getFilterUUID() {
+        return new UUID[]{BleUUID.TP_SERVICE_UUID};
+    }
+
+    @Override
+    protected boolean isAutoScanSetting() {
+        return true;
+    }
+
+    @Override
+    protected String theLastConnDeviceAddress() {
+        Log.e("info", "theLastConnDeviceAddress: "+AppDatabaseCache.getCache(this).getLastConnectedAddress() );
+        return AppDatabaseCache.getCache(this).getLastConnectedAddress();
+    }
+
+    @Override
     protected void onCreateView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_battle);
         ButterKnife.bind(this);
         LocalBroadcastManager.getInstance(this).registerReceiver(_receiver,new IntentFilter(HtsService.BROADCAST_HTS_MEASUREMENT));
         _viewModel = new BattleViewModel(this);
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(_receiver);
     }
 
     private void initView() {
@@ -86,17 +110,16 @@ public class BattleActivity extends BleProfileServiceReadyActivity<HtsService.RS
     protected void setUIConnectStatus(int status) {
         switch (status) {
             case BleConstant.STATE_CONNECTED:
+                dismissLoadingView();
                 mTvConn.setText(R.string.connected_text);
+                showToastCustomView(R.string.connected_device_text);
+                _viewModel.bindDevice(getDeviceAddress(),getDeviceName());//连接成功，网络绑定设备
                 break;
             case BleConstant.STATE_DISCONNECTED:
                 mTvConn.setText(R.string.dis_connect_text);
+                showToastCustomView(R.string.disconnect_device_text);
                 break;
         }
-    }
-
-    @Override
-    protected UUID[] getFilterUUID() {
-        return new UUID[]{BleUUID.TP_SERVICE_UUID};
     }
 
     /**
@@ -108,7 +131,7 @@ public class BattleActivity extends BleProfileServiceReadyActivity<HtsService.RS
             if (HtsService.BROADCAST_HTS_MEASUREMENT.equals(intent.getAction())) {
                 final float value = intent.getFloatExtra(HtsService.EXTRA_HTS,0.0f);
                 runOnUiThread(() -> {
-
+                    Log.e("_receiver", "onReceive: "+value +"  "+getDeviceAddress()+" "+getDeviceName());
                 });
             }
         }

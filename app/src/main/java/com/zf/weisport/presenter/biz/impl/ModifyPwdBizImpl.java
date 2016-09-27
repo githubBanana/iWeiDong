@@ -1,7 +1,6 @@
 package com.zf.weisport.presenter.biz.impl;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.xs.basic_mvvm.presenter.BaseBiz;
 import com.xs.basic_mvvm.ui.callback.ICallBck;
@@ -44,7 +43,6 @@ public class ModifyPwdBizImpl extends BaseBiz<IModifyPwdView> implements IModify
             showToast(R.string.repeat_password_error);
             return;
         }
-        Log.e("info", "commit: "+oldPwd+" "+newPwd+" "+repeatPwd +" "+ User.getUser().getPhone());
         showLoadingView();
         addSubscription(
                 RequestHelper.getInstance().updPassword(User.getUser().getPhone(),repeatPwd,oldPwd).

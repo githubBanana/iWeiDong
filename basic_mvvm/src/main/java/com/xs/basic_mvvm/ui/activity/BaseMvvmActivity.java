@@ -1,13 +1,17 @@
 package com.xs.basic_mvvm.ui.activity;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xs.basic_mvvm.R;
 import com.xs.basic_mvvm.ui.callback.ICallBck;
 import com.xs.basic_mvvm.ui.viewmodel.ViewModel;
 import com.zf.widget.LoadingFragment;
@@ -114,6 +118,31 @@ public class BaseMvvmActivity<VM extends ViewModel,B extends ViewDataBinding> ex
         }
     }
 
+    @Override
+    public void showTipDialog(String message) {
+        new AlertDialog.Builder(this).setTitle(R.string.tip_text)
+                .setMessage(message)
+                .setNegativeButton(R.string.know_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 自定义toast view
+     * @param resInt
+     */
+    protected void showToastCustomView(@StringRes final int resInt) {
+        View layout  = getLayoutInflater().inflate(R.layout.toast_layout,null);
+        TextView textView = (TextView) layout.findViewById(R.id.toast_tvId);
+        textView.setText(resInt);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
 
 
 }

@@ -1,7 +1,6 @@
 package com.zf.weisport.manager.util;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -98,7 +97,6 @@ public class CacheManager {
             try {
                 File[] fileList = file.listFiles();
                 for (int i = 0; i < fileList.length; i++) {
-                    Log.e("info", "getFolderSize: "+fileList[i].getAbsolutePath() );
                     // 如果下面还有文件
                     if (fileList[i].isDirectory()) {
                         size = size + getFolderSize(fileList[i]);

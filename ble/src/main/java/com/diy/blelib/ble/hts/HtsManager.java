@@ -168,7 +168,6 @@ public class HtsManager implements BleManager<HtsManagerCallbacks> {
 				byte[] data = characteristic.getValue();
 				try {
 					float value = (float) BleUtil.decodeTemperature(characteristic.getValue());
-					Log.e(TAG, "hts : "+value );
 					mCallbacks.onBagReceived(value);
 				} catch (Exception e) {
 					e.printStackTrace();

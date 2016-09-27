@@ -138,6 +138,12 @@ public class BaseBiz<View extends IBaseView> implements IBaseBiz,ICallBck{
     }
 
     @Override
+    public void showTipDialog(String message) {
+        if (_iCallback != null)
+            _iCallback.showTipDialog(message);
+    }
+
+    @Override
     public void loadInitData() {
 
     }
