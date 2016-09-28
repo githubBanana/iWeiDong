@@ -35,6 +35,7 @@ public class HistoryBagGroup {
     }
 
     public void clear() {
+        bagList = null;
         instance = null;
     }
 

@@ -130,6 +130,18 @@ public class UnixTimeStamp {
         return date;
     }
 
+    public static String stampToNormal(long timestamp) {
+        if (timestamp < 0)
+            try {
+                throw new Exception("timestamp must be larger than 0");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        String date = getSimpleDateFormat("mm:ss").format(new Date(timestamp * 1000));
+        return date;
+    }
+
+
     /**
      * 支持FORMAT4格式的转化
      *  进行累计秒数转化日期时，用格林标准时间则相等 累计秒数86399 = 23:59:59

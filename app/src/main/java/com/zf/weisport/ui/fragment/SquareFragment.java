@@ -108,11 +108,13 @@ public class SquareFragment extends ToolbarBaseFragment<SquareViewModel,Fragment
         getBinding().recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
 
         mAdapter = new SquareAdapter(getActivity(), (view1, labelTopicModel, position) -> {
-            if (!UserUtil.isLogin(getActivity()))
-                return;
-            String id = mLabelTopicList.get(position).getID();
-            String title = mLabelTopicList.get(position).getName();
-            TopicActivity.start(getActivity(),id,title);
+            if (UserUtil.isLogin(getActivity())) {
+                String id = mLabelTopicList.get(position).getID();
+                String title = mLabelTopicList.get(position).getName();
+                TopicActivity.start(getActivity(), id, title);
+            } else {
+                AccountActivity.start(getActivity());
+            }
         });
         getBinding().recyclerView.setAdapter(mAdapter);
 

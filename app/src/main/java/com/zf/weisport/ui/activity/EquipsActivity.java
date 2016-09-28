@@ -46,7 +46,7 @@ public class EquipsActivity extends BaseActivity{
 
         ArrayList<String> groups = new ArrayList<>();
         ArrayList<String> childs = new ArrayList<>();
-        List<BleDevice> list = AppDatabaseCache.getCache(this).getBleDeviceList(BleDevice.cacheDeviceType);
+        List<BleDevice> list = AppDatabaseCache.getCache(this).getBleDeviceList(BleDevice.DEVICE_TYPE_BOLL);
         groups.add("");
         for (int i = 0; i < list.size(); i++) {
             childs.add(list.get(i).getName());

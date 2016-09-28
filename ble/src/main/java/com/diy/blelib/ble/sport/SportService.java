@@ -10,8 +10,8 @@ import com.diy.blelib.profile.BleProfileService;
 public class SportService extends BleProfileService implements SportManagerCallbacks{
 	private static final String TAG = SportService.class.getSimpleName();
 
-	public static final String BROADCAST_HRS_MEASUREMENT = "com.diy.blelib.ble.BROADCAST_HRS_MEASUREMENT";
-	public static final String EXTRA_HEART = "com.diy.blelib.ble.EXTRA_HEART";
+	public static final String BROADCAST_SPORT_MEASUREMENT = "com.diy.blelib.ble.BROADCAST_SPORT_MEASUREMENT";
+	public static final String EXTRA_SPORT = "com.diy.blelib.ble.EXTRA_SPORT";
 	public static final String BROADCAST_UPGAMEARR = "com.diy.blelib.ble.BROADCAST_UPGAMEARR";
 
 
@@ -70,8 +70,8 @@ public class SportService extends BleProfileService implements SportManagerCallb
 
 	@Override
 	public void onBagReceived(byte config) {
-		final Intent broadcast = new Intent(BROADCAST_HRS_MEASUREMENT);
-		broadcast.putExtra(EXTRA_HEART,config);
+		final Intent broadcast = new Intent(BROADCAST_SPORT_MEASUREMENT);
+		broadcast.putExtra(EXTRA_SPORT,config);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast);
 	}
 

@@ -20,9 +20,11 @@ import com.zf.weisport.model.StatisticsModel;
 import com.zf.weisport.model.SyncInfoModel;
 import com.zf.weisport.model.TopicCommentModel;
 import com.zf.weisport.model.TopicModel;
+import com.zf.weisport.model.UpGameModel;
 import com.zf.weisport.model.UpdUserInfoModel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -518,6 +520,55 @@ public class RequestHelper {
         map.put("User_ID",User_ID);
         map.put("MAC",MAC);
         return new RetrofitClient.Builder().method("DeviceConnect").map(map).post(DeviceConnectModel.class);
+    }
+
+    /**UpGameArr
+     上传历史记录
+     Data:记录数组{"Data"：[{"User_ID":1,"Device_ID":1,...},{}]}
+     记录对象属性值：
+     User_ID:用户ID
+     Device_ID:设备ID
+     Calorie:消耗卡路里
+     Device_Type:设备类型
+     Start_Time:开始时间(时间戳格式)
+     Long_Time:时长
+     Speed:速度*/
+    public static Observable<BaseModel> upGameArr(List<HashMap<String,Object>> list) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("Data",list);
+        return new RetrofitClient.Builder().method("UpGameArr").map(map).post(BaseModel.class);
+    }
+
+    /**
+     * UpGame
+     * 游戏记录上传接口
+     * User_ID:用户ID
+     * Device_ID:设备ID
+     * Calorie:消耗卡路里
+     * Device_Type:设备类型
+     * Start_Time:开始时间(时间戳格式)
+     * Long_Time:时长
+     * Speed:速度
+     * @param User_ID
+     * @param Device_ID
+     * @param Calorie
+     * @param Device_Type
+     * @param Start_Time
+     * @param Long_Time
+     * @param Speed
+     * @return
+     */
+    public Observable<UpGameModel> UpGame(String User_ID,String Device_ID,String Calorie,
+                                                 String Device_Type,String Start_Time,String Long_Time,String Speed) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("User_ID",User_ID);
+        map.put("Device_ID",Device_ID);
+        map.put("Calorie",Calorie);
+        map.put("Device_Type",Device_Type);
+        map.put("Start_Time",Start_Time);
+        map.put("Long_Time",Long_Time);
+        map.put("Speed",Speed);
+        return new RetrofitClient.Builder().method("UpGame").map(map).post(UpGameModel.class);
     }
 }
 

@@ -26,6 +26,7 @@
     <!--toast-->
     <string name="toast_login_error">用户名或密码错误</string>
     <string name="no_more_data_text">没有更多数据</string>
+    <string name="no_realtime_data">没有数据</string>
     <string name="loading_more_text">加载更多...</string>
     <string name="wordlimit_100">抱歉,字数不能超过100个</string>
     <string name="text_release_success">发表成功</string>

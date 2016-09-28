@@ -1,5 +1,7 @@
 package com.zf.weisport.ui.viewmodel;
 
+import android.text.TextUtils;
+
 import com.xs.basic_mvvm.presenter.BaseBiz;
 import com.zf.weisport.manager.db.bean.BleDevice;
 import com.zf.weisport.manager.db.bean.User;
@@ -7,6 +9,7 @@ import com.zf.weisport.manager.db.model.AppDatabaseCache;
 import com.zf.weisport.manager.util.UIUtil;
 import com.zf.weisport.manager.util.UserUtil;
 import com.zf.weisport.model.MyRankModel;
+import com.zf.weisport.model.UpGameModel;
 import com.zf.weisport.presenter.IBattleView;
 import com.zf.weisport.presenter.biz.IBattleBiz;
 import com.zf.weisport.presenter.biz.impl.BattleBizImpl;
@@ -20,6 +23,11 @@ import com.zf.weisport.ui.callback.IBattleCallback;
  */
 public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> implements IBattleView {
 
+
+    public String deviceAddress;
+    public String deviceName;
+    public String deviceId ;
+    public String deviceType ;
 
     private IBattleBiz biz;
     public BattleViewModel(IBattleCallback iBattleCallback) {
@@ -44,6 +52,9 @@ public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> 
      * 绑定设备
      */
     public void bindDevice(String address,String deviceName) {
+        setDeviceAddress(address);
+        setDeviceName(deviceName);
+
         //将型如11:22:33:44:55:66 转为112233445566
         String a[] = address.split(":");
         StringBuffer sb = new StringBuffer();
@@ -52,8 +63,10 @@ public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> 
         //未登陆 无需绑定
         if (!UserUtil.isLogin(UIUtil.getContext())) {
             //本地保存macAddress 无用户登陆
-            AppDatabaseCache.getCache(UIUtil.getContext()).saveBleDevice(BleDevice.cacheDeviceType,
-                    BleDevice.cacheDeviceId,address,deviceName);
+            setDeviceId("0");//无用户登录
+            setDeviceType(BleDevice.DEVICE_TYPE_BOLL);//默认腕力球
+            AppDatabaseCache.getCache(UIUtil.getContext()).saveBleDevice(getDeviceType(),
+                    getDeviceId(),address,deviceName);
             return;
         }
 
@@ -61,6 +74,43 @@ public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> 
 
     }
 
+    /**
+     * 上传 下位机历史记录
+     */
+    public void upGameArr() {
+
+        if (!UserUtil.isLogin(UIUtil.getContext()))
+            return;
+        if (TextUtils.isEmpty(getDeviceId()) || "0".equals(getDeviceId())) {//说明上次网络绑定设备时出错，需重新绑定一次
+            bindDevice(getDeviceAddress(),getDeviceName());
+            return;
+        }
+
+        biz.upGameArr();
+    }
+
+    /**
+     * 游戏记录上传
+     * @param Calorie
+     * @param Start_Time
+     * @param Long_Time
+     * @param Speed
+     */
+    public void upGame(String Calorie,String Start_Time,String Long_Time,String Speed){
+        String userId = "";
+        if (UserUtil.isLogin(UIUtil.getContext())) {
+            if (TextUtils.isEmpty(getDeviceId()) || "0".equals(getDeviceId())) { //说明上次网络绑定设备时出错，需重新绑定一次
+                if (!TextUtils.isEmpty(getDeviceAddress()))
+                    bindDevice(getDeviceAddress(),getDeviceName());
+                return;
+            }
+            userId = User.getUser().getId();
+        } else {
+            userId = "0";
+        }
+
+        biz.upGame(userId,Calorie, Start_Time, Long_Time, Speed);
+    }
     @Override
     public void onGetMyRankCompleted(MyRankModel myRankModel) {
         //update user and sql
@@ -69,6 +119,56 @@ public class BattleViewModel extends BaseViewModel<IBattleCallback,MyRankModel> 
         AppDatabaseCache.getCache(UIUtil.getContext()).updateUser_Level(levelString);
 
         sortDangrad(levelString);
+    }
+
+    @Override
+    public void onUpGameArrCompleted() {
+        getCallback().onUpGameArrSuccess();
+    }
+
+    @Override
+    public void onUpGameCompleted(UpGameModel upGameModel) {
+        getCallback().onUpGameSuccess(upGameModel);
+    }
+
+    @Override
+    public void setDeviceAddress(String deviceAddress) {
+        this.deviceAddress = deviceAddress;
+    }
+
+    @Override
+    public String getDeviceAddress() {
+        return this.deviceAddress;
+    }
+
+    @Override
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    @Override
+    public String getDeviceName() {
+        return this.deviceName;
+    }
+
+    @Override
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    @Override
+    public String getDeviceId() {
+        return this.deviceId;
+    }
+
+    @Override
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    @Override
+    public String getDeviceType() {
+        return this.deviceType;
     }
 
     /**

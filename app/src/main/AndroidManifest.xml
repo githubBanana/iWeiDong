@@ -67,6 +67,7 @@
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:screenOrientation="portrait" />
         <service android:name="com.diy.blelib.ble.hts.HtsService"/>
+        <service android:name="com.diy.blelib.ble.sport.SportService"/>
 
         <!-- for sharesdk -->
         <activity

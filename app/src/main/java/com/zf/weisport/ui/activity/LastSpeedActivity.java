@@ -4,12 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.diy.blelib.bag.RealTimeBag;
 import com.zf.weisport.R;
+import com.zf.weisport.manager.widget.speedchart.DrawSpeedRecord;
+import com.zf.weisport.manager.widget.speedchart.DrawY;
 import com.zf.weisport.ui.activity.base.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @version V1.0 <最近一次转速记录>
@@ -47,7 +54,7 @@ public class LastSpeedActivity extends BaseActivity {
     }
 
     private void initData() {
-          /*  if (RealTimeBag.getBag().getSpeedList() != null && RealTimeBag.getBag().getMaxSpeed() <= DrawY.MAX_Y) {
+            if (RealTimeBag.getBag().getSpeedList() != null && RealTimeBag.getBag().getMaxSpeed() <= DrawY.MAX_Y) {
                 List<Integer> listsY = new ArrayList<>();// speed list
                 listsY = RealTimeBag.getBag().getSpeedList();
                 int maxSpeed = RealTimeBag.getBag().getMaxSpeed();
@@ -65,7 +72,7 @@ public class LastSpeedActivity extends BaseActivity {
                 for (int i = 0; i < listsY.size(); i++) {
                     Log.e("tes","getSpeedList(: "+listsY.get(i));
                 }
-            }*/
+            }
     }
 
     public int getRandom(int min,int max){

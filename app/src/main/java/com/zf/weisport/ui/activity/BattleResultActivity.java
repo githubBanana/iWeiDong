@@ -25,8 +25,10 @@ implements View.OnClickListener,ShareDialog.OnListenShareDialog{
     public static String GAMEID = "GameId";
     private String percent ;
 
-    public static void start(Activity activity) {
+    public static void start(Activity activity,String Percent,String GameId) {
         Intent intent = new Intent(activity,BattleResultActivity.class);
+        intent.putExtra(PERCENT,Percent);
+        intent.putExtra(GAMEID, GameId);
         activity.startActivity(intent);
     }
 

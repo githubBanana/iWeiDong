@@ -2,7 +2,10 @@ package com.zf.weisport.manager.util;
 
 import android.text.TextUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -11,6 +14,35 @@ import java.util.Date;
  * @email Xs.lin@foxmail.com
  */
 public class TimeUtil {
+
+    private static ThreadLocal _threadLocal = new ThreadLocal() {
+        @Override
+        protected Object initialValue() {
+            return null;
+        }
+    };
+
+    /**
+     * 东八时区 SimpleDateFormat
+     * @return
+     */
+    public static SimpleDateFormat getSimpleDateFormat() {
+        SimpleDateFormat format = (SimpleDateFormat) _threadLocal.get();
+        if (format == null) {
+            format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.CHINA);
+            format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));//=TimeZone.getDefault()
+            _threadLocal.set(format);
+        }
+        return format;
+    }
+
+    public static String getCurrTime_Minute_Second_String() {
+        return getCurrFormatTime().substring(14,19);
+    }
+    public static String getCurrTime_Hour_Minute_Second_String() {
+        return getCurrFormatTime().substring(11,19);
+    }
+
 
     /**
      * 获取当前时间
@@ -21,6 +53,16 @@ public class TimeUtil {
         String currTime = UnixTimeStamp.getSimpleDateFormat(formatStr).format(date);
         return currTime;
     }
+
+    public static String getCurrFormatTime() {
+        Date date = new Date(System.currentTimeMillis());
+        String currTime = getSimpleDateFormat().format(date);
+        return currTime;
+    }
+    public static long getCurrTime() {
+        return  (System.currentTimeMillis() / 1000);
+    }
+
     /**
      * 朋友圈时间显示 ps:待优化
      * @param dateString
